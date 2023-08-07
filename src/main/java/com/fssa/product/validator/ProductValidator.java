@@ -109,7 +109,7 @@ public class ProductValidator {
 
 	public static boolean validateEventId(int eventId) throws ValidatorIntializationException {
 		if (eventId <= 0) {
-			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCT_ID);
+			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_EVENT_ID);
 		} else {
 			return true;
 		}

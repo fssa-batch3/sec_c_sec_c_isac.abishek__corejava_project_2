@@ -175,7 +175,7 @@ class TestProductServiceLayer {
 			ProductServiceLayer1.readProductBySpecificEvent(eventId);
 		}
 		catch(ValidatorIntializationException e) {
-			Assertions.assertEquals(ProductValidateErrors.INVALID_PRODUCT_ID, e.getMessage());
+			Assertions.assertEquals(ProductValidateErrors.INVALID_EVENT_ID, e.getMessage());
 		}
 		
 	}

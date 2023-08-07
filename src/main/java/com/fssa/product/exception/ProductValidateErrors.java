@@ -22,7 +22,7 @@ public interface ProductValidateErrors {
 	 * Represents an error message for cases where the product ID is less than or
 	 * equal to 0.
 	 */
-	public static final String INVALID_PRODUCT_ID = "ProductId must be greater than 0";
+	public static final String INVALID_EVENT_ID = "Event Id must be greater than 0";
 
 	/**
 	 * Represents an error message for cases where the ProductDescription is null or
