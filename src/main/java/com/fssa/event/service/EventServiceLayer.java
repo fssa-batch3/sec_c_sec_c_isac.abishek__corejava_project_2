@@ -1,7 +1,6 @@
 package com.fssa.event.service;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.fssa.event.dao.EventDao;
@@ -36,7 +35,7 @@ public class EventServiceLayer {
      * @throws SQLException                  if there is an issue with the SQL database operation.
      * @throws DaoException                  if there is an issue with the data access layer.
      */
-    public static boolean addEvent(Event event)
+	public boolean addEvent(Event event)
             throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
         
         if (event == null) {
@@ -128,13 +127,6 @@ public class EventServiceLayer {
         }
     }
 
-    // Main method for testing purposes.
-    public static void main(String[] args) throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
-        LocalDate input=LocalDate.of(2022, 10, 10);
-    	Event demo = new Event( "EventName", "EventLocation", "Organizer", "9751328805",
-                "https://freeimage.host/i/HNRzLYJ.jpg",input, "Concert");
-        EventServiceLayer.addEvent(demo);
-       
-    }
+  
 }
 

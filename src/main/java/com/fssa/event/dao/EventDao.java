@@ -15,151 +15,150 @@ import com.fssa.event.model.Event;
 //class for doing CRUD on event table
 public class EventDao {
 
-    public static boolean addEvent(Event event) throws SQLException, DaoException {
+	public static boolean addEvent(Event event) throws SQLException, DaoException {
 
-        final String query = "INSERT INTO EventList (event_name, event_location, organizer_name, contact_number, event_date, image_url, about_event) VALUES (?, ?, ?, ?, ?, ?, ? );";
-        // query for adding the values in the table
-        try (Connection con = ConnectionUtil.getConnection()) { // getting connection
-            PreparedStatement pst = con.prepareStatement(query); // prepare statement for query update
-            // setting the values in the question mark
-            System.out.println("helo");
-            pst.setString(1, event.getEventName());
-            pst.setString(2, event.getEventLocation());
-            pst.setString(3, event.getOrganizerName());
-            pst.setString(4, event.getContactNumber());
-            pst.setDate(5, java.sql.Date.valueOf(event.getEventDate()));
-            pst.setString(6, event.getImageUrl());
-            pst.setString(7, event.getAboutEvent());
-          
-            int rs = pst.executeUpdate(); // executing the query and it returns the number of rows affected
-            if (rs == 0) {
-            	
-                throw new DaoException(DaoExceptionErrors.ROW_AFFECTED);
-            }
-            System.out.println(rs);
-            pst.close(); // closing the prepared statement
-        }
-        return true;
-    }
+		final String query = "INSERT INTO EventList (event_name, event_location, organizer_name, contact_number, event_date, image_url, about_event) VALUES (?, ?, ?, ?, ?, ?, ? );";
+		// query for adding the values in the table
+		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
+			PreparedStatement pst = con.prepareStatement(query); // prepare statement for query update
+			// setting the values in the question mark
+			System.out.println("helo");
+			pst.setString(1, event.getEventName());
+			pst.setString(2, event.getEventLocation());
+			pst.setString(3, event.getOrganizerName());
+			pst.setString(4, event.getContactNumber());
+			pst.setDate(5, java.sql.Date.valueOf(event.getEventDate()));
+			pst.setString(6, event.getImageUrl());
+			pst.setString(7, event.getAboutEvent());
 
-    public static boolean deleteEvent(String name) throws SQLException, DaoException {
+			int rs = pst.executeUpdate(); // executing the query and it returns the number of rows affected
+			if (rs == 0) {
 
-        final String query = "DELETE FROM EventList WHERE event_name = ?";
-        // query for deleting the value in the table
+				throw new DaoException(DaoExceptionErrors.ROW_AFFECTED);
+			}
+			System.out.println(rs);
+			pst.close(); // closing the prepared statement
+		}
+		return true;
+	}
 
-        try (Connection con = ConnectionUtil.getConnection()) { // getting connection
-            PreparedStatement pst = con.prepareStatement(query); // prepare statement for query update
-            // setting the values in the question mark
-            pst.setString(1, name);
-            int rs = pst.executeUpdate();// executing the query and it returns the number of rows affected
+	public static boolean deleteEvent(String name) throws SQLException, DaoException {
 
-            if (rs == 0) {
-                throw new DaoException(DaoExceptionErrors.ROW_AFFECTED); // if no rows are affected, throw an exception
-            }
-            pst.close();
-        }
-        return true;
-    }
+		final String query = "DELETE FROM EventList WHERE event_name = ?";
+		// query for deleting the value in the table
 
-    public static Event findEventByName(String name) throws SQLException, DaoException {
-        final String query = "SELECT * FROM EventList WHERE event_name=?";
-        // query for finding an event by name in the table
-        Event result = new Event(); // object created
-        try (Connection con = ConnectionUtil.getConnection()) { // getting connection
+		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
+			PreparedStatement pst = con.prepareStatement(query); // prepare statement for query update
+			// setting the values in the question mark
+			pst.setString(1, name);
+			int rs = pst.executeUpdate();// executing the query and it returns the number of rows affected
 
-            PreparedStatement pst = con.prepareStatement(query); // prepare statement for query update
-            pst.setString(1, name); // setting the values in the question mark
+			if (rs == 0) {
+				throw new DaoException(DaoExceptionErrors.ROW_AFFECTED); // if no rows are affected, throw an exception
+			}
+			pst.close();
+		}
+		return true;
+	}
 
-            ResultSet rs = pst.executeQuery(); // executing the query
+	public static Event findEventByName(String name) throws SQLException, DaoException {
+		final String query = "SELECT * FROM EventList WHERE event_name=?";
+		// query for finding an event by name in the table
+		Event result = new Event(); // object created
+		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
 
-            while (rs.next()) { // Setting all the values to the object
-                result.setEventId(rs.getInt("event_id"));
-                result.setEventName(rs.getString("event_name"));
-                result.setEventLocation(rs.getString("event_location"));
-                result.setOrganizerName(rs.getString("organizer_name"));
-                result.setContactNumber(rs.getString("contact_number"));
-                result.setImageUrl(rs.getString("image_url"));
-                result.setAboutEvent(rs.getString("about_event"));
-                result.setEventDate(rs.getDate("event_date"));
-            }
-            // connections are closed
-            rs.close();
-            pst.close();
-        }
-        return result; // returning the result object
+			PreparedStatement pst = con.prepareStatement(query); // prepare statement for query update
+			pst.setString(1, name); // setting the values in the question mark
 
-    }
-    public static int getId(String name) throws SQLException {
-    
-    	 try (Connection con = ConnectionUtil.getConnection()) {
-    			final String query = "SELECT event_id FROM EventList WHERE event_name='" + name + "'";
-    			try (Statement preparedStatement = con.createStatement()) {
-    				ResultSet id = preparedStatement.executeQuery(query);
-    				int id1=0;
-    				while (id.next()) {
-    					id1=id.getInt("event_id");
-    				}
-    				
-    				System.out.println("Last ID: " + id1);
-    				return id1; 
-    			}
-    	 }catch(SQLException ex) {
-    		 throw new SQLException("ERROR");
-    	 }
-    	
-    }
+			ResultSet rs = pst.executeQuery(); // executing the query
 
-    public static boolean update(Event event) throws SQLException, DaoException {
-        try (Connection con = ConnectionUtil.getConnection()) {
-        	
-            final String query = "UPDATE EventList SET  event_name = ?, organizer_name = ?, event_location = ?, contact_number = ?,image_url = ?,event_date=?,about_event = ? WHERE event_id = ?;";
-            // query for updating the value in the table
-            try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-                preparedStatement.setString(1, event.getEventName());
-                preparedStatement.setString(2, event.getOrganizerName());
-                preparedStatement.setString(3, event.getEventLocation());
-                preparedStatement.setString(4, event.getContactNumber());
-                preparedStatement.setString(5, event.getImageUrl());
-                preparedStatement.setDate(6, java.sql.Date.valueOf(event.getEventDate()));
-                preparedStatement.setString(7, event.getAboutEvent());
-                preparedStatement.setInt(8, getId(event.getEventName()));
-                // Execute the update
-                int rowsAffected = preparedStatement.executeUpdate();
+			while (rs.next()) { // Setting all the values to the object
+				result.setEventId(rs.getInt("event_id"));
+				result.setEventName(rs.getString("event_name"));
+				result.setEventLocation(rs.getString("event_location"));
+				result.setOrganizerName(rs.getString("organizer_name"));
+				result.setContactNumber(rs.getString("contact_number"));
+				result.setImageUrl(rs.getString("image_url"));
+				result.setAboutEvent(rs.getString("about_event"));
+				result.setEventDate(rs.getDate("event_date"));
+			}
+			// connections are closed
+			rs.close();
+			pst.close();
+		}
+		return result; // returning the result object
 
-                return rowsAffected > 0;
+	}
 
-            }
+	public static int getId(String name) throws SQLException {
 
-        }
+		try (Connection con = ConnectionUtil.getConnection()) {
+			final String query = "SELECT event_id FROM EventList WHERE event_name='" + name + "'";
+			try (Statement preparedStatement = con.createStatement()) {
+				ResultSet id = preparedStatement.executeQuery(query);
+				int id1 = 0;
+				while (id.next()) {
+					id1 = id.getInt("event_id");
+				}
 
-    }
+				System.out.println("Last ID: " + id1);
+				return id1;
+			}
+		} catch (SQLException ex) {
+			throw new SQLException("ERROR");
+		}
 
-    public static ArrayList<Event> readFullEventList() throws SQLException, DaoException {
-        try (Connection con = ConnectionUtil.getConnection()) { // getting connection
-            final String query = "SELECT * FROM freshtrust.EventList";
-            ArrayList<Event> resultlist = new ArrayList<>(); // arraylist declared
-            try (PreparedStatement pst = con.prepareStatement(query)) {
-                ResultSet rs = pst.executeQuery();
-                while (rs.next()) {
-                    Event result = new Event();
-                    result.setEventId(rs.getInt("event_id"));
-                    result.setEventName(rs.getString("event_name"));
-                    result.setEventLocation(rs.getString("event_location"));
-                    result.setOrganizerName(rs.getString("organizer_name"));
-                    result.setContactNumber(rs.getString("contact_number"));
-                    result.setImageUrl(rs.getString("image_url"));
-                    result.setAboutEvent(rs.getString("about_event"));
-                    result.setEventDate(rs.getDate("event_date"));
-                    resultlist.add(result); // objects are pushed
-                }
-                rs.close(); // result set is closed
-                return resultlist; // arraylist is returned
-            }
+	}
 
-        }
+	public static boolean update(Event event) throws SQLException, DaoException {
+		try (Connection con = ConnectionUtil.getConnection()) {
 
-    }
+			final String query = "UPDATE EventList SET  event_name = ?, organizer_name = ?, event_location = ?, contact_number = ?,image_url = ?,event_date=?,about_event = ? WHERE event_id = ?;";
+			// query for updating the value in the table
+			try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+				preparedStatement.setString(1, event.getEventName());
+				preparedStatement.setString(2, event.getOrganizerName());
+				preparedStatement.setString(3, event.getEventLocation());
+				preparedStatement.setString(4, event.getContactNumber());
+				preparedStatement.setString(5, event.getImageUrl());
+				preparedStatement.setDate(6, java.sql.Date.valueOf(event.getEventDate()));
+				preparedStatement.setString(7, event.getAboutEvent());
+				preparedStatement.setInt(8, getId(event.getEventName()));
+				// Execute the update
+				int rowsAffected = preparedStatement.executeUpdate();
 
-  
+				return rowsAffected > 0;
+
+			}
+
+		}
+
+	}
+
+	public static ArrayList<Event> readFullEventList() throws SQLException, DaoException {
+		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
+			final String query = "SELECT * FROM freshtrust.EventList";
+			ArrayList<Event> resultlist = new ArrayList<>(); // arraylist declared
+			try (PreparedStatement pst = con.prepareStatement(query)) {
+				ResultSet rs = pst.executeQuery();
+				while (rs.next()) {
+					Event result = new Event();
+					result.setEventId(rs.getInt("event_id"));
+					result.setEventName(rs.getString("event_name"));
+					result.setEventLocation(rs.getString("event_location"));
+					result.setOrganizerName(rs.getString("organizer_name"));
+					result.setContactNumber(rs.getString("contact_number"));
+					result.setImageUrl(rs.getString("image_url"));
+					result.setAboutEvent(rs.getString("about_event"));
+					result.setEventDate(rs.getDate("event_date"));
+					resultlist.add(result); // objects are pushed
+				}
+				rs.close(); // result set is closed
+				return resultlist; // arraylist is returned
+			}
+
+		}
+
+	}
 
 }

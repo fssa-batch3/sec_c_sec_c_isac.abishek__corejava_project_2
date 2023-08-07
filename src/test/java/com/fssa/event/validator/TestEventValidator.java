@@ -196,13 +196,13 @@ public class TestEventValidator {
     public void testValidType() throws ValidatorInitializationException {
         testObj.setAboutEvent("Concert");
         String res = testObj.getAboutEvent();
-        Assertions.assertTrue(EventValidator.ValidateAboutEvent(res));
+        Assertions.assertTrue(EventValidator.validateAboutEvent(res));
     }
 
     @Test
     public void testInvalidType() {
         try {
-            EventValidator.ValidateAboutEvent("123456");
+            EventValidator.validateAboutEvent("123456");
         } catch (ValidatorInitializationException e) {
             Assertions.assertEquals(e.getMessage(), EventValidatorErrors.INVALID_ABOUT_EVENT_TYPE);
         }
@@ -211,7 +211,7 @@ public class TestEventValidator {
     @Test
     public void testInvalidTypeEmpty() {
         try {
-            EventValidator.ValidateAboutEvent(" ");
+            EventValidator.validateAboutEvent(" ");
         } catch (ValidatorInitializationException e) {
             Assertions.assertEquals(e.getMessage(), EventValidatorErrors.INVALID_ABOUT__EVENT_NULL);
         }
@@ -220,7 +220,7 @@ public class TestEventValidator {
     @Test
     public void testInvalidTypeNull() {
         try {
-            EventValidator.ValidateAboutEvent(null);
+            EventValidator.validateAboutEvent(null);
         } catch (ValidatorInitializationException e) {
             Assertions.assertEquals(e.getMessage(), EventValidatorErrors.INVALID_ABOUT__EVENT_NULL);
         }

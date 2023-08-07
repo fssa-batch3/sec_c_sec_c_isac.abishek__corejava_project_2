@@ -14,7 +14,7 @@ import com.fssa.event.exceptions.ValidatorInitializationException;
 import com.fssa.event.model.Event;
 import com.fssa.event.validator.EventValidator;
 
-public class TestEventServiceLayer {
+ class TestEventServiceLayer {
 
     public Event getEvent() {
     	LocalDate input=LocalDate.of(2022, 10, 10);
@@ -33,8 +33,7 @@ public class TestEventServiceLayer {
     }
 
     @Test
-    @Order(1)
-    public void testServiceAdd() throws  ValidatorInitializationException, SQLException, DaoException {
+    void testServiceAdd() throws  ValidatorInitializationException, SQLException, DaoException {
         Event event1 = getEvent();
         EventServiceLayer eventServiceLayer = getEventLayer();
 
@@ -44,7 +43,7 @@ public class TestEventServiceLayer {
     
    
     @Test
-    public void testServiceAddNull() throws   DaoException {
+    void testServiceAddNull() throws   DaoException {
         Event event1 = null;
         EventServiceLayer eventServiceLayer = getEventLayer();
         try {
@@ -55,7 +54,7 @@ public class TestEventServiceLayer {
     }
 
     @Test
-    public void testServiceAddInvalid() throws  ValidatorInitializationException,DaoException,  SQLException {
+    void testServiceAddInvalid() throws  ValidatorInitializationException,DaoException,  SQLException {
     	LocalDate input=LocalDate.of(2022, 10, 10);
     	Event event1 = new Event("12345", "North Street, Taramani", "Organizer", "9751328805",
                 "https://freeimage.host/i/HNRzLYJ.jpg",input, "Concert");
@@ -65,8 +64,8 @@ public class TestEventServiceLayer {
     }
 
     @Test
-    @Order(2)
-    public void testServiceUpdate() throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
+   
+    void testServiceUpdate() throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
     	LocalDate input=LocalDate.of(2022, 10, 10);
     	Event eventNew = new Event( "Appolo Event", "North Street, Taramani", "Organizer", "9751328805",
                 "https://freeimage.host/i/HNRzLYJ.jpg",input, "Concert");
@@ -78,18 +77,18 @@ public class TestEventServiceLayer {
     }
 
     @Test
-    public void testServiceUpdateNull() throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
+    void testServiceUpdateNull() throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
         Event event1 = null;
         EventServiceLayer eventServiceLayer = getEventLayer();
         try {
             eventServiceLayer.updateEvent(event1);
         } catch (Exception e) {
-            Assertions.assertEquals(e.getMessage(), DaoExceptionErrors.INVALID_INPUT);
+            Assertions.assertEquals( DaoExceptionErrors.INVALID_INPUT,e.getMessage());
         }
     }
 
     @Test
-    public void testServiceUpdateInvalid() throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
+    void testServiceUpdateInvalid() throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
     	LocalDate input=LocalDate.of(2022, 10, 10);
     	Event event1 = new Event( "12345", "North Street, Taramani", "Organizer", "9751328805",
                 "https://freeimage.host/i/HNRzLYJ.jpg",input, "Concert");
@@ -100,7 +99,7 @@ public class TestEventServiceLayer {
 
     @Test
     @Order(3)
-    public void testReadEvents() throws DaoException, SQLException, IllegalArgumentException, ValidatorInitializationException {
+    void testReadEvents() throws DaoException, SQLException, IllegalArgumentException, ValidatorInitializationException {
     	LocalDate input=LocalDate.of(2022, 10, 10);
     	Event event1 = new Event( "Balaji Event", "North Street, Taramani", "Organizer", "9751328805",
                 "https://freeimage.host/i/HNRzLYJ.jpg",input, "Concert ");
@@ -111,7 +110,7 @@ public class TestEventServiceLayer {
     }
 
     @Test
-    public void deleteEvent() throws SQLException, DaoException, ValidatorInitializationException {
+    void deleteEvent() throws SQLException, DaoException, ValidatorInitializationException {
 
         EventServiceLayer eventServiceLayer1 = getEventLayer();
         Assertions.assertTrue(eventServiceLayer1.deleteEvent("Balaji Event"));
@@ -119,31 +118,31 @@ public class TestEventServiceLayer {
     }
 
     @Test
-    public void deleteEventNull() throws SQLException, DaoException, ValidatorInitializationException {
+    void deleteEventNull() throws SQLException, DaoException, ValidatorInitializationException {
 
         EventServiceLayer eventServiceLayer1 = getEventLayer();
         try {
             eventServiceLayer1.deleteEvent(null);
         } catch (Exception e) {
-            Assertions.assertEquals(e.getMessage(), DaoExceptionErrors.INVALID_INPUT);
+            Assertions.assertEquals(DaoExceptionErrors.INVALID_INPUT,e.getMessage() );
         }
 
     }
 
     @Test
-    public void deleteEventInvalid() throws SQLException, DaoException, ValidatorInitializationException {
+    void deleteEventInvalid() throws SQLException, DaoException, ValidatorInitializationException {
 
         EventServiceLayer eventServiceLayer1 = getEventLayer();
         try {
             eventServiceLayer1.deleteEvent("InvalidName");
         } catch (Exception e) {
-            Assertions.assertEquals(e.getMessage(), DaoExceptionErrors.ROW_AFFECTED);
+            Assertions.assertEquals(DaoExceptionErrors.ROW_AFFECTED,e.getMessage() );
         }
 
     }
 
     @Test
-    public void testFindByName() throws SQLException, DaoException, ValidatorInitializationException {
+    void testFindByName() throws SQLException, DaoException, ValidatorInitializationException {
     	LocalDate input=LocalDate.of(2022, 10, 10);
     	Event event1 = new Event( "Gokul Event", "North Street, Taramani", "Organizer", "9751328805",
                 "https://freeimage.host/i/HNRzLYJ.jpg",input, "Concert by gokul singer");
@@ -154,13 +153,13 @@ public class TestEventServiceLayer {
     }
 
     @Test
-    public void testServiceFindByNameNull() throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
+    void testServiceFindByNameNull() throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
         String event1 = null;
         EventServiceLayer eventServiceLayer = getEventLayer();
         try {
             eventServiceLayer.findEventByName(event1);
         } catch (Exception e) {
-            Assertions.assertEquals(e.getMessage(), DaoExceptionErrors.INVALID_INPUT);
+            Assertions.assertEquals( DaoExceptionErrors.INVALID_INPUT,e.getMessage());
         }
     }
 
