@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fssa.Connection.dao.ConnectionUtil;
-import com.fssa.Logger.Logger;
+import com.fssa.connection.dao.ConnectionUtil;
+import com.fssa.logger.Logger;
 import com.fssa.product.exception.DaoException;
 import com.fssa.product.exception.DaoExceptionErrors;
 import com.fssa.product.model.Product;

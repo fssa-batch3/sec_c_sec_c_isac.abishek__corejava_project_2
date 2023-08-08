@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import com.fssa.Connection.dao.ConnectionUtil;
-import com.fssa.Logger.Logger;
+import com.fssa.connection.dao.ConnectionUtil;
 import com.fssa.event.exceptions.DaoException;
 import com.fssa.event.exceptions.DaoExceptionErrors;
 import com.fssa.event.model.Event;
+import com.fssa.logger.Logger;
 
 //class for doing CRUD on event table
 public class EventDao {
@@ -142,7 +142,7 @@ public class EventDao {
 
 	}
 
-	public static List<Event> readFullEventList() throws SQLException {
+	public static List<Event> readFullEventList() throws SQLException, DaoException {
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
 			final String query = "SELECT * FROM EventList";
 			ArrayList<Event> resultlist = new ArrayList<>(); // arraylist declared
