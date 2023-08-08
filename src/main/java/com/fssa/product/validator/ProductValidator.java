@@ -49,7 +49,7 @@ public class ProductValidator {
 		String regex = "^[A-Za-z]+(?: [A-Za-z]+)*$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(ProductName);
-		Boolean isMatch = matcher.matches();
+		boolean isMatch = matcher.matches();
 		if (isMatch) {
 			return true;
 		} else {
@@ -73,7 +73,7 @@ public class ProductValidator {
 		String regex = "^[a-zA-Z0-9\\s\\-\\.\\,#/]+$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(ProductDescription);
-		Boolean isMatch = matcher.matches();
+		boolean isMatch = matcher.matches();
 		if (isMatch) {
 			return true;
 		} else {
@@ -98,7 +98,7 @@ public class ProductValidator {
 
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(URL);
-		Boolean isMatch = matcher.matches();
+		boolean isMatch = matcher.matches();
 
 		if (isMatch) {
 			return true;

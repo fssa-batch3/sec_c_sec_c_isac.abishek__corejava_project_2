@@ -5,7 +5,7 @@ package com.fssa.event.exceptions;
  * class. These error messages can be used to identify specific types of data
  * access related issues when handling DaoException in the application.
  */
-public interface DaoExceptionErrors {
+public class DaoExceptionErrors {
 
 	/**
 	 * Represents an error message for cases where the input provided is invalid or

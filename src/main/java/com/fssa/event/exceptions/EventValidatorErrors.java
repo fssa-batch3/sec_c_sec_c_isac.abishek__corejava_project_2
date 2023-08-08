@@ -6,7 +6,7 @@ package com.fssa.event.exceptions;
  * event-related data.
  */
 public interface EventValidatorErrors {
-	
+
 	/**
 	 * Represents an error message for cases where the event is null.
 	 */

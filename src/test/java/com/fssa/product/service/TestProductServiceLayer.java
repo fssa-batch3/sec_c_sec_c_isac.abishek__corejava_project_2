@@ -99,8 +99,7 @@ class TestProductServiceLayer {
 
 	@Test
 
-	public void testReadObject()
-			throws DaoException, SQLException, IllegalArgumentException, ValidatorIntializationException {
+	void testReadObject() throws DaoException, SQLException, IllegalArgumentException, ValidatorIntializationException {
 		Product Product1 = new Product("cluster", "ISI mark Tricycler", "https://freeimage.host/i/HNRzLYJ.jpg", 3);
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
 		ProductServiceLayer1.addProduct(Product1);
@@ -123,7 +122,7 @@ class TestProductServiceLayer {
 		try {
 			ProductServiceLayer1.deleteProduct(null);
 		} catch (Exception e) {
-			Assertions.assertEquals(e.getMessage(), DaoExceptionErrors.INVALID_INPUT);
+			Assertions.assertEquals(DaoExceptionErrors.INVALID_INPUT, e.getMessage());
 		}
 
 	}

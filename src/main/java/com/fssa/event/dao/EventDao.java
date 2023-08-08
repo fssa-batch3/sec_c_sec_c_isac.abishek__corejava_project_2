@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.fssa.Connection.dao.ConnectionUtil;
 import com.fssa.event.exceptions.DaoException;
@@ -14,6 +15,13 @@ import com.fssa.event.model.Event;
 
 //class for doing CRUD on event table
 public class EventDao {
+	public EventDao() {
+		/*
+		 * to call without
+		 */
+	}
+
+	static final String EVENTID = "event_id";
 
 	public static boolean addEvent(Event event) throws SQLException, DaoException {
 
@@ -37,7 +45,6 @@ public class EventDao {
 
 					throw new DaoException(DaoExceptionErrors.ROW_AFFECTED);
 				}
-//			System.out.println(rs);
 			} // closing the prepared statement
 		}
 		return true;
@@ -63,7 +70,7 @@ public class EventDao {
 		return true;
 	}
 
-	public static Event findEventByName(String name) throws SQLException, DaoException {
+	public static Event findEventByName(String name) throws SQLException {
 		final String query = "SELECT * FROM EventList WHERE event_name=?";
 		// query for finding an event by name in the table
 		Event result = new Event(); // object created
@@ -75,7 +82,8 @@ public class EventDao {
 				try (ResultSet rs = pst.executeQuery()) { // executing the query
 
 					while (rs.next()) { // Setting all the values to the object
-						result.setEventId(rs.getInt("event_id"));
+
+						result.setEventId(rs.getInt(EVENTID));
 						result.setEventName(rs.getString("event_name"));
 						result.setEventLocation(rs.getString("event_location"));
 						result.setOrganizerName(rs.getString("organizer_name"));
@@ -100,7 +108,7 @@ public class EventDao {
 				try (ResultSet id = preparedStatement.executeQuery(query)) {
 					int id1 = 0;
 					while (id.next()) {
-						id1 = id.getInt("event_id");
+						id1 = id.getInt(EVENTID);
 					}
 
 					System.out.println("Last ID: " + id1);
@@ -112,7 +120,7 @@ public class EventDao {
 		}
 	}
 
-	public static boolean update(Event event) throws SQLException, DaoException {
+	public static boolean update(Event event) throws SQLException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 
 			final String query = "UPDATE EventList SET  event_name = ?, organizer_name = ?, event_location = ?, contact_number = ?,image_url = ?,event_date=?,about_event = ? WHERE event_id = ?;";
@@ -137,7 +145,7 @@ public class EventDao {
 
 	}
 
-	public static ArrayList<Event> readFullEventList() throws SQLException, DaoException {
+	public static List<Event> readFullEventList() throws SQLException {
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
 			final String query = "SELECT * FROM EventList";
 			ArrayList<Event> resultlist = new ArrayList<>(); // arraylist declared
@@ -145,7 +153,7 @@ public class EventDao {
 				try (ResultSet rs = pst.executeQuery()) {
 					while (rs.next()) {
 						Event result = new Event();
-						result.setEventId(rs.getInt("event_id"));
+						result.setEventId(rs.getInt(EVENTID));
 						result.setEventName(rs.getString("event_name"));
 						result.setEventLocation(rs.getString("event_location"));
 						result.setOrganizerName(rs.getString("organizer_name"));

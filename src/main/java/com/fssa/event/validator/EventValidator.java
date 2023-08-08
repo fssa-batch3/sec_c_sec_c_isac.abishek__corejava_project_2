@@ -58,7 +58,7 @@ public class EventValidator {
 		String regex = "^(?:[A-Za-z]+(?: [A-Za-z]+)*)?$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(eventName);
-		Boolean isMatch = matcher.matches();
+		boolean isMatch = matcher.matches();
 		if (isMatch) {
 			return true;
 		} else {
@@ -82,7 +82,7 @@ public class EventValidator {
 		String regex = "^(?:[A-Za-z]+(?: [A-Za-z]+)*)?$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(organizerName);
-		Boolean isMatch = matcher.matches();
+		boolean isMatch = matcher.matches();
 		if (isMatch) {
 			return true;
 		} else {
@@ -106,7 +106,7 @@ public class EventValidator {
 		String regex = "^(\\+91|91)?[6789]\\d{9}$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(contactNo);
-		Boolean isMatch = matcher.matches();
+		boolean isMatch = matcher.matches();
 		if (isMatch) {
 			return true;
 		} else {
@@ -130,7 +130,7 @@ public class EventValidator {
 		String regex = "^[a-zA-Z0-9\\s\\-\\.\\,#/]+$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(aboutEvent);
-		Boolean isMatch = matcher.matches();
+		boolean isMatch = matcher.matches();
 		if (isMatch) {
 			return true;
 		} else {
@@ -145,7 +145,7 @@ public class EventValidator {
 		String regex = "^[a-zA-Z0-9\\s\\-\\.\\,#/]+$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(eventLocation);
-		Boolean isMatch = matcher.matches();
+		boolean isMatch = matcher.matches();
 		if (isMatch) {
 			return true;
 		} else {
@@ -161,16 +161,16 @@ public class EventValidator {
 	 * @throws ValidatorInitializationException if the URL is null or does not meet
 	 *                                          the required format.
 	 */
-	public static boolean validateURL(String URL) throws ValidatorInitializationException {
-		if (URL == null || URL.trim().isEmpty()) {
+	public static boolean validateURL(String url) throws ValidatorInitializationException {
+		if (url == null || url.trim().isEmpty()) {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_URL_NULL);
 		}
 
 		String regex = "(?i)\\b(?>https?|ftp)://[a-z0-9-]+(?:\\.[a-z0-9-]+)+(?:[/?][^\\s\"]*)?\\.(?:jpg|jpeg|gif|png|bmp)\\b";
 
 		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(URL);
-		Boolean isMatch = matcher.matches();
+		Matcher matcher = pattern.matcher(url);
+		boolean isMatch = matcher.matches();
 
 		if (isMatch) {
 			return true;
@@ -178,15 +178,15 @@ public class EventValidator {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_URL);
 		}
 	}
-	
+
 	public static boolean isValidEventDate(LocalDate eventDate) throws ValidatorInitializationException {
 		LocalDate today = LocalDate.now();
-		        if(eventDate == null ) {
-		        	throw new ValidatorInitializationException(EventValidatorErrors.INVALID_EVENT_DATE_NULL);
-		        }else if(eventDate.isAfter(today)) {
-		        	return true;
-		        }else {
-		        	throw new ValidatorInitializationException(EventValidatorErrors.INVALID_EVENT_DATE);
-		        }
-		    }
+		if (eventDate == null) {
+			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_EVENT_DATE_NULL);
+		} else if (eventDate.isAfter(today)) {
+			return true;
+		} else {
+			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_EVENT_DATE);
+		}
+	}
 }

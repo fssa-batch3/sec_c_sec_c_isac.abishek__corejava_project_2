@@ -127,7 +127,6 @@ public class Product {
 
 	public String toString() {
 
-		String s = "productName : " + this.getProductName() + " Event Id : " + this.getEventId() + "\n";
-		return s;
+		return "productName : " + this.getProductName() + " Event Id : " + this.getEventId() + "\n";
 	}
 }
