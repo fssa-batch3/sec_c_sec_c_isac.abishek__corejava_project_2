@@ -1,5 +1,6 @@
 package com.fssa.event.validator;
 
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,6 +35,7 @@ public class EventValidator {
 			validateEventLocation(event.getEventLocation());
 			validateAboutEvent(event.getAboutEvent());
 			validateURL(event.getImageUrl());
+			isValidEventDate(event.getEventDate());
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -53,7 +55,7 @@ public class EventValidator {
 		if (eventName == null || eventName.isEmpty()) {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_EVENT_NULL);
 		}
-		String regex = "^[A-Za-z]+(?: [A-Za-z]+)*$";
+		String regex = "^(?:[A-Za-z]+(?: [A-Za-z]+)*)?$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(eventName);
 		Boolean isMatch = matcher.matches();
@@ -77,7 +79,7 @@ public class EventValidator {
 		if (organizerName == null || organizerName.isEmpty()) {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_ORGANIZER_NULL);
 		}
-		String regex = "^[A-Za-z]+(?: [A-Za-z]+)*$";
+		String regex = "^(?:[A-Za-z]+(?: [A-Za-z]+)*)?$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(organizerName);
 		Boolean isMatch = matcher.matches();
@@ -164,7 +166,7 @@ public class EventValidator {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_URL_NULL);
 		}
 
-		String regex = "(?i)\\b((https?|ftp)://)?[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?\\.(jpg|jpeg|gif|png|bmp)\\b";
+		String regex = "(?i)\\b(?>https?|ftp)://[a-z0-9-]+(?:\\.[a-z0-9-]+)+(?:[/?][^\\s\"]*)?\\.(?:jpg|jpeg|gif|png|bmp)\\b";
 
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(URL);
@@ -176,4 +178,15 @@ public class EventValidator {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_URL);
 		}
 	}
+	
+	public static boolean isValidEventDate(LocalDate eventDate) throws ValidatorInitializationException {
+		LocalDate today = LocalDate.now();
+		        if(eventDate == null ) {
+		        	throw new ValidatorInitializationException(EventValidatorErrors.INVALID_EVENT_DATE_NULL);
+		        }else if(eventDate.isAfter(today)) {
+		        	return true;
+		        }else {
+		        	throw new ValidatorInitializationException(EventValidatorErrors.INVALID_EVENT_DATE);
+		        }
+		    }
 }

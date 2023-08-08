@@ -6,7 +6,15 @@ package com.fssa.event.exceptions;
  * event-related data.
  */
 public interface EventValidatorErrors {
-
+	
+	/**
+	 * Represents an error message for cases where the event is null.
+	 */
+	public static final String INVALID_EVENT_DATE_NULL = "Event  Date can't be Null ";
+	/**
+	 * Represents an error message for cases where the event is past date.
+	 */
+	public static final String INVALID_EVENT_DATE = "Event can't be Past Date";
 	/**
 	 * Represents an error message for cases where the event is null or empty.
 	 */

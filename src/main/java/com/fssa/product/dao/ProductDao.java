@@ -130,7 +130,7 @@ public class ProductDao {
     // Method to retrieve a list of all products from the database
     public static ArrayList<Product> readFullProductList() throws SQLException {
         try (Connection con = ConnectionUtil.getConnection()) {
-            final String query = "SELECT * FROM freshtrust.ProductList";
+            final String query = "SELECT * FROM ProductList";
             ArrayList<Product> resultList = new ArrayList<>();
             try (PreparedStatement pst = con.prepareStatement(query)) {
                 ResultSet rs = pst.executeQuery();

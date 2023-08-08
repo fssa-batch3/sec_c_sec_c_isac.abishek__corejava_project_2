@@ -17,7 +17,7 @@ import com.fssa.event.validator.EventValidator;
  class TestEventServiceLayer {
 
     public Event getEvent() {
-    	LocalDate input=LocalDate.of(2022, 10, 10);
+    	LocalDate input=LocalDate.of(2023, 10, 10);
         Event event = new Event( "Gem Event", "North Street, Taramani", "Organizer", "9751328805",
                 "https://freeimage.host/i/HNRzLYJ.jpg",input, "Concert by ar");
 
@@ -55,7 +55,7 @@ import com.fssa.event.validator.EventValidator;
 
     @Test
     void testServiceAddInvalid() throws  ValidatorInitializationException,DaoException,  SQLException {
-    	LocalDate input=LocalDate.of(2022, 10, 10);
+    	LocalDate input=LocalDate.of(2023, 10, 10);
     	Event event1 = new Event("12345", "North Street, Taramani", "Organizer", "9751328805",
                 "https://freeimage.host/i/HNRzLYJ.jpg",input, "Concert");
         EventServiceLayer eventServiceLayer = getEventLayer();
@@ -66,7 +66,7 @@ import com.fssa.event.validator.EventValidator;
     @Test
    
     void testServiceUpdate() throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
-    	LocalDate input=LocalDate.of(2022, 10, 10);
+    	LocalDate input=LocalDate.of(2023, 10, 10);
     	Event eventNew = new Event( "Appolo Event", "North Street, Taramani", "Organizer", "9751328805",
                 "https://freeimage.host/i/HNRzLYJ.jpg",input, "Concert");
         Event updateEvent = new Event( "Appolo Event", "North Street, Taramani", "FreshTrust", "9751328805",
@@ -89,7 +89,7 @@ import com.fssa.event.validator.EventValidator;
 
     @Test
     void testServiceUpdateInvalid() throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
-    	LocalDate input=LocalDate.of(2022, 10, 10);
+    	LocalDate input=LocalDate.of(2023, 10, 10);
     	Event event1 = new Event( "12345", "North Street, Taramani", "Organizer", "9751328805",
                 "https://freeimage.host/i/HNRzLYJ.jpg",input, "Concert");
         EventServiceLayer eventServiceLayer = getEventLayer();
@@ -100,7 +100,7 @@ import com.fssa.event.validator.EventValidator;
     @Test
     @Order(3)
     void testReadEvents() throws DaoException, SQLException, IllegalArgumentException, ValidatorInitializationException {
-    	LocalDate input=LocalDate.of(2022, 10, 10);
+    	LocalDate input=LocalDate.of(2023, 10, 10);
     	Event event1 = new Event( "Balaji Event", "North Street, Taramani", "Organizer", "9751328805",
                 "https://freeimage.host/i/HNRzLYJ.jpg",input, "Concert ");
         EventServiceLayer eventServiceLayer1 = getEventLayer();
@@ -143,7 +143,7 @@ import com.fssa.event.validator.EventValidator;
 
     @Test
     void testFindByName() throws SQLException, DaoException, ValidatorInitializationException {
-    	LocalDate input=LocalDate.of(2022, 10, 10);
+    	LocalDate input=LocalDate.of(2023, 10, 10);
     	Event event1 = new Event( "Gokul Event", "North Street, Taramani", "Organizer", "9751328805",
                 "https://freeimage.host/i/HNRzLYJ.jpg",input, "Concert by gokul singer");
 
