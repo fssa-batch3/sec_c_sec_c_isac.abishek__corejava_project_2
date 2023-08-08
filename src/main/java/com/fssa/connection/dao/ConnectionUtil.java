@@ -5,6 +5,7 @@ package com.fssa.connection.dao;
  *  */
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import com.fssa.logger.Logger;
 
@@ -12,7 +13,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 public class ConnectionUtil {
 
-	public static Connection getConnection() throws ConnectionException{
+	public static Connection getConnection() throws ConnectionException, SQLException{
 		Connection con = null;
 
 		String url;
@@ -39,9 +40,10 @@ public class ConnectionUtil {
 			e.printStackTrace();
 			throw new ConnectionException(ConectionError.CONNECTION_ERROR);
 		}
+		con.close();
 		return con;
 	}
-public static void main(String[] args) throws ConnectionException {
+public static void main(String[] args) throws ConnectionException, SQLException {
 	getConnection();
 }
 
