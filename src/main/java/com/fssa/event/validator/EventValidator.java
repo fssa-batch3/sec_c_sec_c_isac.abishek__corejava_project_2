@@ -29,7 +29,7 @@ public class EventValidator {
 	
 	public static boolean validate(Event event) throws ValidatorInitializationException {
 
-		try {
+		try { 
 			validateEventName(event.getEventName());
 			validateOrganizerName(event.getOrganizerName());
 
