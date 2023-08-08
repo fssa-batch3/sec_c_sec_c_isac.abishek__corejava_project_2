@@ -2,6 +2,8 @@ package com.fssa.product.service;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import com.fssa.connection.dao.ConnectionException;
 import com.fssa.product.dao.ProductDao;
 import com.fssa.product.exception.DaoException;
 import com.fssa.product.exception.DaoExceptionErrors;
@@ -38,12 +40,13 @@ public class ProductServiceLayer {
 	 *                                          database operation.
 	 * @throws DaoException                     if there is an issue with the data
 	 *                                          access layer.
+	 * @throws ConnectionException 
 	 */
 	public boolean addProduct(Product product)
-			throws IllegalArgumentException, SQLException, DaoException, ValidatorIntializationException {
+			throws  SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 
 		if (product == null) {
-			throw new IllegalArgumentException(DaoExceptionErrors.INVALID_INPUT);
+			throw new DaoException(DaoExceptionErrors.INVALID_INPUT);
 		}
 		if (ProductValidator.validate(product)) {
 			return ProductDao.addProduct(product);
@@ -64,12 +67,13 @@ public class ProductServiceLayer {
 	 *                                          database operation.
 	 * @throws DaoException                     if there is an issue with the data
 	 *                                          access layer.
+	 * @throws ConnectionException 
 	 */
 	public boolean updateProduct(Product product)
-			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException {
+			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException, ConnectionException {
 
 		if (product == null) {
-			throw new IllegalArgumentException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
 		}
 		if (ProductValidator.validate(product)) {
 			return ProductDao.update(product);
@@ -90,8 +94,9 @@ public class ProductServiceLayer {
 	 *                                          database operation.
 	 * @throws DaoException                     if there is an issue with the data
 	 *                                          access layer.
+	 * @throws ConnectionException 
 	 */
-	public List<Product> readProduct() throws IllegalArgumentException, SQLException, DaoException {
+	public List<Product> readProduct() throws IllegalArgumentException, SQLException, DaoException, ConnectionException {
 		return ProductDao.readFullProductList();
 	}
 
@@ -107,10 +112,11 @@ public class ProductServiceLayer {
 	 * @throws ValidatorInitializationException        if there is an issue with
 	 *                                                 initializing the validator.
 	 * @throws com.fssa.product.exception.DaoException
+	 * @throws ConnectionException 
 	 */
-	public boolean deleteProduct(String name) throws SQLException, DaoException, ValidatorIntializationException {
+	public boolean deleteProduct(String name) throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 		if (name == null) {
-			throw new IllegalArgumentException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
 		}
 		if (ProductValidator.validateProductName(name)) {
 			return ProductDao.deleteProduct(name);
@@ -128,12 +134,13 @@ public class ProductServiceLayer {
 	 *                                          database operation.
 	 * @throws DaoException                     if there is an issue with the data
 	 *                                          access layer.
+	 * @throws ConnectionException 
 	 * @throws ValidatorInitializationException if there is an issue with
 	 *                                          initializing the validator.
 	 */
-	public Product findByNameProduct(String name) throws SQLException, DaoException, ValidatorIntializationException {
+	public Product findByNameProduct(String name) throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 		if (name == null) {
-			throw new IllegalArgumentException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
 		}
 		if (ProductValidator.validateProductName(name)) {
 			return ProductDao.findProductByName(name);
@@ -142,13 +149,13 @@ public class ProductServiceLayer {
 		}
 	}
 
-	public boolean readProductByEvent() throws IllegalArgumentException, SQLException, DaoException {
+	public boolean readProductByEvent() throws IllegalArgumentException, SQLException, DaoException, ConnectionException {
 
 		return ProductDao.viewProductByEvents();
 	}
 
 	public boolean readProductBySpecificEvent(int eventId)
-			throws IllegalArgumentException, SQLException, ValidatorIntializationException, DaoException {
+			throws IllegalArgumentException, SQLException, ValidatorIntializationException, DaoException, ConnectionException {
 
 		if (ProductValidator.validateEventId(eventId)) {
 			return ProductDao.viewProductBySpecificEvents(eventId);

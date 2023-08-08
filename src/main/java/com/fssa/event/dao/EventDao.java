@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fssa.connection.dao.ConnectionException;
 import com.fssa.connection.dao.ConnectionUtil;
 import com.fssa.event.exceptions.DaoException;
 import com.fssa.event.exceptions.DaoExceptionErrors;
@@ -19,7 +21,7 @@ public class EventDao {
 
 	static final String EVENTID = "event_id";
 
-	public static boolean addEvent(Event event) throws SQLException, DaoException {
+	public static boolean addEvent(Event event) throws SQLException, DaoException, ConnectionException {
 
 		final String query = "INSERT INTO EventList (event_name, event_location, organizer_name, contact_number, event_date, image_url, about_event) VALUES (?, ?, ?, ?, ?, ?, ? );";
 		// query for adding the values in the table
@@ -46,7 +48,7 @@ public class EventDao {
 		return true;
 	}
 
-	public static boolean deleteEvent(String name) throws SQLException, DaoException {
+	public static boolean deleteEvent(String name) throws SQLException, DaoException, ConnectionException {
 
 		final String query = "DELETE FROM EventList WHERE event_name = ?";
 		// query for deleting the value in the table
@@ -66,7 +68,7 @@ public class EventDao {
 		return true;
 	}
 
-	public static Event findEventByName(String name) throws SQLException {
+	public static Event findEventByName(String name) throws SQLException, ConnectionException {
 		final String query = "SELECT * FROM EventList WHERE event_name=?";
 		// query for finding an event by name in the table
 		Event result = new Event(); // object created
@@ -96,7 +98,7 @@ public class EventDao {
 
 	}
 
-	public static int getId(String name) throws SQLException {
+	public static int getId(String name) throws SQLException, ConnectionException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 			final String query = "SELECT event_id FROM EventList WHERE event_name='" + name + "'";
@@ -117,7 +119,7 @@ public class EventDao {
 		}
 	}
 
-	public static boolean update(Event event) throws SQLException {
+	public static boolean update(Event event) throws SQLException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 
 			final String query = "UPDATE EventList SET  event_name = ?, organizer_name = ?, event_location = ?, contact_number = ?,image_url = ?,event_date=?,about_event = ? WHERE event_id = ?;";
@@ -142,7 +144,7 @@ public class EventDao {
 
 	}
 
-	public static List<Event> readFullEventList() throws SQLException, DaoException {
+	public static List<Event> readFullEventList() throws SQLException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
 			final String query = "SELECT * FROM EventList";
 			ArrayList<Event> resultlist = new ArrayList<>(); // arraylist declared

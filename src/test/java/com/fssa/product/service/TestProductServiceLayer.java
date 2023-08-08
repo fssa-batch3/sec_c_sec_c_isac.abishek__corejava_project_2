@@ -4,6 +4,8 @@ import java.sql.SQLException;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import com.fssa.connection.dao.ConnectionException;
 import com.fssa.product.dao.ProductDao;
 import com.fssa.product.exception.DaoException;
 import com.fssa.product.exception.DaoExceptionErrors;
@@ -30,7 +32,7 @@ class TestProductServiceLayer {
 
 	@Test
 
-	void testServiceAdd() throws IllegalArgumentException, SQLException, DaoException, ValidatorIntializationException {
+	void testServiceAdd() throws IllegalArgumentException, SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 		Product Product1 = getProduct();
 		ProductServiceLayer ProductServiceLayer = getProductLayer();
 		Assertions.assertTrue(ProductServiceLayer.addProduct(Product1));
@@ -39,12 +41,12 @@ class TestProductServiceLayer {
 	@Test
 
 	void testServiceAddNull()
-			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException {
+			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException, ConnectionException {
 		Product Product1 = null;
 		ProductServiceLayer ProductServiceLayer = getProductLayer();
 		try {
 			ProductServiceLayer.addProduct(Product1);
-		} catch (Exception e) {
+		} catch (DaoException e) {
 			Assertions.assertEquals(DaoExceptionErrors.INVALID_INPUT, e.getMessage());
 		}
 
@@ -53,7 +55,7 @@ class TestProductServiceLayer {
 	@Test
 
 	void testServiceAddInvalid()
-			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException {
+			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException, ConnectionException {
 		Product Product1 = new Product("12345", "ISI mark wheel chair", "https://freeimage.host/i/HNRzLYJ.jpg", 1);
 		ProductServiceLayer ProductServiceLayer = getProductLayer();
 
@@ -64,7 +66,7 @@ class TestProductServiceLayer {
 	@Test
 
 	void testServiceUpdate()
-			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException {
+			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException, ConnectionException {
 		Product Productnew = new Product("Tricycle", "ISI mark Stick", "https://freeimage.host/i/HNRzLYJ.jpg", 2);
 		Product updateProduct = new Product("Tricycle", "ISI mark Tricycle", "https://freeimage.host/i/HNRzLYJ.jpg", 2);
 		ProductServiceLayer ProductServiceLayer = getProductLayer();
@@ -75,12 +77,12 @@ class TestProductServiceLayer {
 	@Test
 //	 @Order(1)
 	void testServiceupdateNull()
-			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException {
+			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException, ConnectionException {
 		Product Product1 = null;
 		ProductServiceLayer ProductServiceLayer = getProductLayer();
 		try {
 			ProductServiceLayer.updateProduct(Product1);
-		} catch (Exception e) {
+		} catch (DaoException e) {
 			Assertions.assertEquals(DaoExceptionErrors.INVALID_INPUT, e.getMessage());
 		}
 
@@ -89,7 +91,7 @@ class TestProductServiceLayer {
 	@Test
 //	 @Order(1)
 	void testServiceupdateInvalid()
-			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException {
+			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException, ConnectionException {
 		Product Product1 = new Product("12345", "ISIS mark stick", "https://freeimage.host/i/HNRzLYJ.jpg", 1);
 		ProductServiceLayer ProductServiceLayer = getProductLayer();
 
@@ -99,7 +101,7 @@ class TestProductServiceLayer {
 
 	@Test
 
-	void testReadObject() throws DaoException, SQLException, IllegalArgumentException, ValidatorIntializationException {
+	void testReadObject() throws DaoException, SQLException, IllegalArgumentException, ValidatorIntializationException, ConnectionException {
 		Product Product1 = new Product("cluster", "ISI mark Tricycler", "https://freeimage.host/i/HNRzLYJ.jpg", 3);
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
 		ProductServiceLayer1.addProduct(Product1);
@@ -108,7 +110,7 @@ class TestProductServiceLayer {
 	}
 
 	@Test
-	void deleteObject() throws SQLException, DaoException, ValidatorIntializationException {
+	void deleteObject() throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
 		Assertions.assertTrue(ProductServiceLayer1.deleteProduct("cluster"));
@@ -116,31 +118,31 @@ class TestProductServiceLayer {
 	}
 
 	@Test
-	void deleteObjectNull() throws SQLException, DaoException, ValidatorIntializationException {
+	void deleteObjectNull() throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
 		try {
 			ProductServiceLayer1.deleteProduct(null);
-		} catch (Exception e) {
+		} catch (DaoException e) {
 			Assertions.assertEquals(DaoExceptionErrors.INVALID_INPUT, e.getMessage());
 		}
 
 	}
 
 	@Test
-	void deleteObjectInvalid() throws SQLException, DaoException, ValidatorIntializationException {
+	void deleteObjectInvalid() throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
 		try {
 			ProductServiceLayer1.deleteProduct("InvalidName");
-		} catch (Exception e) {
+		} catch (DaoException e) {
 			Assertions.assertEquals(DaoExceptionErrors.ROW_AFFECTED, e.getMessage());
 		}
 
 	}
 
 	@Test
-	void testFindByName() throws SQLException, DaoException, ValidatorIntializationException {
+	void testFindByName() throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 		Product Product1 = new Product("Laser", "ISI mark laser", "https://freeimage.host/i/HNRzLYJ.jpg", 2);
 
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
@@ -149,7 +151,7 @@ class TestProductServiceLayer {
 	}
 
 	@Test
-	void testProductByEvent() throws SQLException, DaoException, ValidatorIntializationException {
+	void testProductByEvent() throws SQLException, DaoException, ValidatorIntializationException, IllegalArgumentException, ConnectionException {
 		Product Product1 = new Product("arms", "ISI mark arms", "https://freeimage.host/i/HNRzLYJ.jpg", 2);
 
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
@@ -161,7 +163,7 @@ class TestProductServiceLayer {
 
 	@Test
 	void testProductBySpecificEvent()
-			throws IllegalArgumentException, SQLException, DaoException, ValidatorIntializationException {
+			throws IllegalArgumentException, SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 		final int eventId = 2;
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
 		Assertions.assertTrue(ProductServiceLayer1.readProductBySpecificEvent(eventId));
@@ -169,7 +171,7 @@ class TestProductServiceLayer {
 
 	@Test
 	void testProductBySpecificEventInvalid()
-			throws IllegalArgumentException, SQLException, DaoException, ValidatorIntializationException {
+			throws IllegalArgumentException, SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 		final int eventId = 0;
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
 		try {
@@ -183,12 +185,12 @@ class TestProductServiceLayer {
 	@Test
 
 	void testServiceFindByNameNull()
-			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException {
+			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException, ConnectionException {
 		String Product1 = null;
 		ProductServiceLayer hospitalServiceLayer = getProductLayer();
 		try {
 			hospitalServiceLayer.findByNameProduct(Product1);
-		} catch (Exception e) {
+		} catch (DaoException e) {
 			Assertions.assertEquals(DaoExceptionErrors.INVALID_INPUT, e.getMessage());
 		}
 

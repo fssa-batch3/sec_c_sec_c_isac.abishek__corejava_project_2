@@ -26,8 +26,7 @@ public class EventValidator {
 	 *                                          validation errors occur.
 	 */
 	
-	public EventValidator() {
-	}
+	
 	public static boolean validate(Event event) throws ValidatorInitializationException {
 
 		try {

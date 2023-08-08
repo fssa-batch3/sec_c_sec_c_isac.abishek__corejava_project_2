@@ -12,7 +12,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 public class ConnectionUtil {
 
-	public static Connection getConnection() {
+	public static Connection getConnection() throws ConnectionException{
 		Connection con = null;
 
 		String url;
@@ -37,14 +37,12 @@ public class ConnectionUtil {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("Unable to connect to the database");
+			throw new ConnectionException(ConectionError.CONNECTION_ERROR);
 		}
 		return con;
 	}
 
-	public static void main(String[] args) {
-		getConnection();
-	}
+
 
 }
 

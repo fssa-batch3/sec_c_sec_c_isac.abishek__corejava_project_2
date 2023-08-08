@@ -3,6 +3,7 @@ package com.fssa.event.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.fssa.connection.dao.ConnectionException;
 import com.fssa.event.dao.EventDao;
 import com.fssa.event.exceptions.DaoException;
 import com.fssa.event.exceptions.DaoExceptionErrors;
@@ -38,12 +39,13 @@ public class EventServiceLayer {
 	 *                                          database operation.
 	 * @throws DaoException                     if there is an issue with the data
 	 *                                          access layer.
+	 * @throws ConnectionException 
 	 */
 	public boolean addEvent(Event event)
-			throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
+			throws  ValidatorInitializationException, SQLException, DaoException, ConnectionException {
 
 		if (event == null) {
-			throw new IllegalArgumentException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
 		}
 		if (EventValidator.validate(event)) {
 
@@ -65,12 +67,13 @@ public class EventServiceLayer {
 	 *                                          database operation.
 	 * @throws DaoException                     if there is an issue with the data
 	 *                                          access layer.
+	 * @throws ConnectionException 
 	 */
 	public boolean updateEvent(Event event)
-			throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
+			throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException, ConnectionException {
 		
 		if (event == null) {
-			throw new IllegalArgumentException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
 		}
 		if (EventValidator.validate(event)) {
 			return EventDao.update(event);
@@ -91,9 +94,10 @@ public class EventServiceLayer {
 	 *                                          database operation.
 	 * @throws DaoException                     if there is an issue with the data
 	 *                                          access layer.
+	 * @throws ConnectionException 
 	 */
 	public List<Event> readEvents()
-			throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
+			throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException, ConnectionException {
 		return EventDao.readFullEventList();
 	}
 
@@ -108,10 +112,11 @@ public class EventServiceLayer {
 	 *                                          access layer.
 	 * @throws ValidatorInitializationException if there is an issue with
 	 *                                          initializing the validator.
+	 * @throws ConnectionException 
 	 */
-	public boolean deleteEvent(String name) throws SQLException, DaoException, ValidatorInitializationException {
+	public boolean deleteEvent(String name) throws SQLException, DaoException, ValidatorInitializationException, ConnectionException {
 		if (name == null) {
-			throw new IllegalArgumentException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
 		}
 		if (EventValidator.validateEventName(name)) {
 			return EventDao.deleteEvent(name);
@@ -131,10 +136,11 @@ public class EventServiceLayer {
 	 *                                          access layer.
 	 * @throws ValidatorInitializationException if there is an issue with
 	 *                                          initializing the validator.
+	 * @throws ConnectionException 
 	 */
-	public Event findEventByName(String name) throws SQLException, DaoException, ValidatorInitializationException {
+	public Event findEventByName(String name) throws SQLException, DaoException, ValidatorInitializationException, ConnectionException {
 		if (name == null) {
-			throw new IllegalArgumentException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
 		}
 		if (EventValidator.validateEventName(name)) {
 			return EventDao.findEventByName(name);
