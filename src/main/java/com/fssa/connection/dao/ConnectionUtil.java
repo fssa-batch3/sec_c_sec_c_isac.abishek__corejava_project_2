@@ -27,7 +27,7 @@ public class ConnectionUtil {
 			url = env.get("DATABASE_HOST");
 			userName = env.get("DATABASE_USERNAME");
 			passWord = env.get("DATABASE_PASSWORD");
-//			Logger.info("Connection success");
+			Logger.info("Connection success");
 		}
 
 		try {

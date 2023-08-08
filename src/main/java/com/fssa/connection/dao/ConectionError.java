@@ -10,5 +10,5 @@ public  final class  ConectionError {
 	
 	private ConectionError() {
 		
-	};
+	}
 }
