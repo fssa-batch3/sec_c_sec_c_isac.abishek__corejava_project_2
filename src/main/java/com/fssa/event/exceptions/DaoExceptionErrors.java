@@ -5,7 +5,7 @@ package com.fssa.event.exceptions;
  * class. These error messages can be used to identify specific types of data
  * access related issues when handling DaoException in the application.
  */
-public class DaoExceptionErrors {
+public final class DaoExceptionErrors {
 
 	/**
 	 * Represents an error message for cases where the input provided is invalid or
@@ -20,5 +20,8 @@ public class DaoExceptionErrors {
 	 */
 	public static final String ROW_AFFECTED = "No Lines Are Affected";
 
+	private DaoExceptionErrors(){
+		
+	}
 
 }

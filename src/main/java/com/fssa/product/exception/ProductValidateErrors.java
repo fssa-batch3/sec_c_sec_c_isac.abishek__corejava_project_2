@@ -5,7 +5,7 @@ package com.fssa.product.exception;
  * These error messages can be used to identify specific issues when validating
  * Product-related data.
  */
-public interface ProductValidateErrors {
+public final class ProductValidateErrors {
 
 	/**
 	 * Represents an error message for cases where the Product is null or empty.
@@ -45,4 +45,8 @@ public interface ProductValidateErrors {
 	 * Represents an error message for cases where the URL is invalid.
 	 */
 	public static final String INVALID_URL = "Invalid URL";
+	
+	private ProductValidateErrors() {
+		
+	}
 }

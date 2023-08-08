@@ -5,7 +5,7 @@ package com.fssa.event.exceptions;
  * These error messages can be used to identify specific issues when validating
  * event-related data.
  */
-public interface EventValidatorErrors {
+public final class EventValidatorErrors {
 
 	/**
 	 * Represents an error message for cases where the event is null.
@@ -84,4 +84,8 @@ public interface EventValidatorErrors {
 	 * Represents an error message for cases where the URL is invalid.
 	 */
 	public static final String INVALID_URL = "Invalid URL";
+	
+	private EventValidatorErrors() {
+		
+	}
 }

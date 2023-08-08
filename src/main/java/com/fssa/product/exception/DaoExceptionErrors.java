@@ -5,7 +5,7 @@ package com.fssa.product.exception;
  * class. These error messages can be used to identify specific types of data
  * access related issues when handling DaoException in the application.
  */
-public interface DaoExceptionErrors {
+public final class DaoExceptionErrors {
 
 	/**
 	 * Represents an error message for cases where the input provided is invalid or
@@ -26,4 +26,8 @@ public interface DaoExceptionErrors {
 	 * establish a connection with the database.
 	 */
 	public static final String CONNECTION_ERROR = "Connection Error";
+	
+	private DaoExceptionErrors() {
+		
+	}
 }
