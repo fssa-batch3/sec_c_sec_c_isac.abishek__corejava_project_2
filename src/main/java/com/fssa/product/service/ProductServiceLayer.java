@@ -149,13 +149,13 @@ public class ProductServiceLayer {
 		}
 	}
 
-	public boolean readProductByEvent() throws IllegalArgumentException, SQLException, DaoException, ConnectionException {
+	public boolean readProductByEvent() throws IllegalArgumentException, SQLException,  ConnectionException {
 
 		return ProductDao.viewProductByEvents();
 	}
 
 	public boolean readProductBySpecificEvent(int eventId)
-			throws IllegalArgumentException, SQLException, ValidatorIntializationException, DaoException, ConnectionException {
+			throws IllegalArgumentException, SQLException, ValidatorIntializationException,  ConnectionException {
 
 		if (ProductValidator.validateEventId(eventId)) {
 			return ProductDao.viewProductBySpecificEvents(eventId);
