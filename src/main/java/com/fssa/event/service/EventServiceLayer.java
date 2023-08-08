@@ -17,8 +17,18 @@ import com.fssa.event.validator.EventValidator;
  */
 public class EventServiceLayer {
 
-	public  EventValidator eventValidator;
-	public  EventDao eventDao;
+	private  EventValidator eventValidator;
+	public EventValidator getEventValidator() {
+		return eventValidator;
+	}
+
+	private  EventDao eventDao;
+
+	public EventDao getEventDao() {
+		return eventDao;
+	}
+
+
 
 	// Constructor to initialize the service layer with EventValidator and EventDao
 	// instances.
@@ -26,6 +36,8 @@ public class EventServiceLayer {
 		this.eventValidator = eventValidator;
 		this.eventDao = eventDao;
 	}
+	
+	
 
 	/**
 	 * Adds a new event to the system if it passes validation checks.
