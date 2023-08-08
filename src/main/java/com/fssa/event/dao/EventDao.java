@@ -142,7 +142,7 @@ public class EventDao {
 
 	}
 
-	public static List<Event> readFullEventList() throws SQLException, DaoException {
+	public static List<Event> readFullEventList() throws SQLException {
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
 			final String query = "SELECT * FROM EventList";
 			ArrayList<Event> resultlist = new ArrayList<>(); // arraylist declared
