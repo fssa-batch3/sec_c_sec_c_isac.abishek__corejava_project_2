@@ -68,7 +68,7 @@ public class EventServiceLayer {
 	 */
 	public boolean updateEvent(Event event)
 			throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException {
-		System.out.println(event);
+		
 		if (event == null) {
 			throw new IllegalArgumentException(DaoExceptionErrors.INVALID_INPUT);
 		}

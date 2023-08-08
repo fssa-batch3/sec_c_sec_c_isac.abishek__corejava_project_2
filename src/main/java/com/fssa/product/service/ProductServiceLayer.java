@@ -1,9 +1,7 @@
 package com.fssa.product.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-
 import com.fssa.product.dao.ProductDao;
 import com.fssa.product.exception.DaoException;
 import com.fssa.product.exception.DaoExceptionErrors;
@@ -144,13 +142,13 @@ public class ProductServiceLayer {
 		}
 	}
 
-	public boolean readProductByEvent() throws IllegalArgumentException, SQLException {
+	public boolean readProductByEvent() throws IllegalArgumentException, SQLException, DaoException {
 
 		return ProductDao.viewProductByEvents();
 	}
 
 	public boolean readProductBySpecificEvent(int eventId)
-			throws IllegalArgumentException, SQLException, ValidatorIntializationException {
+			throws IllegalArgumentException, SQLException, ValidatorIntializationException, DaoException {
 
 		if (ProductValidator.validateEventId(eventId)) {
 			return ProductDao.viewProductBySpecificEvents(eventId);

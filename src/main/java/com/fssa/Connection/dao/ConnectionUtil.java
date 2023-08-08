@@ -6,6 +6,8 @@ package com.fssa.Connection.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import com.fssa.Logger.Logger;
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class ConnectionUtil {
@@ -25,13 +27,13 @@ public class ConnectionUtil {
 			url = env.get("DATABASE_HOST");
 			userName = env.get("DATABASE_USERNAME");
 			passWord = env.get("DATABASE_PASSWORD");
-			System.out.println("Connection success");
+			Logger.info("Connection success");
 		}
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(url, userName, passWord);
-			System.out.println("Connection success");
+			Logger.info("Connection success");
 
 		} catch (Exception e) {
 			e.printStackTrace();

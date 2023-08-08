@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.fssa.Connection.dao.ConnectionUtil;
+import com.fssa.Logger.Logger;
 import com.fssa.event.exceptions.DaoException;
 import com.fssa.event.exceptions.DaoExceptionErrors;
 import com.fssa.event.model.Event;
@@ -107,7 +107,8 @@ public class EventDao {
 						id1 = id.getInt(EVENTID);
 					}
 
-					System.out.println("Last ID: " + id1);
+					
+					Logger.info("Last ID: " + id1);
 					return id1;
 				}
 			} catch (SQLException ex) {
@@ -141,7 +142,7 @@ public class EventDao {
 
 	}
 
-	public static List<Event> readFullEventList() throws SQLException {
+	public static List<Event> readFullEventList() throws SQLException, DaoException {
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
 			final String query = "SELECT * FROM EventList";
 			ArrayList<Event> resultlist = new ArrayList<>(); // arraylist declared

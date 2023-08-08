@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fssa.Connection.dao.ConnectionUtil;
+import com.fssa.Logger.Logger;
 import com.fssa.product.exception.DaoException;
 import com.fssa.product.exception.DaoExceptionErrors;
 import com.fssa.product.model.Product;
@@ -60,7 +61,7 @@ public class ProductDao {
 	}
 
 	// Method to find a Product record from the database by its name
-	public static Product findProductByName(String name) throws SQLException {
+	public static Product findProductByName(String name) throws SQLException, DaoException {
 		final String query = "SELECT * FROM ProductList WHERE Product_name = ?;";
 		Product result = new Product();
 		try (Connection con = ConnectionUtil.getConnection()) {
@@ -87,7 +88,7 @@ public class ProductDao {
 	}
 
 	// Method to get the product ID based on the product name
-	public static int getId(String name) throws SQLException {
+	public static int getId(String name) throws SQLException, DaoException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 			final String query = "SELECT product_id FROM ProductList WHERE product_name='" + name + "';";
 			try (Statement preparedStatement = con.createStatement()) {
@@ -96,7 +97,8 @@ public class ProductDao {
 					while (id.next()) {
 						id1 = id.getInt("product_id");
 					}
-					System.out.println("Last ID: " + id1);
+					
+					Logger.info("Last ID: " + id1);
 					return id1;
 				}
 			}
@@ -106,7 +108,7 @@ public class ProductDao {
 	}
 
 	// Method to update a Product record in the database
-	public static boolean update(Product product) throws SQLException {
+	public static boolean update(Product product) throws SQLException, DaoException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 			final String query = "UPDATE ProductList SET Product_name = ?, Product_description = ?, image_url = ? WHERE Product_id = ?;";
 			try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
@@ -123,7 +125,7 @@ public class ProductDao {
 	}
 
 	// Method to retrieve a list of all products from the database
-	public static List<Product> readFullProductList() throws SQLException {
+	public static List<Product> readFullProductList() throws SQLException, DaoException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 			final String query = "SELECT * FROM ProductList";
 			ArrayList<Product> resultList = new ArrayList<>();
@@ -146,7 +148,7 @@ public class ProductDao {
 
 	}
 
-	public static List<ArrayList<String>> listProductByEvents() throws SQLException {
+	public static List<ArrayList<String>> listProductByEvents() throws SQLException, DaoException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 			final String query = "SELECT p.Product_name ,  e.event_name FROM EventList as e LEFT JOIN ProductList as p ON e.event_id = p.event_id;";
 
@@ -166,7 +168,7 @@ public class ProductDao {
 		}
 	}
 
-	public static List<ArrayList<String>> listProductBySpecificEvents(int eventId) throws SQLException {
+	public static List<ArrayList<String>> listProductBySpecificEvents(int eventId) throws SQLException, DaoException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 			final String query = "SELECT p.Product_name ,  e.event_name FROM EventList as e LEFT JOIN ProductList as p ON  e.event_id = p.event_id WHERE p.event_id=?";
 
@@ -188,17 +190,19 @@ public class ProductDao {
 		}
 	}
 
-	public static boolean viewProductByEvents() throws SQLException {
+	public static boolean viewProductByEvents() throws SQLException, DaoException {
 		List<ArrayList<String>> resultList;
 		resultList = listProductByEvents();
-		System.out.println(resultList);
+		
+		Logger.info(resultList);
 		return true;
 	}
 
-	public static boolean viewProductBySpecificEvents(int eventId) throws SQLException {
+	public static boolean viewProductBySpecificEvents(int eventId) throws SQLException, DaoException {
 		List<ArrayList<String>> resultList;
 		resultList = listProductBySpecificEvents(eventId);
-		System.out.println(resultList);
+		
+		Logger.info(resultList);
 		return true;
 	}
 
