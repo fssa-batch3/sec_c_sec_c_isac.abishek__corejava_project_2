@@ -15,11 +15,7 @@ import com.fssa.event.model.Event;
 
 //class for doing CRUD on event table
 public class EventDao {
-	public EventDao() {
-		/*
-		 * to call without
-		 */
-	}
+	
 
 	static final String EVENTID = "event_id";
 

@@ -68,7 +68,7 @@ public interface EventValidatorErrors {
 	/**
 	 * Represents an error message for cases where the event type is null or empty.
 	 */
-	public static final String INVALID_ABOUT__EVENT_NULL = "Event about can't be null or empty";
+	public static final String INVALID_ABOUT_EVENT_NULL = "Event about can't be null or empty";
 
 	/**
 	 * Represents an error message for cases where the event type is invalid.

@@ -201,7 +201,7 @@ class TestEventValidator {
 		try {
 			EventValidator.validateAboutEvent(" ");
 		} catch (ValidatorInitializationException e) {
-			Assertions.assertEquals(EventValidatorErrors.INVALID_ABOUT__EVENT_NULL, e.getMessage());
+			Assertions.assertEquals(EventValidatorErrors.INVALID_ABOUT_EVENT_NULL, e.getMessage());
 		}
 	}
 
@@ -210,7 +210,7 @@ class TestEventValidator {
 		try {
 			EventValidator.validateAboutEvent(null);
 		} catch (ValidatorInitializationException e) {
-			Assertions.assertEquals(EventValidatorErrors.INVALID_ABOUT__EVENT_NULL, e.getMessage());
+			Assertions.assertEquals(EventValidatorErrors.INVALID_ABOUT_EVENT_NULL, e.getMessage());
 		}
 	}
 

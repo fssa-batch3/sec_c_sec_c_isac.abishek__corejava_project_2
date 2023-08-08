@@ -125,7 +125,7 @@ public class EventValidator {
 	 */
 	public static boolean validateAboutEvent(String aboutEvent) throws ValidatorInitializationException {
 		if (aboutEvent == null || aboutEvent.isEmpty()) {
-			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_ABOUT__EVENT_NULL);
+			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_ABOUT_EVENT_NULL);
 		}
 		String regex = "^[a-zA-Z0-9\\s\\-\\.\\,#/]+$";
 		Pattern pattern = Pattern.compile(regex);
