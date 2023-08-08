@@ -18,15 +18,15 @@ public class ProductValidator {
 	 *                                          initializing the validator or other
 	 *                                          validation errors occur.
 	 */
-	public static boolean validate(Product Product) throws ValidatorIntializationException {
-		if (Product == null) {
+	public static boolean validate(Product product) throws ValidatorIntializationException {
+		if (product == null) {
 			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCT_NULL);
 		}
 		try {
-			validateProductName(Product.getProductName());
-			validateEventId(Product.getEventId());
-			validateDescription(Product.getProductDescription());
-			validateURL(Product.getImageUrl());
+			validateProductName(product.getProductName());
+			validateEventId(product.getEventId());
+			validateDescription(product.getProductDescription());
+			validateURL(product.getImageUrl());
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -42,13 +42,13 @@ public class ProductValidator {
 	 * @throws ValidatorInitializationException if the Product name is null or does
 	 *                                          not meet the required format.
 	 */
-	public static boolean validateProductName(String ProductName) throws ValidatorIntializationException {
-		if (ProductName == null) {
+	public static boolean validateProductName(String productName) throws ValidatorIntializationException {
+		if (productName == null) {
 			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCT_NULL);
 		}
 		String regex = "^[A-Za-z]+(?: [A-Za-z]+)*$";
 		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(ProductName);
+		Matcher matcher = pattern.matcher(productName);
 		boolean isMatch = matcher.matches();
 		if (isMatch) {
 			return true;
@@ -66,13 +66,13 @@ public class ProductValidator {
 	 * @throws ValidatorInitializationException if the ProductDescription is null or
 	 *                                          does not meet the required format.
 	 */
-	public static boolean validateDescription(String ProductDescription) throws ValidatorIntializationException {
-		if (ProductDescription == null) {
+	public static boolean validateDescription(String productDescription) throws ValidatorIntializationException {
+		if (productDescription == null) {
 			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCTDESCRIPTION_NULL);
 		}
 		String regex = "^[a-zA-Z0-9\\s\\-\\.\\,#/]+$";
 		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(ProductDescription);
+		Matcher matcher = pattern.matcher(productDescription);
 		boolean isMatch = matcher.matches();
 		if (isMatch) {
 			return true;
@@ -89,15 +89,15 @@ public class ProductValidator {
 	 * @throws ValidatorInitializationException if the URL is null or does not meet
 	 *                                          the required format.
 	 */
-	public static boolean validateURL(String URL) throws ValidatorIntializationException {
-		if (URL == null || URL.trim().isEmpty()) {
+	public static boolean validateURL(String url) throws ValidatorIntializationException {
+		if (url == null || url.trim().isEmpty()) {
 			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_URL_NULL);
 		}
 
-		String regex = "(?i)\\b((https?|ftp)://)?[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?\\.(jpg|jpeg|gif|png|bmp)\\b";
+		String regex = "(?i)\\b(?>https?|ftp)://[a-z0-9-]+(?:\\.[a-z0-9-]+)+(?:[/?][^\\s\"]*)?\\.(?:jpg|jpeg|gif|png|bmp)\\b";
 
 		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(URL);
+		Matcher matcher = pattern.matcher(url);
 		boolean isMatch = matcher.matches();
 
 		if (isMatch) {

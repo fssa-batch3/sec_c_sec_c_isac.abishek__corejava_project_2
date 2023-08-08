@@ -6,7 +6,7 @@ import com.fssa.product.exception.ProductValidateErrors;
 import com.fssa.product.exception.ValidatorIntializationException;
 import com.fssa.product.model.Product;
 
-public class TestProductValidator {
+ class TestProductValidator {
 	Product product = new Product("limbs", "ISI MARK LIMBS", "https://freeimage.host/i/HNRzLYJ.jpg", 2);
 	Product testObj = new Product();
 

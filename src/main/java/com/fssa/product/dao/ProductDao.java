@@ -61,7 +61,7 @@ public class ProductDao {
 	}
 
 	// Method to find a Product record from the database by its name
-	public static Product findProductByName(String name) throws SQLException, DaoException {
+	public static Product findProductByName(String name) throws SQLException{
 		final String query = "SELECT * FROM ProductList WHERE Product_name = ?;";
 		Product result = new Product();
 		try (Connection con = ConnectionUtil.getConnection()) {
@@ -88,7 +88,7 @@ public class ProductDao {
 	}
 
 	// Method to get the product ID based on the product name
-	public static int getId(String name) throws SQLException, DaoException {
+	public static int getId(String name) throws SQLException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 			final String query = "SELECT product_id FROM ProductList WHERE product_name='" + name + "';";
 			try (Statement preparedStatement = con.createStatement()) {
@@ -125,7 +125,7 @@ public class ProductDao {
 	}
 
 	// Method to retrieve a list of all products from the database
-	public static List<Product> readFullProductList() throws SQLException, DaoException {
+	public static List<Product> readFullProductList() throws SQLException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 			final String query = "SELECT * FROM ProductList";
 			ArrayList<Product> resultList = new ArrayList<>();
@@ -148,7 +148,7 @@ public class ProductDao {
 
 	}
 
-	public static List<ArrayList<String>> listProductByEvents() throws SQLException, DaoException {
+	public static List<ArrayList<String>> listProductByEvents() throws SQLException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 			final String query = "SELECT p.Product_name ,  e.event_name FROM EventList as e LEFT JOIN ProductList as p ON e.event_id = p.event_id;";
 
@@ -168,7 +168,7 @@ public class ProductDao {
 		}
 	}
 
-	public static List<ArrayList<String>> listProductBySpecificEvents(int eventId) throws SQLException, DaoException {
+	public static List<ArrayList<String>> listProductBySpecificEvents(int eventId) throws SQLException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 			final String query = "SELECT p.Product_name ,  e.event_name FROM EventList as e LEFT JOIN ProductList as p ON  e.event_id = p.event_id WHERE p.event_id=?";
 
