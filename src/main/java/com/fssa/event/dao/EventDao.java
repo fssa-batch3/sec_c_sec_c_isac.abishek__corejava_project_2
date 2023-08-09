@@ -90,11 +90,12 @@ public class EventDao {
 						result.setAboutEvent(rs.getString("about_event"));
 						result.setEventDate(rs.getDate("event_date"));
 					}
-					// connections are closed
+					return result; // returning the result object	// connections are closed
 				}
 			}
+			
 		}
-		return result; // returning the result object
+		
 
 	}
 

@@ -46,7 +46,7 @@ public class ProductValidator {
 		if (productName == null) {
 			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCT_NULL);
 		}
-		String regex = "^[A-Za-z]+(?: [A-Za-z]+)*$";
+		String regex = "^[A-Za-z\s]+$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(productName);
 		boolean isMatch = matcher.matches();
@@ -94,7 +94,7 @@ public class ProductValidator {
 			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_URL_NULL);
 		}
 
-		String regex = "(?i)\\b(?>https?|ftp)://[a-z0-9-]+(?:\\.[a-z0-9-]+)+(?:[/?][^\\s\"]*)?\\.(?:jpg|jpeg|gif|png|bmp)\\b";
+		String regex = "(?i)\\b((https?|ftp)://)?[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?\\.(jpg|jpeg|gif|png|bmp)\\b";
 
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(url);

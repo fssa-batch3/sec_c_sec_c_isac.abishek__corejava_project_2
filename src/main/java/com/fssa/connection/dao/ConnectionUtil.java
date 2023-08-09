@@ -40,8 +40,9 @@ public class ConnectionUtil {
 			e.printStackTrace();
 			throw new ConnectionException(ConectionError.CONNECTION_ERROR);
 		}
-		con.close();
+
 		return con;
+		
 	}
 public static void main(String[] args) throws ConnectionException, SQLException {
 	getConnection();

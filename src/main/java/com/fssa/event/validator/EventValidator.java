@@ -57,7 +57,7 @@ public class EventValidator {
 		if (eventName == null || eventName.isEmpty()) {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_EVENT_NULL);
 		}
-		String regex = "^(?:[A-Za-z]+(?: [A-Za-z]+)*)?$";
+		String regex = "^[A-Za-z\s]+$" ;
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(eventName);
 		boolean isMatch = matcher.matches();
@@ -81,7 +81,7 @@ public class EventValidator {
 		if (organizerName == null || organizerName.isEmpty()) {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_ORGANIZER_NULL);
 		}
-		String regex = "^(?:[A-Za-z]+(?: [A-Za-z]+)*)?$";
+		String regex = "^[A-Za-z\s]+$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(organizerName);
 		boolean isMatch = matcher.matches();

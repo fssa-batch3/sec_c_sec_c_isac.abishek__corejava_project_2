@@ -104,7 +104,7 @@ public class ProductDao {
 				}
 			}
 		} catch (SQLException ex) {
-			throw new SQLException("ERROR");
+			throw new SQLException(ex.getMessage());
 		}
 	}
 
