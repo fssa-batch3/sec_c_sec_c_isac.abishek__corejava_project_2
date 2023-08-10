@@ -10,6 +10,7 @@ import com.fssa.event.exceptions.DaoExceptionErrors;
 import com.fssa.event.exceptions.ValidatorInitializationException;
 import com.fssa.event.model.Event;
 import com.fssa.event.validator.EventValidator;
+import com.fssa.product.dao.ProductDao;
 
 /**
  * The service layer class that acts as an intermediary between the
@@ -159,6 +160,11 @@ public class EventServiceLayer {
 		} else {
 			return null;
 		}
+	}
+
+	public boolean viewEvent() throws IllegalArgumentException, SQLException,  ConnectionException {
+
+		return EventDao.viewEvents();
 	}
 
 }

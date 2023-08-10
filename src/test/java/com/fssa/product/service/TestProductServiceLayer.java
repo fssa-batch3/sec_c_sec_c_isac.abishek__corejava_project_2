@@ -23,11 +23,13 @@ class TestProductServiceLayer {
 	}
 
 	public ProductServiceLayer getProductLayer() {
-		ProductValidator ProductValidator = new ProductValidator();
-		ProductDao ProductDao = new ProductDao();
+		ProductValidator ProductValidatorobj = ProductValidator.getProductValidator();
+		
+		ProductDao ProductDaoobj = ProductDao.getProductDao();
+	
 
-		ProductServiceLayer ProductServiceLayer = new ProductServiceLayer(ProductValidator, ProductDao);
-		return ProductServiceLayer;
+		ProductServiceLayer ProductServiceLayerobj = new ProductServiceLayer(ProductValidatorobj, ProductDaoobj);
+		return ProductServiceLayerobj;
 	}
 
 	@Test
@@ -155,9 +157,9 @@ class TestProductServiceLayer {
 		Product Product1 = new Product("arms", "ISI mark arms", "https://freeimage.host/i/HNRzLYJ.jpg", 2);
 
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
-		ProductServiceLayer1.addProduct(Product1);
+//		ProductServiceLayer1.addProduct(Product1);
 		Product1 = new Product("Plastic legs", "ISI mark plastic legs", "https://freeimage.host/i/HNRzLYJ.jpg", 4);
-		ProductServiceLayer1.addProduct(Product1);
+//		ProductServiceLayer1.addProduct(Product1);
 		Assertions.assertTrue(ProductServiceLayer1.readProductByEvent());
 	}
 

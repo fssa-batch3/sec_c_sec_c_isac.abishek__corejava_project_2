@@ -14,7 +14,8 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class ConnectionUtil {
 
 	public static Connection getConnection() throws ConnectionException, SQLException{
-
+		
+		Connection con = null;
 
 		String url;
 		String userName;
@@ -32,11 +33,11 @@ public class ConnectionUtil {
 		}
 
 		try {
-            return DriverManager.getConnection(url, userName, passWord);
+             con = DriverManager.getConnection(url, userName, passWord);
         } catch (SQLException e) {
-            e.printStackTrace();
              throw new ConnectionException(ConectionError.CONNECTION_ERROR);
         }
+		return con;
 		
 	}
 public static void main(String[] args) throws ConnectionException, SQLException {

@@ -17,7 +17,13 @@ import com.fssa.logger.Logger;
 
 //class for doing CRUD on event table
 public class EventDao {
+	private EventDao() {
+		
+	}
 	
+	public static EventDao getEventDao(){
+		return new EventDao();
+	}
 
 	static final String EVENTID = "event_id";
 
@@ -146,6 +152,7 @@ public class EventDao {
 	}
 
 	public static List<Event> readFullEventList() throws SQLException, ConnectionException {
+		
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
 			final String query = "SELECT * FROM EventList";
 			ArrayList<Event> resultlist = new ArrayList<>(); // arraylist declared
@@ -169,6 +176,13 @@ public class EventDao {
 
 		}
 
+	}
+	public static boolean viewEvents() throws SQLException,  ConnectionException {
+		List<Event> resultList;
+		resultList = readFullEventList();
+		
+		Logger.info(resultList);
+		return true;
 	}
 
 }

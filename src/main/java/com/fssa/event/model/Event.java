@@ -20,6 +20,13 @@ public class Event {
 	private String imageUrl;
 	private String aboutEvent;
 
+	@Override
+	public String toString() {
+		return "Event [eventId=" + eventId + ", eventName=" + eventName + ", eventLocation=" + eventLocation
+				+ ", organizerName=" + organizerName + ", contactNumber=" + contactNumber + ", eventDate=" + eventDate
+				+ ", eventDateSQL=" + eventDateSQL + ", imageUrl=" + imageUrl + ", aboutEvent=" + aboutEvent + "]";
+	}
+
 	public Event() {
 
 	}

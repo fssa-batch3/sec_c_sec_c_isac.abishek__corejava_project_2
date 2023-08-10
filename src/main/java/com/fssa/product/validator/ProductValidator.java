@@ -12,7 +12,13 @@ import com.fssa.product.exception.ValidatorIntializationException;
 import com.fssa.product.model.Product;
 
 public class ProductValidator {
-
+	
+	private ProductValidator() {
+		
+	}
+   public static ProductValidator getProductValidator() {
+	   return new ProductValidator();
+   }
 	/**
 	 * Validates the complete Product object to ensure all properties meet the
 	 * required criteria.

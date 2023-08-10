@@ -17,6 +17,12 @@ import com.fssa.product.model.Product;
 
 // Class for doing CRUD on the Product table
 public class ProductDao {
+	private ProductDao() {
+		
+	}
+	public static  ProductDao getProductDao() {
+		return new ProductDao();
+	}
 	static final String PRODUCTNAME = "Product_name";
 
 	// Method to add a new Product record to the database

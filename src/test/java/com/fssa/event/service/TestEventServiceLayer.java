@@ -27,7 +27,7 @@ class TestEventServiceLayer {
 
 	public EventServiceLayer getEventLayer() {
 		EventValidator eventValidator = new EventValidator();
-		EventDao eventDao = new EventDao();
+		EventDao eventDao = EventDao.getEventDao();
 
 		EventServiceLayer eventServiceLayer = new EventServiceLayer(eventValidator, eventDao);
 		return eventServiceLayer;
@@ -110,6 +110,12 @@ class TestEventServiceLayer {
 		eventServiceLayer1.addEvent(event1);
 		Assertions.assertNotEquals(0, eventServiceLayer1.readEvents().size());
 
+	}
+	@Test
+	void testViewEvents() throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException, ConnectionException {
+		EventServiceLayer eventServiceLayer1 = getEventLayer();
+		
+		Assertions.assertTrue(eventServiceLayer1.viewEvent());
 	}
 
 	@Test
