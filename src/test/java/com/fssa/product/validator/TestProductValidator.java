@@ -1,5 +1,7 @@
 package com.fssa.product.validator;
 
+import java.net.MalformedURLException;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import com.fssa.product.exception.ProductValidateErrors;
@@ -102,23 +104,23 @@ import com.fssa.product.model.Product;
 	}
 
 	@Test
-	void testValidURL() throws ValidatorIntializationException {
+	void testValidURL() throws ValidatorIntializationException, MalformedURLException {
 		testObj.setImageUrl("https://iili.io/H8lK1MQ.jpg");
 		String URL = testObj.getImageUrl();
 		Assertions.assertTrue(ProductValidator.validateURL(URL));
 	}
 
 	@Test
-	void testInvalidURL() {
+	void testInvalidURL() throws MalformedURLException, ValidatorIntializationException {
 		try {
 			ProductValidator.validateURL("NOTINTYPE");
-		} catch (ValidatorIntializationException e) {
+		} catch (MalformedURLException e) {
 			Assertions.assertEquals(ProductValidateErrors.INVALID_URL, e.getMessage());
 		}
 	}
 
 	@Test
-	void testInvalidURLEmpty() {
+	void testInvalidURLEmpty() throws MalformedURLException {
 		try {
 			ProductValidator.validateURL(" ");
 		} catch (ValidatorIntializationException e) {
@@ -127,7 +129,7 @@ import com.fssa.product.model.Product;
 	}
 
 	@Test
-	void testInvalidURLNull() {
+	void testInvalidURLNull() throws MalformedURLException {
 		try {
 			ProductValidator.validateURL(null);
 		} catch (ValidatorIntializationException e) {

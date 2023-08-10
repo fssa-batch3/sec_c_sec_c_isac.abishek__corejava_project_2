@@ -1,5 +1,6 @@
 package com.fssa.event.validator;
 
+import java.net.MalformedURLException;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Assertions;
@@ -215,23 +216,23 @@ class TestEventValidator {
 	}
 
 	@Test
-	void testValidURL() throws ValidatorInitializationException {
+	void testValidURL() throws ValidatorInitializationException, MalformedURLException {
 		testObj.setImageUrl("https://iili.io/H8lK1MQ.jpg");
 		String URL = testObj.getImageUrl();
 		Assertions.assertTrue(EventValidator.validateURL(URL));
 	}
 
 	@Test
-	void testInvalidURL() {
+	void testInvalidURL() throws MalformedURLException, ValidatorInitializationException {
 		try {
 			EventValidator.validateURL("NOTINTYPE");
-		} catch (ValidatorInitializationException e) {
+		} catch (MalformedURLException e) {
 			Assertions.assertEquals(EventValidatorErrors.INVALID_URL, e.getMessage());
 		}
 	}
 
 	@Test
-	void testInvalidURLEmpty() {
+	void testInvalidURLEmpty() throws MalformedURLException {
 		try {
 			EventValidator.validateURL(" ");
 		} catch (ValidatorInitializationException e) {
@@ -240,7 +241,7 @@ class TestEventValidator {
 	}
 
 	@Test
-	void testInvalidURLNull() {
+	void testInvalidURLNull() throws MalformedURLException {
 		try {
 			EventValidator.validateURL(null);
 		} catch (ValidatorInitializationException e) {

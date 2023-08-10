@@ -1,5 +1,6 @@
 package com.fssa.product.validator;
 
+import java.net.MalformedURLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -93,7 +94,7 @@ public class ProductValidator {
 	 * @throws ValidatorInitializationException if the URL is null or does not meet
 	 *                                          the required format.
 	 */
-	static boolean validateURL(String url) throws ValidatorIntializationException {
+	static boolean validateURL(String url) throws ValidatorIntializationException,MalformedURLException {
 		if (url == null || url.trim().isEmpty()) {
 			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_URL_NULL);
 		}
@@ -102,7 +103,7 @@ public class ProductValidator {
 	    if (isMatch) {
 			return true;
 		} else {
-			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_URL);
+			throw new MalformedURLException(ProductValidateErrors.INVALID_URL);
 		}
 	}
 

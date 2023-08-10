@@ -1,5 +1,6 @@
 package com.fssa.event.validator;
 
+import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -167,7 +168,7 @@ public class EventValidator {
 	 * @throws ValidatorInitializationException if the URL is null or does not meet
 	 *                                          the required format.
 	 */
-	static boolean validateURL(String url) throws ValidatorInitializationException {
+	static boolean validateURL(String url) throws ValidatorInitializationException,MalformedURLException {
 		if (url == null || url.trim().isEmpty()) {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_URL_NULL);
 		}
@@ -176,7 +177,7 @@ public class EventValidator {
 	    if (isMatch) {
 			return true;
 		} else {
-			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_URL);
+			throw new MalformedURLException(EventValidatorErrors.INVALID_URL);
 		}
 	}
 	
