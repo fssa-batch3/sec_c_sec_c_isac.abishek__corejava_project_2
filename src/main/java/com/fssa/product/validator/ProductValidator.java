@@ -2,6 +2,10 @@ package com.fssa.product.validator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.validator.routines.UrlValidator;
+
+import com.fssa.event.exceptions.ValidatorInitializationException;
 import com.fssa.product.exception.ProductValidateErrors;
 import com.fssa.product.exception.ValidatorIntializationException;
 import com.fssa.product.model.Product;
@@ -89,23 +93,19 @@ public class ProductValidator {
 	 * @throws ValidatorInitializationException if the URL is null or does not meet
 	 *                                          the required format.
 	 */
-	public static boolean validateURL(String url) throws ValidatorIntializationException {
+	static boolean validateURL(String url) throws ValidatorIntializationException {
 		if (url == null || url.trim().isEmpty()) {
 			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_URL_NULL);
 		}
-
-		String regex = "(?i)\\b((https?|ftp)://)?[a-z0-9-]+(\\.[a-z0-9-]+)+([/?].*)?\\.(jpg|jpeg|gif|png|bmp)\\b";
-
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(url);
-		boolean isMatch = matcher.matches();
-
-		if (isMatch) {
+	    UrlValidator validator = new UrlValidator();
+	   boolean isMatch=validator.isValid(url);
+	    if (isMatch) {
 			return true;
 		} else {
 			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_URL);
 		}
 	}
+
 
 	public static boolean validateEventId(int eventId) throws ValidatorIntializationException {
 		if (eventId <= 0) {

@@ -4,9 +4,13 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.validator.routines.UrlValidator;
+
 import com.fssa.event.exceptions.EventValidatorErrors;
 import com.fssa.event.exceptions.ValidatorInitializationException;
 import com.fssa.event.model.Event;
+import com.fssa.product.exception.ProductValidateErrors;
+import com.fssa.product.exception.ValidatorIntializationException;
 
 /**
  * The EventValidator class contains static methods for validating event-related
@@ -163,23 +167,19 @@ public class EventValidator {
 	 * @throws ValidatorInitializationException if the URL is null or does not meet
 	 *                                          the required format.
 	 */
-	public static boolean validateURL(String url) throws ValidatorInitializationException {
+	static boolean validateURL(String url) throws ValidatorInitializationException {
 		if (url == null || url.trim().isEmpty()) {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_URL_NULL);
 		}
-
-		String regex = "(?i)\\b(?>https?|ftp)://[a-z0-9-]+(?:\\.[a-z0-9-]+)+(?:[/?][^\\s\"]*)?\\.(?:jpg|jpeg|gif|png|bmp)\\b";
-
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(url);
-		boolean isMatch = matcher.matches();
-
-		if (isMatch) {
+	    UrlValidator validator = new UrlValidator();
+	   boolean isMatch=validator.isValid(url);
+	    if (isMatch) {
 			return true;
 		} else {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_URL);
 		}
 	}
+	
 
 	public static boolean isValidEventDate(LocalDate eventDate) throws ValidatorInitializationException {
 		LocalDate today = LocalDate.now();
