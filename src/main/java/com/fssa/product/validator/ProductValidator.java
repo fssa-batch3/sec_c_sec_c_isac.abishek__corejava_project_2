@@ -50,7 +50,7 @@ public class ProductValidator {
 		if (productName == null) {
 			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCT_NULL);
 		}
-		String regex = "^[A-Za-z\s]+$";
+		String regex = "[a-zA-Z ]+";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(productName);
 		boolean isMatch = matcher.matches();
