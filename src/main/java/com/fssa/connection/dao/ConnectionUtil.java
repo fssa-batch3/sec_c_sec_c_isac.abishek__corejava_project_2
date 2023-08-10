@@ -14,7 +14,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class ConnectionUtil {
 
 	public static Connection getConnection() throws ConnectionException, SQLException{
-		Connection con = null;
+
 
 		String url;
 		String userName;
@@ -32,16 +32,11 @@ public class ConnectionUtil {
 		}
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection(url, userName, passWord);
-			Logger.info("Connection success");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new ConnectionException(ConectionError.CONNECTION_ERROR);
-		}
-
-		return con;
+            return DriverManager.getConnection(url, userName, passWord);
+        } catch (SQLException e) {
+            e.printStackTrace();
+             throw new ConnectionException(ConectionError.CONNECTION_ERROR);
+        }
 		
 	}
 public static void main(String[] args) throws ConnectionException, SQLException {
