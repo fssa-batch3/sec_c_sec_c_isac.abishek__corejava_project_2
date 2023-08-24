@@ -5,7 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>charitytrust</name>
   <description>project for doing donation</description>
-  <url>http://www.exampl.com</url>
+ <!--  <url>http://www.exampl.com</url>-->
 <properties>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
