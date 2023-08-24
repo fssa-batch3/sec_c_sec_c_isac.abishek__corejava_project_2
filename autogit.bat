@@ -1,6 +1,6 @@
 @echo off
 
-set "current_dir=%cd%"
+
 
 git status
 git add .
