@@ -10,8 +10,11 @@ import java.sql.SQLException;
 import com.fssa.charitytrust.logger.Logger;
 
 public class ConnectionUtil {
+	private ConnectionUtil() {
+		
+	}
 
-	public static Connection getConnection() throws ConnectionException, SQLException {
+	public static Connection getConnection() throws ConnectionException, SQLException  {
 
 		Connection con = null;
 
@@ -28,16 +31,19 @@ public class ConnectionUtil {
 //		passWord = "123456";
 
 		try {
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(url, userName, passWord);
+			Logger.info("Connection success");
 		} catch (SQLException e) {
 			throw new ConnectionException(ConectionError.CONNECTION_ERROR);
+		}
+		catch (Exception e) {
+			throw new RuntimeException("unable to get connection");
 		}
 		return con;
 
 	}
 
-	public static void main(String[] args) throws ConnectionException, SQLException {
-		getConnection();
-	}
 
 }
