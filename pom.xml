@@ -5,6 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>charitytrust</name>
   <description>project for doing donation</description>
+  <url>http://www.exampl.com</url>
 <properties>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
@@ -21,16 +22,16 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+    <groupId>commons-validator</groupId>
+    <artifactId>commons-validator</artifactId>
+    <version>1.7</version>
+</dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.33</version>
 		</dependency>
-		 <!-- https://mvnrepository.com/artifact/io.github.cdimascio/java-dotenv -->
-        <dependency>
-            <groupId>io.github.cdimascio</groupId>
-            <artifactId>java-dotenv</artifactId>
-            <version>5.1.2</version>
-        </dependency>
+		
 	</dependencies>
 	<build>
 		<pluginManagement>
