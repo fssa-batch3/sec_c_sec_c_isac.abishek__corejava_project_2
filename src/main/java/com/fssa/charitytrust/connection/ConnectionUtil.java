@@ -30,6 +30,9 @@ public class ConnectionUtil {
 //		url = "jdbc:mysql://localhost:3306/charitytrust";
 //		userName = "root";
 //		passWord = "123456";
+		
+		
+		
 
 		try {
 			
