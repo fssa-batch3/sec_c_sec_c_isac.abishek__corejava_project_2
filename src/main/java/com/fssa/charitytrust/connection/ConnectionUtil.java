@@ -13,6 +13,7 @@ public class ConnectionUtil {
 	private ConnectionUtil() {
 		
 	}
+	
 
 	public static Connection getConnection() throws ConnectionException, SQLException  {
 
