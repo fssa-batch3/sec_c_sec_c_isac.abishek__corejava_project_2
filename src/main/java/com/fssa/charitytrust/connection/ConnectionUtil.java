@@ -15,6 +15,7 @@ public class ConnectionUtil {
 	}
 	
 
+	
 	public static Connection getConnection() throws ConnectionException, SQLException  {
 
 		Connection con = null;
@@ -30,6 +31,7 @@ public class ConnectionUtil {
 //		url = "jdbc:mysql://localhost:3306/charitytrust";
 //		userName = "root";
 //		passWord = "123456";
+		
 		
 		
 		
