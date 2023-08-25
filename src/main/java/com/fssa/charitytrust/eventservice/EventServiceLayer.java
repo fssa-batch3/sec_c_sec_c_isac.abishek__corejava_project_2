@@ -17,6 +17,7 @@ import com.fssa.charitytrust.eventvalidator.EventValidator;
  */
 public class EventServiceLayer {
 
+
 	private  EventValidator eventValidator;
 	public EventValidator getEventValidator() {
 		return eventValidator;

@@ -17,7 +17,7 @@ import com.fssa.charitytrust.logger.Logger;
 
 //class for doing CRUD on event table
 public class EventDao {
-	private EventDao() {
+	public EventDao() {
 		
 	}
 	
