@@ -114,10 +114,10 @@ class TestProductServiceLayer {
 
 	@Test
 	void deleteObject() throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
-		Product Product1 = new Product("Artificial limbs", "ISI mark Artificial limbs", "https://iili.io/HNRzs2a.jpg", 4);
+//		Product Product1 = new Product("Artificial limbs", "ISI mark Artificial limbs", "https://iili.io/HNRzs2a.jpg", 4);
 		
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
-		ProductServiceLayer1.addProduct(Product1);
+//		ProductServiceLayer1.addProduct(Product1);
 		Assertions.assertTrue(ProductServiceLayer1.deleteProduct("Artificial limbs",4));
 
 	}
