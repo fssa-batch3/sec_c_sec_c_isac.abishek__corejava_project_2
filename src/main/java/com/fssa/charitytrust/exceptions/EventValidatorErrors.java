@@ -1,4 +1,4 @@
-package com.fssa.charitytrust.eventexceptions;
+package com.fssa.charitytrust.exceptions;
 
 /**
  * An interface containing constant error messages for event data validation.

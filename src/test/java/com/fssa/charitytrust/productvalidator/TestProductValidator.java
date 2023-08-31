@@ -5,10 +5,10 @@ import java.net.MalformedURLException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.charitytrust.productexception.ProductValidateErrors;
-import com.fssa.charitytrust.productexception.ValidatorIntializationException;
-import com.fssa.charitytrust.productmodel.Product;
-import com.fssa.charitytrust.productvalidator.ProductValidator;
+import com.fssa.charitytrust.exceptions.ProductValidateErrors;
+import com.fssa.charitytrust.exceptions.ValidatorIntializationException;
+import com.fssa.charitytrust.model.Product;
+import com.fssa.charitytrust.validator.ProductValidator;
 
  class TestProductValidator {
 	Product product = new Product("limbs", "ISI MARK LIMBS", "https://freeimage.host/i/HNRzLYJ.jpg", 2);

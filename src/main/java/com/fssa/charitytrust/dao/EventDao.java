@@ -1,4 +1,4 @@
-package com.fssa.charitytrust.eventdao;
+package com.fssa.charitytrust.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,10 +10,10 @@ import java.util.List;
 
 import com.fssa.charitytrust.connection.ConnectionException;
 import com.fssa.charitytrust.connection.ConnectionUtil;
-import com.fssa.charitytrust.eventexceptions.DaoException;
-import com.fssa.charitytrust.eventexceptions.DaoExceptionErrors;
-import com.fssa.charitytrust.eventmodel.Event;
+import com.fssa.charitytrust.exceptions.DaoException;
+import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
 import com.fssa.charitytrust.logger.Logger;
+import com.fssa.charitytrust.model.Event;
 
 //class for doing CRUD on event table
 public class EventDao {
@@ -184,5 +184,7 @@ public class EventDao {
 //		Logger.info(resultList);
 //		return true;
 	}
+	
+	
 
 }

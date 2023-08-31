@@ -1,4 +1,4 @@
-package com.fssa.charitytrust.productdao;
+package com.fssa.charitytrust.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,14 +10,14 @@ import java.util.List;
 
 import com.fssa.charitytrust.connection.ConnectionException;
 import com.fssa.charitytrust.connection.ConnectionUtil;
+import com.fssa.charitytrust.exceptions.DaoException;
+import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
 import com.fssa.charitytrust.logger.Logger;
-import com.fssa.charitytrust.productexception.DaoException;
-import com.fssa.charitytrust.productexception.DaoExceptionErrors;
-import com.fssa.charitytrust.productmodel.Product;
+import com.fssa.charitytrust.model.Product;
 
 // Class for doing CRUD on the Product table
 public class ProductDao {
-	private ProductDao() {
+	public ProductDao() {
 		
 	}
 	public static  ProductDao getProductDao() {
@@ -49,14 +49,14 @@ public class ProductDao {
 	}
 
 	// Method to delete a Product record from the database based on the product name
-	public static boolean deleteProduct(String name) throws SQLException, DaoException, ConnectionException {
-		final String query = "DELETE FROM ProductList WHERE Product_name = ?";
+	public static boolean deleteProduct(String name,int eventId) throws SQLException, DaoException, ConnectionException {
+		final String query = "DELETE FROM ProductList WHERE Product_name = ? and event_id=?";
 		try (Connection con = ConnectionUtil.getConnection()) {
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 
 				// Setting the values in the query using the product name
 				pst.setString(1, name);
-
+				pst.setInt(2, eventId);
 				int rowsAffected = pst.executeUpdate(); // Executing the query and getting the number of rows affected
 
 				if (rowsAffected == 0) {
@@ -70,7 +70,7 @@ public class ProductDao {
 	// Method to find a Product record from the database by its name
 	public static Product findProductByName(String name) throws SQLException, ConnectionException{
 		final String query = "SELECT * FROM ProductList WHERE Product_name = ?";
-		Product result = new Product();
+		Product result =null;
 		try (Connection con = ConnectionUtil.getConnection()) {
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 
@@ -78,7 +78,7 @@ public class ProductDao {
 				pst.setString(1, name);
 
 				try (ResultSet rs = pst.executeQuery()) { // Executing the query and getting the result set
-
+					result = new Product();
 					while (rs.next()) {
 						// Setting all the values to the product object from the result set
 						result.setProductId(rs.getInt("Product_id"));
@@ -87,10 +87,12 @@ public class ProductDao {
 						result.setImageUrl(rs.getString("image_url"));
 						result.setProductRegisteredDate(rs.getDate("Product_registerd_date"));
 					}
+					System.out.println(result);
+					return result;
 				} // Closing the result set
-
+				
 			}
-			return result;
+			
 		}
 	}
 
@@ -177,7 +179,7 @@ public class ProductDao {
 
 	public static List<ArrayList<String>> listProductBySpecificEvents(int eventId) throws SQLException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) {
-			final String query = "SELECT p.Product_name ,  e.event_name FROM EventList as e LEFT JOIN ProductList as p ON  e.event_id = p.event_id WHERE p.event_id=?";
+			final String query = "SELECT p.Product_name , p.Product_description, p.image_url , e.event_name FROM EventList as e LEFT JOIN ProductList as p ON  e.event_id = p.event_id WHERE p.event_id=?";
 
 			ArrayList<ArrayList<String>> resultList = new ArrayList<ArrayList<String>>();
 			try (PreparedStatement pst = con.prepareStatement(query)) {
@@ -187,9 +189,11 @@ public class ProductDao {
 					ArrayList<String> ar = new ArrayList<String>();
 					ar.add(rs.getString(PRODUCTNAME));
 					ar.add(rs.getString("event_name"));
+					ar.add(rs.getString("Product_description"));
+					ar.add(rs.getString("image_url"));
 					resultList.add(ar);
 
-				}
+				} 
 
 				rs.close();
 				return resultList;
@@ -204,13 +208,13 @@ public class ProductDao {
 		Logger.info(resultList);
 		return true;
 	}
-
-	public static boolean viewProductBySpecificEvents(int eventId) throws SQLException,  ConnectionException {
+// to view specific event
+	public static List<ArrayList<String>> viewProductBySpecificEvents(int eventId) throws SQLException,  ConnectionException {
 		List<ArrayList<String>> resultList;
 		resultList = listProductBySpecificEvents(eventId);
 		
 		Logger.info(resultList);
-		return true;
+		return resultList;
 	}
 
 }

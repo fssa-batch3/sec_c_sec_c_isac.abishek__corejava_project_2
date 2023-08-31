@@ -1,15 +1,16 @@
-package com.fssa.charitytrust.productservice;
+package com.fssa.charitytrust.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fssa.charitytrust.connection.ConnectionException;
-import com.fssa.charitytrust.productdao.ProductDao;
-import com.fssa.charitytrust.productexception.DaoException;
-import com.fssa.charitytrust.productexception.DaoExceptionErrors;
-import com.fssa.charitytrust.productexception.ValidatorIntializationException;
-import com.fssa.charitytrust.productmodel.Product;
-import com.fssa.charitytrust.productvalidator.ProductValidator;
+import com.fssa.charitytrust.dao.ProductDao;
+import com.fssa.charitytrust.exceptions.DaoException;
+import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
+import com.fssa.charitytrust.exceptions.ValidatorIntializationException;
+import com.fssa.charitytrust.model.Product;
+import com.fssa.charitytrust.validator.ProductValidator;
 
 /**
  * The service layer class that acts as an intermediary between the
@@ -111,15 +112,15 @@ public class ProductServiceLayer {
 	 *                                                 data access layer.
 	 * @throws ValidatorInitializationException        if there is an issue with
 	 *                                                 initializing the validator.
-	 * @throws com.fssa.charitytrust.productexception.DaoException
+	 * @throws com.fssa.charitytrust.exceptions.DaoException
 	 * @throws ConnectionException 
 	 */
-	public boolean deleteProduct(String name) throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
+	public boolean deleteProduct(String name,int eventId) throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 		if (name == null) {
 			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
 		}
 		if (ProductValidator.validateProductName(name)) {
-			return ProductDao.deleteProduct(name);
+			return ProductDao.deleteProduct(name,eventId);
 		} else {
 			return false;
 		}
@@ -154,13 +155,13 @@ public class ProductServiceLayer {
 		return ProductDao.viewProductByEvents();
 	}
 
-	public boolean readProductBySpecificEvent(int eventId)
+	public List<ArrayList<String>> readProductBySpecificEvent(int eventId)
 			throws IllegalArgumentException, SQLException, ValidatorIntializationException,  ConnectionException {
 
 		if (ProductValidator.validateEventId(eventId)) {
 			return ProductDao.viewProductBySpecificEvents(eventId);
 		} else {
-			return false;
+			return null;
 		}
 
 	}

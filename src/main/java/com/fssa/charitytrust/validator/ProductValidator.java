@@ -1,4 +1,4 @@
-package com.fssa.charitytrust.productvalidator;
+package com.fssa.charitytrust.validator;
 
 import java.net.MalformedURLException;
 import java.util.regex.Matcher;
@@ -6,14 +6,14 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.validator.routines.UrlValidator;
 
-import com.fssa.charitytrust.eventexceptions.ValidatorInitializationException;
-import com.fssa.charitytrust.productexception.ProductValidateErrors;
-import com.fssa.charitytrust.productexception.ValidatorIntializationException;
-import com.fssa.charitytrust.productmodel.Product;
+import com.fssa.charitytrust.exceptions.ProductValidateErrors;
+import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
+import com.fssa.charitytrust.exceptions.ValidatorIntializationException;
+import com.fssa.charitytrust.model.Product;
 
 public class ProductValidator {
 	
-	private ProductValidator() {
+	public ProductValidator() {
 		
 	}
    public static ProductValidator getProductValidator() {
@@ -100,7 +100,7 @@ public class ProductValidator {
 	 * @throws ValidatorInitializationException if the URL is null or does not meet
 	 *                                          the required format.
 	 */
-	static boolean validateURL(String url) throws ValidatorIntializationException,MalformedURLException {
+	public static boolean validateURL(String url) throws ValidatorIntializationException,MalformedURLException {
 		if (url == null || url.trim().isEmpty()) {
 			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_URL_NULL);
 		}

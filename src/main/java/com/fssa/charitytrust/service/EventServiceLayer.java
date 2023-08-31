@@ -1,15 +1,15 @@
-package com.fssa.charitytrust.eventservice;
+package com.fssa.charitytrust.service;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import com.fssa.charitytrust.connection.ConnectionException;
-import com.fssa.charitytrust.eventdao.EventDao;
-import com.fssa.charitytrust.eventexceptions.DaoException;
-import com.fssa.charitytrust.eventexceptions.DaoExceptionErrors;
-import com.fssa.charitytrust.eventexceptions.ValidatorInitializationException;
-import com.fssa.charitytrust.eventmodel.Event;
-import com.fssa.charitytrust.eventvalidator.EventValidator;
+import com.fssa.charitytrust.dao.EventDao;
+import com.fssa.charitytrust.exceptions.DaoException;
+import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
+import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
+import com.fssa.charitytrust.model.Event;
+import com.fssa.charitytrust.validator.EventValidator;
 
 /**
  * The service layer class that acts as an intermediary between the

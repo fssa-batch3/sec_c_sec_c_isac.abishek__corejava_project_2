@@ -1,4 +1,4 @@
-package com.fssa.charitytrust.eventmodel;
+package com.fssa.charitytrust.model;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -23,7 +23,7 @@ public class Event {
 	@Override
 	public String toString() {
 		return "Event [eventId=" + eventId + ", eventName=" + eventName + ", eventLocation=" + eventLocation
-				+ ", organizerName=" + organizerName + ", contactNumber=" + contactNumber + ", eventDate=" + eventDate
+				+ ", organizerName=" + organizerName + ", contactNumber=" + contactNumber 
 				+ ", eventDateSQL=" + eventDateSQL + ", imageUrl=" + imageUrl + ", aboutEvent=" + aboutEvent + "]";
 	}
 
@@ -152,5 +152,8 @@ public class Event {
 	 */
 	public void setEventDate(Date date) {
 		this.eventDateSQL = date;
+	}
+	public Date getEventDateSql() {
+		return eventDateSQL ;
 	}
 }

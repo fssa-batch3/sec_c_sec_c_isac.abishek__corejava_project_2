@@ -1,4 +1,4 @@
-package com.fssa.charitytrust.eventexceptions;
+package com.fssa.charitytrust.exceptions;
 
 /**
  * Custom exception class for handling data access related issues in the

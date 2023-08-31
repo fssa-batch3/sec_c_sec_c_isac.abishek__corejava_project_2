@@ -8,21 +8,21 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.charitytrust.connection.ConnectionException;
-import com.fssa.charitytrust.eventdao.EventDao;
-import com.fssa.charitytrust.eventexceptions.DaoException;
-import com.fssa.charitytrust.eventexceptions.DaoExceptionErrors;
-import com.fssa.charitytrust.eventexceptions.ValidatorInitializationException;
-import com.fssa.charitytrust.eventmodel.Event;
-import com.fssa.charitytrust.eventservice.EventServiceLayer;
-import com.fssa.charitytrust.eventvalidator.EventValidator;
+import com.fssa.charitytrust.dao.EventDao;
+import com.fssa.charitytrust.exceptions.DaoException;
+import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
+import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
 import com.fssa.charitytrust.logger.Logger;
+import com.fssa.charitytrust.model.Event;
+import com.fssa.charitytrust.service.EventServiceLayer;
+import com.fssa.charitytrust.validator.EventValidator;
 
 class TestEventServiceLayer {
 
 	public Event getEvent() {
 		LocalDate input = LocalDate.of(2023, 10, 10);
-		Event event = new Event("Gem Event", "North Street, Taramani", "Organizer", "9751328805",
-				"https://freeimage.host/i/HNRzLYJ.jpg", input, "Concert by ar");
+		Event event = new Event("Marina Walk", "Marina beach Chennai", "Freshtrust", "9751328805",
+				"https://iili.io/HUfsTgV.jpg", input, "Arranging walk in marina beach for exploring new things for user");
 
 		return event;
 	}
@@ -72,10 +72,10 @@ class TestEventServiceLayer {
 	void testServiceUpdate() throws IllegalArgumentException, ValidatorInitializationException, SQLException,
 			DaoException, ConnectionException {
 		LocalDate input = LocalDate.of(2023, 10, 10);
-		Event eventNew = new Event("Appolo Event", "North Street, Taramani", "Organizer", "9751328805",
-				"https://freeimage.host/i/HNRzLYJ.jpg", input, "Concert");
-		Event updateEvent = new Event("Appolo Event", "North Street, Taramani", "FreshTrust", "9751328805",
-				"https://freeimage.host/i/HNRzLYJ.jpg", input, "Concert by ar");
+		Event eventNew = new Event("Island Ground", "North Street, Taramani", "Organizer", "9751328805",
+				"https://iili.io/H8lK1MQ.jpg", input, "Product Donating And Distribuations");
+		Event updateEvent = new Event("Island Ground", "North Street, Taramani", "FreshTrust", "9751328805",
+				"https://iili.io/H8lK1MQ.jpg", input, "Product Donating And Distribuations");
 		EventServiceLayer eventServiceLayer1 = getEventLayer();
 		eventServiceLayer1.addEvent(eventNew);
 		Assertions.assertTrue(eventServiceLayer1.updateEvent(updateEvent));
@@ -162,8 +162,8 @@ class TestEventServiceLayer {
 	void testFindByName() throws SQLException, DaoException, ValidatorInitializationException, IllegalArgumentException,
 			ConnectionException {
 		LocalDate input = LocalDate.of(2023, 10, 10);
-		Event event1 = new Event("Gokul Event", "North Street, Taramani", "Organizer", "9751328805",
-				"https://freeimage.host/i/HNRzLYJ.jpg", input, "Concert by gokul singer");
+		Event event1 = new Event("Chepak Event", "A Stand ,MA Chidambaram Stadium, MA CHIDAMBARAM STADIUM, Victoria Hostel Rd", "Freshtrust", "9751328805",
+				"https://iili.io/HyOu1Ve.jpg", input, "Product distribution in chepak stadium");
 
 		EventServiceLayer eventServiceLayer1 = getEventLayer();
 		eventServiceLayer1.addEvent(event1);

@@ -1,4 +1,4 @@
-package com.fssa.charitytrust.eventvalidator;
+package com.fssa.charitytrust.validator;
 
 import java.net.MalformedURLException;
 
@@ -8,9 +8,9 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fssa.charitytrust.eventexceptions.EventValidatorErrors;
-import com.fssa.charitytrust.eventexceptions.ValidatorInitializationException;
-import com.fssa.charitytrust.eventmodel.Event;
+import com.fssa.charitytrust.exceptions.EventValidatorErrors;
+import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
+import com.fssa.charitytrust.model.Event;
 
 /**
  * The EventValidator class contains static methods for validating event-related
@@ -167,7 +167,7 @@ public class EventValidator {
 	 * @throws ValidatorInitializationException if the URL is null or does not meet
 	 *                                          the required format.
 	 */
-	static boolean validateURL(String url) throws ValidatorInitializationException,MalformedURLException {
+	public static boolean validateURL(String url) throws ValidatorInitializationException,MalformedURLException {
 		if (url == null || url.trim().isEmpty()) {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_URL_NULL);
 		}

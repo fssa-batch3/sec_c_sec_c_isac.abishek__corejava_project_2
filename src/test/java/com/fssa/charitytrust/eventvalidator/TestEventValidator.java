@@ -6,10 +6,10 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.charitytrust.eventexceptions.EventValidatorErrors;
-import com.fssa.charitytrust.eventexceptions.ValidatorInitializationException;
-import com.fssa.charitytrust.eventmodel.Event;
-import com.fssa.charitytrust.eventvalidator.EventValidator;
+import com.fssa.charitytrust.exceptions.EventValidatorErrors;
+import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
+import com.fssa.charitytrust.model.Event;
+import com.fssa.charitytrust.validator.EventValidator;
 
 class TestEventValidator {
 	LocalDate input = LocalDate.of(2023, 10, 10);

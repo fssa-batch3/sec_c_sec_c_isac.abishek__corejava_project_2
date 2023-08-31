@@ -1,4 +1,4 @@
-package com.fssa.charitytrust.productexception;
+package com.fssa.charitytrust.exceptions;
 
 /**
  * An interface containing constant error messages for Product data validation.

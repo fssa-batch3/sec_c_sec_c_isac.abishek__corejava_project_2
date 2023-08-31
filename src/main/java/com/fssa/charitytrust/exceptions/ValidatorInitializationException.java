@@ -1,4 +1,4 @@
-package com.fssa.charitytrust.eventexceptions;
+package com.fssa.charitytrust.exceptions;
 
 /**
  * Custom exception class for handling errors related to the initialization of
