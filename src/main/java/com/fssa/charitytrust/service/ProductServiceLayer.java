@@ -151,7 +151,7 @@ public class ProductServiceLayer {
 	}
 
 	public boolean readProductByEvent() throws IllegalArgumentException, SQLException,  ConnectionException {
-
+ 
 		return ProductDao.viewProductByEvents();
 	}
 

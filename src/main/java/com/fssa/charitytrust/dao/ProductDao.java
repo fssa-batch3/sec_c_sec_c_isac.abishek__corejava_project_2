@@ -18,7 +18,7 @@ import com.fssa.charitytrust.model.Product;
 // Class for doing CRUD on the Product table
 public class ProductDao {
 	public ProductDao() {
-		
+		 
 	}
 	public static  ProductDao getProductDao() {
 		return new ProductDao();
@@ -27,8 +27,8 @@ public class ProductDao {
 
 	// Method to add a new Product record to the database
 	public static boolean addProduct(Product product) throws SQLException, DaoException, ConnectionException {
-		// SQL query to insert values into the ProductList table
-		final String query = "INSERT INTO ProductList (Product_name, Product_description, Product_registerd_date, image_url,event_id) VALUES (?, ?, ?, ?,?)";
+		// SQL query to insert values into the products table
+		final String query = "INSERT INTO products (Product_name, Product_description, Product_registerd_date, image_url,event_id) VALUES (?, ?, ?, ?,?)";
 		try (Connection con = ConnectionUtil.getConnection()) {
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 
@@ -50,7 +50,7 @@ public class ProductDao {
 
 	// Method to delete a Product record from the database based on the product name
 	public static boolean deleteProduct(String name,int eventId) throws SQLException, DaoException, ConnectionException {
-		final String query = "DELETE FROM ProductList WHERE Product_name = ? and event_id=?";
+		final String query = "DELETE FROM products WHERE Product_name = ? and event_id=?";
 		try (Connection con = ConnectionUtil.getConnection()) {
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 
@@ -69,7 +69,7 @@ public class ProductDao {
 
 	// Method to find a Product record from the database by its name
 	public static Product findProductByName(String name) throws SQLException, ConnectionException{
-		final String query = "SELECT * FROM ProductList WHERE Product_name = ?";
+		final String query = "SELECT * FROM products WHERE Product_name = ?";
 		Product result =null;
 		try (Connection con = ConnectionUtil.getConnection()) {
 			try (PreparedStatement pst = con.prepareStatement(query)) {
@@ -99,7 +99,7 @@ public class ProductDao {
 	// Method to get the product ID based on the product name
 	public static int getId(String name) throws SQLException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) {
-			final String query = "SELECT product_id FROM ProductList WHERE product_name='" + name + "';";
+			final String query = "SELECT product_id FROM products WHERE product_name='" + name + "';";
 			try (Statement preparedStatement = con.createStatement()) {
 				try (ResultSet id = preparedStatement.executeQuery(query)) {
 					int id1 = 0;
@@ -119,7 +119,7 @@ public class ProductDao {
 	// Method to update a Product record in the database
 	public static boolean update(Product product) throws SQLException,  ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) {
-			final String query = "UPDATE ProductList SET Product_name = ?, Product_description = ?, image_url = ? WHERE Product_id = ?";
+			final String query = "UPDATE products SET Product_name = ?, Product_description = ?, image_url = ? WHERE Product_id = ?";
 			try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
 				preparedStatement.setString(1, product.getProductName());
 				preparedStatement.setString(2, product.getProductDescription());
@@ -136,7 +136,7 @@ public class ProductDao {
 	// Method to retrieve a list of all products from the database
 	public static List<Product> readFullProductList() throws SQLException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) {
-			final String query = "SELECT * FROM ProductList";
+			final String query = "SELECT * FROM products";
 			ArrayList<Product> resultList = new ArrayList<>();
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 				try (ResultSet rs = pst.executeQuery()) {
@@ -159,7 +159,7 @@ public class ProductDao {
 
 	public static List<ArrayList<String>> listProductByEvents() throws SQLException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) {
-			final String query = "SELECT p.Product_name ,  e.event_name FROM EventList as e LEFT JOIN ProductList as p ON e.event_id = p.event_id";
+			final String query = "SELECT p.Product_name ,  e.event_name FROM events as e LEFT JOIN products as p ON e.event_id = p.event_id";
 
 			ArrayList<ArrayList<String>> resultList = new ArrayList<ArrayList<String>>();
 			try (PreparedStatement pst = con.prepareStatement(query)) {
@@ -179,7 +179,7 @@ public class ProductDao {
 
 	public static List<ArrayList<String>> listProductBySpecificEvents(int eventId) throws SQLException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) {
-			final String query = "SELECT p.Product_name , p.Product_description, p.image_url , e.event_name FROM EventList as e LEFT JOIN ProductList as p ON  e.event_id = p.event_id WHERE p.event_id=?";
+			final String query = "SELECT p.Product_name , p.Product_description, p.image_url , e.event_name FROM events as e LEFT JOIN products as p ON  e.event_id = p.event_id WHERE p.event_id=?";
 
 			ArrayList<ArrayList<String>> resultList = new ArrayList<ArrayList<String>>();
 			try (PreparedStatement pst = con.prepareStatement(query)) {
@@ -205,7 +205,7 @@ public class ProductDao {
 		List<ArrayList<String>> resultList;
 		resultList = listProductByEvents();
 		
-		Logger.info(resultList);
+		Logger.info(resultList); 
 		return true;
 	}
 // to view specific event

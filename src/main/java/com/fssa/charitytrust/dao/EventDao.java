@@ -19,7 +19,7 @@ import com.fssa.charitytrust.model.Event;
 public class EventDao {
 	public EventDao() {
 		
-	}
+	} 
 	
 	public static EventDao getEventDao(){
 		return new EventDao();
@@ -29,7 +29,7 @@ public class EventDao {
 
 	public static boolean addEvent(Event event) throws SQLException, DaoException, ConnectionException {
 
-		final String query = "INSERT INTO EventList (event_name, event_location, organizer_name, contact_number, event_date, image_url, about_event) VALUES (?, ?, ?, ?, ?, ?, ? )";
+		final String query = "INSERT INTO events (event_name, event_location, organizer_name, contact_number, event_date, image_url, about_event) VALUES (?, ?, ?, ?, ?, ?, ? )";
 		// query for adding the values in the table
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
 
@@ -56,7 +56,7 @@ public class EventDao {
 
 	public static boolean deleteEvent(String name) throws SQLException, DaoException, ConnectionException {
 
-		final String query = "DELETE FROM EventList WHERE event_name = ?";
+		final String query = "DELETE FROM events WHERE event_name = ?";
 		// query for deleting the value in the table
 
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
@@ -75,7 +75,7 @@ public class EventDao {
 	}
 
 	public static Event findEventByName(String name) throws SQLException, ConnectionException {
-		final String query = "SELECT * FROM EventList WHERE event_name=?";
+		final String query = "SELECT * FROM events WHERE event_name=?";
 		// query for finding an event by name in the table
 		Event result = new Event(); // object created
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
@@ -108,7 +108,7 @@ public class EventDao {
 	public static int getId(String name) throws SQLException, ConnectionException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
-			final String query = "SELECT event_id FROM EventList WHERE event_name='" + name + "'";
+			final String query = "SELECT event_id FROM events WHERE event_name='" + name + "'";
 			try (Statement preparedStatement = con.createStatement()) {
 				try (ResultSet id = preparedStatement.executeQuery(query)) {
 					int id1 = 0;
@@ -129,7 +129,7 @@ public class EventDao {
 	public static boolean update(Event event) throws SQLException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 
-			final String query = "UPDATE EventList SET  event_name = ?, organizer_name = ?, event_location = ?, contact_number = ?,image_url = ?,event_date=?,about_event = ? WHERE event_id = ?";
+			final String query = "UPDATE events SET  event_name = ?, organizer_name = ?, event_location = ?, contact_number = ?,image_url = ?,event_date=?,about_event = ? WHERE event_id = ?";
 			// query for updating the value in the table
 			try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
 				preparedStatement.setString(1, event.getEventName());
@@ -154,7 +154,7 @@ public class EventDao {
 	public static List<Event> readFullEventList() throws SQLException, ConnectionException {
 		
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
-			final String query = "SELECT * FROM EventList";
+			final String query = "SELECT * FROM events";
 			ArrayList<Event> resultlist = new ArrayList<>(); // arraylist declared
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 				try (ResultSet rs = pst.executeQuery()) {

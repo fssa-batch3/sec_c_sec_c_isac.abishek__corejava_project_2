@@ -32,7 +32,15 @@ class TestProductServiceLayer {
 		ProductServiceLayer ProductServiceLayerobj = new ProductServiceLayer(ProductValidatorobj, ProductDaoobj);
 		return ProductServiceLayerobj;
 	}
-
+	/**
+	 * Test the ProductServiceLayer.addProduct method with a valid Product object.
+	 *
+	 * @throws IllegalArgumentException if the Product object is invalid.
+	 * @throws SQLException if there is a problem with the database connection.
+	 * @throws DaoException if there is a problem with the DAO.
+	 * @throws ValidatorIntializationException if the validator is not initialized properly.
+	 * @throws ConnectionException if there is a problem with the database connection.
+	 */
 	@Test
 
 	void testServiceAdd() throws IllegalArgumentException, SQLException, DaoException, ValidatorIntializationException, ConnectionException {
@@ -40,7 +48,15 @@ class TestProductServiceLayer {
 		ProductServiceLayer ProductServiceLayer = getProductLayer();
 		Assertions.assertTrue(ProductServiceLayer.addProduct(Product1));
 	}
-
+	/**
+	 * Test the ProductServiceLayer.addProduct method with a null Product object.
+	 *
+	 * @throws IllegalArgumentException if the Product object is invalid.
+	 * @throws ValidatorIntializationException if the validator is not initialized properly.
+	 * @throws SQLException if there is a problem with the database connection.
+	 * @throws DaoException if there is a problem with the DAO.
+	 * @throws ConnectionException if there is a problem with the database connection.
+	 */
 	@Test
 
 	void testServiceAddNull()
@@ -54,7 +70,15 @@ class TestProductServiceLayer {
 		}
 
 	}
-
+	/**
+	 * Test the ProductServiceLayer.addProduct method with an invalid Product object.
+	 *
+	 * @throws IllegalArgumentException if the Product object is invalid.
+	 * @throws ValidatorIntializationException if the validator is not initialized properly.
+	 * @throws SQLException if there is a problem with the database connection.
+	 * @throws DaoException if there is a problem with the DAO.
+	 * @throws ConnectionException if there is a problem with the database connection.
+	 */
 	@Test
 
 	void testServiceAddInvalid()
@@ -65,7 +89,15 @@ class TestProductServiceLayer {
 		Assertions.assertFalse(ProductServiceLayer.addProduct(Product1));
 
 	}
-
+	/**
+	 * Test the ProductServiceLayer's updateProduct method with a valid product.
+	 *
+	 * @throws IllegalArgumentException if the product is invalid
+	 * @throws ValidatorIntializationException if the validator is not initialized
+	 * @throws SQLException if there is a problem with the database
+	 * @throws DaoException if there is a problem with the DAO
+	 * @throws ConnectionException if there is a problem with the connection to the database
+	 */
 	@Test
 
 	void testServiceUpdate()
@@ -76,9 +108,17 @@ class TestProductServiceLayer {
 		ProductServiceLayer.addProduct(Productnew);
 		Assertions.assertTrue(ProductServiceLayer.updateProduct(updateProduct));
 	}
-
+	/**
+	 * Test the ProductServiceLayer's updateProduct method with a null product.
+	 *
+	 * @throws IllegalArgumentException if the product is invalid
+	 * @throws ValidatorIntializationException if the validator is not initialized
+	 * @throws SQLException if there is a problem with the database
+	 * @throws DaoException if there is a problem with the DAO
+	 * @throws ConnectionException if there is a problem with the connection to the database
+	 */
 	@Test
-//	 @Order(1)
+
 	void testServiceupdateNull()
 			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException, ConnectionException {
 		Product Product1 = null;
@@ -90,9 +130,17 @@ class TestProductServiceLayer {
 		}
 
 	}
-
+	/**
+	 * Tests that the updateProduct method throws an IllegalArgumentException when passed an invalid product.
+	 *
+	 * @throws IllegalArgumentException if the product is invalid
+	 * @throws ValidatorIntializationException if the validator is not initialized properly
+	 * @throws SQLException if there is a problem with the database
+	 * @throws DaoException if there is a problem with the DAO
+	 * @throws ConnectionException if there is a problem with the connection to the database
+	 */
 	@Test
-//	 @Order(1)
+
 	void testServiceupdateInvalid()
 			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException, ConnectionException {
 		Product Product1 = new Product("12345", "ISIS mark stick", "https://freeimage.host/i/HNRzLYJ.jpg", 1);
@@ -101,7 +149,15 @@ class TestProductServiceLayer {
 		Assertions.assertFalse(ProductServiceLayer.updateProduct(Product1));
 
 	}
-
+	/**
+	 * Test the readProduct() method in the ProductServiceLayer class.
+	 *
+	 * @throws DaoException if there is a problem accessing the database
+	 * @throws SQLException if there is a problem with the SQL statement
+	 * @throws IllegalArgumentException if the product ID is not valid
+	 * @throws ValidatorIntializationException if the validator is not initialized properly
+	 * @throws ConnectionException if there is a problem connecting to the database
+	 */
 	@Test
 
 	void testReadObject() throws DaoException, SQLException, IllegalArgumentException, ValidatorIntializationException, ConnectionException {
@@ -111,7 +167,14 @@ class TestProductServiceLayer {
 		Assertions.assertNotEquals(null, ProductServiceLayer1.readProduct());
 
 	}
-
+	 /**
+     * Test that a product can be deleted.
+     *
+     * @throws SQLException if there is a problem with the database.
+     * @throws DaoException if there is a problem with the DAO.
+     * @throws ValidatorIntializationException if there is a problem initializing the validator.
+     * @throws ConnectionException if there is a problem with the connection.
+     */
 	@Test
 	void deleteObject() throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 		Product Product1 = new Product("Artificial hands", "ISI mark Artificial limbs", "https://iili.io/HNRzs2a.jpg", 4);
@@ -121,7 +184,14 @@ class TestProductServiceLayer {
 		Assertions.assertTrue(ProductServiceLayer1.deleteProduct("Artificial hands",4));
 
 	}
-
+	/**
+     * Test that a product cannot be deleted with null values.
+     *
+     * @throws SQLException if there is a problem with the database.
+     * @throws DaoException if there is a problem with the DAO.
+     * @throws ValidatorIntializationException if there is a problem initializing the validator.
+     * @throws ConnectionException if there is a problem with the connection.
+     */
 	@Test
 	void deleteObjectNull() throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 
@@ -133,7 +203,14 @@ class TestProductServiceLayer {
 		}
 
 	}
-
+	 /**
+     * Test that a product cannot be deleted with invalid values.
+     *
+     * @throws SQLException if there is a problem with the database.
+     * @throws DaoException if there is a problem with the DAO.
+     * @throws ValidatorIntializationException if there is a problem initializing the validator.
+     * @throws ConnectionException if there is a problem with the connection.
+     */
 	@Test
 	void deleteObjectInvalid() throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
 
@@ -145,16 +222,32 @@ class TestProductServiceLayer {
 		}
 
 	}
-
+	/**
+	 * Test the findByNameProduct method of the ProductServiceLayer.
+	 *
+	 * @throws SQLException if there is a problem with the database connection
+	 * @throws DaoException if there is a problem with the DAO
+	 * @throws ValidatorIntializationException if there is a problem initializing the validator
+	 * @throws ConnectionException if there is a problem with the database connection
+	 */
 	@Test
 	void testFindByName() throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
-		Product Product1 = new Product("Hearing Aid", "ISI mark hearing aid", "https://iili.io/HNRzyBt.jpg", 2);
+		Product Product1 = new Product("Hearing Aid", "ISI mark hearing aid", "https://iili.io/HNRzyBt.jpg", 4);
 
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
 		ProductServiceLayer1.addProduct(Product1);
 		Assertions.assertEquals(ProductServiceLayer1.findByNameProduct(Product1.getProductName()), Product1);
 	}
 	//test by specific event
+	/**
+	 * Test the readProductByEvent method of the ProductServiceLayer.
+	 *
+	 * @throws SQLException if there is a problem with the database connection
+	 * @throws DaoException if there is a problem with the DAO
+	 * @throws ValidatorIntializationException if there is a problem initializing the validator
+	 * @throws IllegalArgumentException if the event ID is invalid
+	 * @throws ConnectionException if there is a problem with the database connection
+	 */
 	@Test
 	void testProductByEvent() throws SQLException, DaoException, ValidatorIntializationException, IllegalArgumentException, ConnectionException {
 		Product Product1 = new Product("stick", "ISI mark stick", "https://iili.io/HNRIM8J.jpg", 2);
@@ -166,6 +259,15 @@ class TestProductServiceLayer {
 		Assertions.assertTrue(ProductServiceLayer1.readProductByEvent());
 	}
     //test by specific event
+	/**
+	 * Test the readProductBySpecificEvent method of the ProductServiceLayer.
+	 *
+	 * @throws SQLException if there is a problem with the database connection
+	 * @throws DaoException if there is a problem with the DAO
+	 * @throws ValidatorIntializationException if there is a problem initializing the validator
+	 * @throws IllegalArgumentException if the event ID is invalid
+	 * @throws ConnectionException if there is a problem with the database connection
+	 */
 	@Test
 	void testProductBySpecificEvent()
 			throws IllegalArgumentException, SQLException, DaoException, ValidatorIntializationException, ConnectionException {
@@ -174,7 +276,15 @@ class TestProductServiceLayer {
 	
 		Assertions.assertNotEquals(null, ProductServiceLayer1.readProductBySpecificEvent(eventId));
 	}
-
+	/**
+	 * Test that an exception is thrown when trying to get a product by an invalid event ID.
+	 *
+	 * @throws IllegalArgumentException if the event ID is not a positive integer
+	 * @throws SQLException if there is a problem with the database connection
+	 * @throws DaoException if there is a problem with the DAO
+	 * @throws ValidatorIntializationException if the validator cannot be initialized
+	 * @throws ConnectionException if there is a problem with the database connection
+	 */
 	@Test
 	void testProductBySpecificEventInvalid()
 			throws IllegalArgumentException, SQLException, DaoException, ValidatorIntializationException, ConnectionException {
@@ -187,7 +297,15 @@ class TestProductServiceLayer {
 		}
 
 	}
-
+	/**
+	 * Test that an exception is thrown when trying to find a product by a null name.
+	 *
+	 * @throws IllegalArgumentException if the product name is null
+	 * @throws ValidatorIntializationException if the validator cannot be initialized
+	 * @throws SQLException if there is a problem with the database connection
+	 * @throws DaoException if there is a problem with the DAO
+	 * @throws ConnectionException if there is a problem with the database connection
+	 */
 	@Test
 
 	void testServiceFindByNameNull()
@@ -201,6 +319,14 @@ class TestProductServiceLayer {
 		}
 
 	}
+	/**
+	 * Test that an exception is thrown when trying to find a product by an invalid name.
+	 *
+	 * @throws SQLException if there is a problem with the database connection
+	 * @throws DaoException if there is a problem with the DAO
+	 * @throws ValidatorIntializationException if the validator cannot be initialized
+	 * @throws ConnectionException if there is a problem with the database connection
+	 */
      @Test
       void testinvalidfindbyname() throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
     	 String productName="invalid";
