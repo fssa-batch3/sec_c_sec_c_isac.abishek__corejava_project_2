@@ -1,10 +1,9 @@
-package com.fssa.charitytrust.eventservice;
+package com.fssa.charitytrust.service;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.charitytrust.connection.ConnectionException;
@@ -14,7 +13,6 @@ import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
 import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
 import com.fssa.charitytrust.logger.Logger;
 import com.fssa.charitytrust.model.Event;
-import com.fssa.charitytrust.service.EventServiceLayer;
 import com.fssa.charitytrust.validator.EventValidator;
 
 class TestEventServiceLayer {
@@ -27,7 +25,7 @@ class TestEventServiceLayer {
     public Event createTestEvent() {
         LocalDate input = LocalDate.of(2023, 10, 10);
         return new Event(
-            "Marina ",
+            "Marina",
             "Marina beach Chennai",
             "Freshtrust",
             "9751328805",
@@ -126,7 +124,7 @@ class TestEventServiceLayer {
             DaoException, ConnectionException {
         LocalDate input = LocalDate.of(2023, 10, 10);
         Event eventNew = new Event(
-            "Island Ground",
+            "IslandGround",
             "North Street, Taramani",
             "Organizer",
             "9751328805",
@@ -135,7 +133,7 @@ class TestEventServiceLayer {
             "Product Donating And Distributions"
         );
         Event updateEvent = new Event(
-            "Island Ground",
+            "IslandGround",
             "North Street, Taramani",
             "FreshTrust",
             "9751328805",
@@ -252,7 +250,7 @@ class TestEventServiceLayer {
     void testDeleteEvent() throws SQLException, DaoException, ValidatorInitializationException, ConnectionException {
     	 LocalDate input = LocalDate.of(2023, 10, 10);
          Event event1 = new Event(
-             "Balajii Event",
+             "BalajiiEvent",
              "Global info North Street, Taramani",
              "Freshtrust",
              "9751328805",
@@ -262,7 +260,7 @@ class TestEventServiceLayer {
          );
          EventServiceLayer eventServiceLayer = createTestEventLayer();
          eventServiceLayer.addEvent(event1);
-        Assertions.assertTrue(eventServiceLayer.deleteEvent("Balajii Event"));
+        Assertions.assertTrue(eventServiceLayer.deleteEvent("BalajiiEvent"));
     }
 
     /**
@@ -315,7 +313,7 @@ class TestEventServiceLayer {
             IllegalArgumentException, ConnectionException {
         LocalDate input = LocalDate.of(2023, 10, 10);
         Event event1 = new Event(
-            "Chepak Event",
+            "Chepak",
             "A Stand ,MA Chidambaram Stadium, MA CHIDAMBARAM STADIUM, Victoria Hostel Rd",
             "Freshtrust",
             "9751328805",

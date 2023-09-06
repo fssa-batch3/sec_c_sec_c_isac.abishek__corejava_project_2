@@ -12,7 +12,7 @@ import com.fssa.charitytrust.connection.ConnectionException;
 import com.fssa.charitytrust.connection.ConnectionUtil;
 import com.fssa.charitytrust.exceptions.DaoException;
 import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
-import com.fssa.charitytrust.logger.Logger;
+//import com.fssa.charitytrust.logger.Logger;
 import com.fssa.charitytrust.model.Product;
 
 // Class for doing CRUD on the Product table
@@ -69,7 +69,7 @@ public class ProductDao {
 
 	// Method to find a Product record from the database by its name
 	public static Product findProductByName(String name) throws SQLException, ConnectionException{
-		final String query = "SELECT * FROM products WHERE Product_name = ?";
+		final String query = "SELECT Product_id,Product_name,Product_description,image_url,Product_registerd_date FROM products WHERE Product_name = ?";
 		Product result =null;
 		try (Connection con = ConnectionUtil.getConnection()) {
 			try (PreparedStatement pst = con.prepareStatement(query)) {
@@ -79,7 +79,7 @@ public class ProductDao {
 
 				try (ResultSet rs = pst.executeQuery()) { // Executing the query and getting the result set
 					result = new Product();
-					while (rs.next()) {
+					if (rs.next()) {
 						// Setting all the values to the product object from the result set
 						result.setProductId(rs.getInt("Product_id"));
 						result.setProductName(rs.getString(PRODUCTNAME));
@@ -107,7 +107,7 @@ public class ProductDao {
 						id1 = id.getInt("product_id");
 					}
 					
-					Logger.info("Last ID: " + id1);
+					
 					return id1;
 				}
 			}
@@ -136,7 +136,7 @@ public class ProductDao {
 	// Method to retrieve a list of all products from the database
 	public static List<Product> readFullProductList() throws SQLException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) {
-			final String query = "SELECT * FROM products";
+			final String query = "SELECT Product_id,Product_name,Product_description,image_url,Product_registerd_date FROM products";
 			ArrayList<Product> resultList = new ArrayList<>();
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 				try (ResultSet rs = pst.executeQuery()) {
@@ -205,7 +205,7 @@ public class ProductDao {
 		List<ArrayList<String>> resultList;
 		resultList = listProductByEvents();
 		
-		Logger.info(resultList); 
+//		Logger.info(resultList); 
 		return true;
 	}
 // to view specific event
@@ -213,7 +213,7 @@ public class ProductDao {
 		List<ArrayList<String>> resultList;
 		resultList = listProductBySpecificEvents(eventId);
 		
-		Logger.info(resultList);
+//		Logger.info(resultList);
 		return resultList;
 	}
 

@@ -1,4 +1,4 @@
-package com.fssa.charitytrust.eventvalidator;
+package com.fssa.charitytrust.validator;
 
 import java.net.MalformedURLException;
 import java.time.LocalDate;

@@ -71,6 +71,8 @@ public class Event {
 		this.eventDate = eventDate;
 	}
 
+	
+
 	/**
 	 * Default constructor for the Event class. Sets the event date to the current
 	 * date.

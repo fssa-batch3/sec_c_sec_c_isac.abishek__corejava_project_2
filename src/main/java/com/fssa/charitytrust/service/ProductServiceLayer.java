@@ -44,11 +44,9 @@ public class ProductServiceLayer {
 	 * @throws ConnectionException 
 	 */
 	public boolean addProduct(Product product)
-			throws  SQLException, DaoException, ValidatorIntializationException, ConnectionException {
+			throws  SQLException,  ValidatorIntializationException, ConnectionException, DaoException {
 
-		if (product == null) {
-			throw new DaoException(DaoExceptionErrors.INVALID_INPUT);
-		}
+	
 		if (ProductValidator.validate(product)) {
 			return ProductDao.addProduct(product);
 		} else {

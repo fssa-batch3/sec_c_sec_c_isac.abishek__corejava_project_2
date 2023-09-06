@@ -1,4 +1,4 @@
-package com.fssa.charitytrust.productservice;
+package com.fssa.charitytrust.service;
 
 import java.sql.SQLException;
 
@@ -10,15 +10,15 @@ import com.fssa.charitytrust.dao.ProductDao;
 import com.fssa.charitytrust.exceptions.DaoException;
 import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
 import com.fssa.charitytrust.exceptions.ProductValidateErrors;
+import com.fssa.charitytrust.exceptions.ServiceException;
 import com.fssa.charitytrust.exceptions.ValidatorIntializationException;
 import com.fssa.charitytrust.model.Product;
-import com.fssa.charitytrust.service.ProductServiceLayer;
 import com.fssa.charitytrust.validator.ProductValidator;
 
 class TestProductServiceLayer {
 
 	public Product getProduct() {
-		Product Product = new Product("Wheel Chair", "Isi mark WheelChair", "https://iili.io/HNRIOGt.jpg", 3);
+		Product Product = new Product("WheelChair", "Isi mark WheelChair", "https://iili.io/HNRIOGt.jpg", 3);
 
 		return Product;
 	}
@@ -65,8 +65,8 @@ class TestProductServiceLayer {
 		ProductServiceLayer ProductServiceLayer = getProductLayer();
 		try {
 			ProductServiceLayer.addProduct(Product1);
-		} catch (DaoException e) {
-			Assertions.assertEquals(DaoExceptionErrors.INVALID_INPUT, e.getMessage());
+		} catch (Exception e) {
+			Assertions.assertEquals(ProductValidateErrors.INVALID_PRODUCT_NULL, e.getMessage());
 		}
 
 	}
@@ -97,11 +97,12 @@ class TestProductServiceLayer {
 	 * @throws SQLException if there is a problem with the database
 	 * @throws DaoException if there is a problem with the DAO
 	 * @throws ConnectionException if there is a problem with the connection to the database
+	 * @throws ServiceException 
 	 */
 	@Test
 
 	void testServiceUpdate()
-			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException, ConnectionException {
+			throws  ConnectionException, ServiceException, SQLException, ValidatorIntializationException, DaoException {
 		Product Productnew = new Product("Tricycle", "ISI mark Stick", "https://iili.io/HNRIS8G.jpg", 2);
 		Product updateProduct = new Product("Tricycle", "ISI mark Tricycle", "https://iili.io/HNRIS8G.jpg", 2);
 		ProductServiceLayer ProductServiceLayer = getProductLayer();
@@ -116,11 +117,12 @@ class TestProductServiceLayer {
 	 * @throws SQLException if there is a problem with the database
 	 * @throws DaoException if there is a problem with the DAO
 	 * @throws ConnectionException if there is a problem with the connection to the database
+	 * @throws ServiceException 
 	 */
 	@Test
 
 	void testServiceupdateNull()
-			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException, ConnectionException {
+			throws IllegalArgumentException, ValidatorIntializationException, SQLException, DaoException, ConnectionException, ServiceException {
 		Product Product1 = null;
 		ProductServiceLayer ProductServiceLayer = getProductLayer();
 		try {
@@ -177,11 +179,11 @@ class TestProductServiceLayer {
      */
 	@Test
 	void deleteObject() throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
-		Product Product1 = new Product("Artificial hands", "ISI mark Artificial limbs", "https://iili.io/HNRzs2a.jpg", 4);
+		Product Product1 = new Product("Artificialhands", "ISI mark Artificial limbs", "https://iili.io/HNRzs2a.jpg", 4);
 		
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
 		ProductServiceLayer1.addProduct(Product1);
-		Assertions.assertTrue(ProductServiceLayer1.deleteProduct("Artificial hands",4));
+		Assertions.assertTrue(ProductServiceLayer1.deleteProduct("Artificialhands",4));
 
 	}
 	/**
@@ -232,7 +234,7 @@ class TestProductServiceLayer {
 	 */
 	@Test
 	void testFindByName() throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
-		Product Product1 = new Product("Hearing Aid", "ISI mark hearing aid", "https://iili.io/HNRzyBt.jpg", 4);
+		Product Product1 = new Product("HearingAid", "ISI mark hearing aid", "https://iili.io/HNRzyBt.jpg", 4);
 
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
 		ProductServiceLayer1.addProduct(Product1);

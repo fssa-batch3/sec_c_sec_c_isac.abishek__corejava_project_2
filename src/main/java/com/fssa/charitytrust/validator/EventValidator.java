@@ -35,13 +35,19 @@ public class EventValidator {
 
 		try { 
 			validateEventName(event.getEventName());
+			System.out.println("name");
 			validateOrganizerName(event.getOrganizerName());
-
+			System.out.println("nullorg");
 			validateContactNo(event.getContactNumber());
+			System.out.println("nullcon");
 			validateEventLocation(event.getEventLocation());
+			System.out.println("nulllo");
 			validateAboutEvent(event.getAboutEvent());
+			System.out.println("nullabt");
 			validateURL(event.getImageUrl());
+			System.out.println("nullurl");
 			isValidEventDate(event.getEventDate());
+			System.out.println("ndate");
 			return true;
 		} catch (Exception e) {
 			return false;

@@ -1,4 +1,4 @@
-package com.fssa.charitytrust.productvalidator;
+package com.fssa.charitytrust.validator;
 
 import java.net.MalformedURLException;
 

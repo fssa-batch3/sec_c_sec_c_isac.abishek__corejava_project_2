@@ -84,7 +84,10 @@ public final class EventValidatorErrors {
 	 * Represents an error message for cases where the URL is invalid.
 	 */
 	public static final String INVALID_URL = "Invalid URL";
-	
+	/**
+	 * Represents an error message for cases where the booleanvalue is invalid.
+	 */
+	public static final String INVALID_BOOLEAN = "Invalid boolean";
 	private EventValidatorErrors() {
 		
 	}
