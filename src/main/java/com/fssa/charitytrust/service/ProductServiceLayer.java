@@ -2,6 +2,7 @@ package com.fssa.charitytrust.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.fssa.charitytrust.connection.ConnectionException;
@@ -159,7 +160,7 @@ public class ProductServiceLayer {
 		if (ProductValidator.validateEventId(eventId)) {
 			return ProductDao.viewProductBySpecificEvents(eventId);
 		} else {
-			return null;
+			return Collections.emptyList();
 		}
 
 	}

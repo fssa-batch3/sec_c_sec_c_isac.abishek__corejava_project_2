@@ -12,7 +12,6 @@ import com.fssa.charitytrust.connection.ConnectionException;
 import com.fssa.charitytrust.connection.ConnectionUtil;
 import com.fssa.charitytrust.exceptions.DaoException;
 import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
-//import com.fssa.charitytrust.logger.Logger;
 import com.fssa.charitytrust.model.Event;
 
 //class for doing CRUD on event table
@@ -118,7 +117,7 @@ public class EventDao {
 					}
 
 					
-					System.out.println(id1);
+					
 					return id1;
 				}
 			} catch (SQLException ex) {
@@ -193,8 +192,7 @@ public class EventDao {
 		List<Event> resultList;
 		resultList = readFullEventList();
 		return resultList;
-//		Logger.info(resultList);
-//		return true;
+
 	}
 	
 	

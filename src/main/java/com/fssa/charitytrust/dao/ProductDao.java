@@ -12,7 +12,6 @@ import com.fssa.charitytrust.connection.ConnectionException;
 import com.fssa.charitytrust.connection.ConnectionUtil;
 import com.fssa.charitytrust.exceptions.DaoException;
 import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
-//import com.fssa.charitytrust.logger.Logger;
 import com.fssa.charitytrust.model.Product;
 
 // Class for doing CRUD on the Product table
@@ -24,6 +23,8 @@ public class ProductDao {
 		return new ProductDao();
 	}
 	static final String PRODUCTNAME = "Product_name";
+	static final String PRODUCTDESCRIPTION = "Product_description";
+	static final String IMAGEURL = "image_url";
 
 	// Method to add a new Product record to the database
 	public static boolean addProduct(Product product) throws SQLException, DaoException, ConnectionException {
@@ -83,11 +84,11 @@ public class ProductDao {
 						// Setting all the values to the product object from the result set
 						result.setProductId(rs.getInt("Product_id"));
 						result.setProductName(rs.getString(PRODUCTNAME));
-						result.setProductDescription(rs.getString("Product_description"));
-						result.setImageUrl(rs.getString("image_url"));
+						result.setProductDescription(rs.getString(PRODUCTDESCRIPTION));
+						result.setImageUrl(rs.getString(IMAGEURL));
 						result.setProductRegisteredDate(rs.getDate("Product_registerd_date"));
 					}
-					System.out.println(result);
+				
 					return result;
 				} // Closing the result set
 				
@@ -144,8 +145,8 @@ public class ProductDao {
 						Product result = new Product();
 						result.setProductId(rs.getInt("Product_id"));
 						result.setProductName(rs.getString(PRODUCTNAME));
-						result.setProductDescription(rs.getString("Product_description"));
-						result.setImageUrl(rs.getString("image_url"));
+						result.setProductDescription(rs.getString(PRODUCTDESCRIPTION));
+						result.setImageUrl(rs.getString(IMAGEURL));
 						result.setProductRegisteredDate(rs.getDate("Product_registerd_date"));
 						resultList.add(result);
 					}
@@ -189,8 +190,8 @@ public class ProductDao {
 					ArrayList<String> ar = new ArrayList<String>();
 					ar.add(rs.getString(PRODUCTNAME));
 					ar.add(rs.getString("event_name"));
-					ar.add(rs.getString("Product_description"));
-					ar.add(rs.getString("image_url"));
+					ar.add(rs.getString(PRODUCTDESCRIPTION));
+					ar.add(rs.getString(IMAGEURL));
 					resultList.add(ar);
 
 				} 
@@ -204,16 +205,12 @@ public class ProductDao {
 	public static boolean viewProductByEvents() throws SQLException,  ConnectionException {
 		List<ArrayList<String>> resultList;
 		resultList = listProductByEvents();
-		
-//		Logger.info(resultList); 
 		return true;
 	}
 // to view specific event
 	public static List<ArrayList<String>> viewProductBySpecificEvents(int eventId) throws SQLException,  ConnectionException {
 		List<ArrayList<String>> resultList;
 		resultList = listProductBySpecificEvents(eventId);
-		
-//		Logger.info(resultList);
 		return resultList;
 	}
 

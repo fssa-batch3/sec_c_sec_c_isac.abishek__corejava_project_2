@@ -120,8 +120,7 @@ public class ProductRequestValidator {
 	 */
 	public boolean validateIsActive(boolean isactive) throws ValidatorInitializationException {
 		boolean trueval= true;
-		boolean falseval=false;
-		if (isactive==trueval||isactive==falseval) {
+		if (isactive==trueval) {
 			return true;
 		} else {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_BOOLEAN);

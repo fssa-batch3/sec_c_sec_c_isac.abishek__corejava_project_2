@@ -71,7 +71,7 @@ public class ProductRequestDao {
 						result.setMobileno(rs.getLong("contact_number"));
 						result.setRequestDate(rs.getDate("request_registerd_date"));
 					}
-					System.out.println(result);
+					
 					return result; // returning the result object	// connections are closed
 				}
 			}
@@ -151,8 +151,6 @@ public class ProductRequestDao {
 		resultList = productRequestDao.readFullRequestList();
 		Logger.info(resultList);
 		return resultList;
-
-//		return true;
 	}
 	
 	

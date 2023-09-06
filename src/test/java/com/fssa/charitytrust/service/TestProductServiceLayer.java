@@ -333,7 +333,7 @@ class TestProductServiceLayer {
       void testinvalidfindbyname() throws SQLException, DaoException, ValidatorIntializationException, ConnectionException {
     	 String productName="invalid";
     	 ProductServiceLayer ProductServiceLayer = getProductLayer();
-    	 Assertions.assertEquals(ProductServiceLayer.findByNameProduct(productName).getProductName(),null);
+    	 Assertions.assertEquals(null,ProductServiceLayer.findByNameProduct(productName).getProductName());
     	 
      }
 }

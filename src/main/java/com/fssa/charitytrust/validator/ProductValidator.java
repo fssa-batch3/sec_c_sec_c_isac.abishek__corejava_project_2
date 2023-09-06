@@ -13,9 +13,8 @@ import com.fssa.charitytrust.model.Product;
 
 public class ProductValidator {
 	
-	public ProductValidator() {
-		
-	}
+	 public ProductValidator() {
+ }
    public static ProductValidator getProductValidator() {
 	   return new ProductValidator();
    }

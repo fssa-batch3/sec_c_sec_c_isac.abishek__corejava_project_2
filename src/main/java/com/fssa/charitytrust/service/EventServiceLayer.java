@@ -86,11 +86,9 @@ public class EventServiceLayer {
 			throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException, ConnectionException {
 		
 		if (event == null) {
-			System.out.println("null");
 			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
 		}
 		if (EventValidator.validate(event)) {
-			System.out.println("no ");
 			return EventDao.update(event);
 		} else {
 			return false;

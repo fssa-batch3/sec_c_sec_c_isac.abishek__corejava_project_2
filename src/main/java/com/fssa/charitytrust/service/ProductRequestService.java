@@ -3,14 +3,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.fssa.charitytrust.connection.ConnectionException;
-import com.fssa.charitytrust.dao.EventDao;
 import com.fssa.charitytrust.dao.ProductRequestDao;
 import com.fssa.charitytrust.exceptions.DaoException;
 import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
 import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
-import com.fssa.charitytrust.model.Event;
 import com.fssa.charitytrust.model.ProductRequest;
-import com.fssa.charitytrust.validator.EventValidator;
 import com.fssa.charitytrust.validator.ProductRequestValidator;
 
 public class ProductRequestService {
