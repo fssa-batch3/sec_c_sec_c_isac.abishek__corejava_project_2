@@ -54,7 +54,7 @@ public class ProductRequestValidator {
 		Matcher matcher = pattern.matcher(eventName);
 		boolean isMatch = matcher.matches();
 		if (isMatch) {
-			System.out.println("namedone");
+			
 			return true;
 		} else {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_EVENT_NAME);
@@ -79,7 +79,7 @@ public class ProductRequestValidator {
 		Matcher matcher = pattern.matcher(productName);
 		boolean isMatch = matcher.matches();
 		if (isMatch) {
-			System.out.println("namedone");
+			
 			return true;
 		} else {
 			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCT_NAME);
@@ -103,7 +103,7 @@ public class ProductRequestValidator {
 		Matcher matcher = pattern.matcher(contactNos);
 		boolean isMatch = matcher.matches();
 		if (isMatch) {
-			System.out.println("namedone");
+			
 			return true;
 		} else {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_CONTACT_NUMBER);

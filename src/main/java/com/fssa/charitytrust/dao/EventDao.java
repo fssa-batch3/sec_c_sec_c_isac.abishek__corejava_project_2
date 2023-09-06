@@ -128,21 +128,21 @@ public class EventDao {
 	}
 
 	public static boolean update(Event event) throws SQLException, ConnectionException {
-		System.out.println("no ");
+	
 		try (Connection con = ConnectionUtil.getConnection()) {
-			System.out.println("no ");
+			
 			final String query = "UPDATE events SET  event_name = ?, organizer_name = ?, event_location = ?, contact_number = ?,image_url = ?,event_date=?,about_event = ? WHERE event_id = ?";
 			// query for updating the value in the table
-			System.out.println("no ");
+		
 			try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
 				preparedStatement.setString(1, event.getEventName());
-				System.out.println("no ");
+				
 				preparedStatement.setString(2, event.getOrganizerName());
-				System.out.println("no ");
+				
 				preparedStatement.setString(3, event.getEventLocation());
-				System.out.println("no ");
+				
 				preparedStatement.setString(4, event.getContactNumber());
-				System.out.println("no ");
+				
 				preparedStatement.setString(5, event.getImageUrl());
 				System.out.println("no ");
 				preparedStatement.setDate(6, java.sql.Date.valueOf(event.getEventDate()));

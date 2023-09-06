@@ -122,20 +122,7 @@ public class ProductRequestService {
 			return null;
 		}
 	}
-	public static void main(String[] args) throws SQLException, DaoException, ConnectionException, ValidatorInitializationException {
-		ProductRequestDao productRequestDao =new ProductRequestDao();
-		ProductRequestValidator productRequestValidator= new ProductRequestValidator();
-		ProductRequest productRequest = new ProductRequest("isac","devabbus",9751328805l);
-		ProductRequestService productRequestService = new ProductRequestService(productRequestValidator,productRequestDao);
-//		productRequestDao.addrequest(productRequest);
-//		productRequestDao.updateRequest(123456789, true);
-//		productRequestDao.viewRequests();
-		
-//		productRequestService.addproductRequest(productRequest);
-//		productRequestService.updateProductRequest(productRequest);
-//		productRequestService.readRequests();
-		productRequestService.findRequestByConatactNo(9751328805l);
-	}
+
 	
 
 }
