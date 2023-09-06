@@ -144,13 +144,13 @@ public class EventDao {
 				preparedStatement.setString(4, event.getContactNumber());
 				
 				preparedStatement.setString(5, event.getImageUrl());
-				System.out.println("no ");
+				
 				preparedStatement.setDate(6, java.sql.Date.valueOf(event.getEventDate()));
-				System.out.println("no ");
+				
 				preparedStatement.setString(7, event.getAboutEvent());
-				System.out.println("no ");
+				
 				preparedStatement.setInt(8, getId(event.getEventName()));
-				System.out.println("no ");
+				
 				// Execute the update
 				int rowsAffected = preparedStatement.executeUpdate();
 
