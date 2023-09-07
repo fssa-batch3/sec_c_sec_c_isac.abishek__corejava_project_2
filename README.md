@@ -16,16 +16,21 @@
 # DATABASE_DESIGN
 ### EventList Table
 
-| Field          | Type        | Null  | Key | Default           | Extra          |
-|----------------|-------------|-------|-----|-------------------|----------------|
-| event_id       | int         | NO    | PRI | NULL              | auto_increment |
-| event_name     | varchar(50) | NO    | UNI | NULL              |                |
-| event_location | varchar(45) | NO    |     | NULL              |                |
-| organizer_name | varchar(45) | NO    |     | NULL              |                |
-| contact_number | varchar(45) | NO    |     | NULL              |                |
-| event_date     | datetime    | NO    |     | CURRENT_TIMESTAMP |                |
-| image_url      | varchar(45) | NO    |     | NULL              |                |
-| about_event    | varchar(45) | NO    |     | NULL              |                |
+### Table: events
+
+| Column Name     | Data Type    | Constraints                             | Description                              |
+|-----------------|--------------|-----------------------------------------|------------------------------------------|
+| event_id        | int          | NOT NULL, AUTO_INCREMENT, PRIMARY KEY  | Unique identifier for each event.        |
+| event_name      | varchar(25)  | NOT NULL, UNIQUE                        | Name of the event.                       |
+| event_location  | varchar(100) | NOT NULL                                | Location where the event is held.       |
+| organizer_name  | varchar(45)  | NOT NULL                                | Name of the event organizer.             |
+| contact_number  | varchar(12)  | NOT NULL                                | Contact number for the event.           |
+| event_date      | timestamp    | NOT NULL, CHECK (event_date >= created_at) | Date and time of the event.          |
+| image_url       | varchar(45)  | NOT NULL                                | URL of the event's image.                |
+| about_event     | varchar(200) | NOT NULL                                | Brief description about the event.       |
+| created_at      | timestamp    | DEFAULT current_timestamp                | Timestamp indicating when the event was created. |
+
+
 
 
 ###  ** PRODUCT MODULE**
@@ -45,13 +50,43 @@
 -Delete Product
 
 
-### ProductList Table
+### Table: products
 
-| Field                   | Type        | Null  | Key | Default           | Extra          |
-|-------------------------|-------------|-------|-----|-------------------|----------------|
-| Product_id              | int         | NO    | PRI | NULL              | auto_increment |
-| Product_name            | varchar(50) | NO    | UNI | NULL              |                |
-| Product_description     | varchar(45) | NO    |     | NULL              |                |
-| Product_registered_date | datetime    | NO    |     | CURRENT_TIMESTAMP |                |
-| image_url               | varchar(45) | NO    |     | NULL              |                |
-| event_id                | int         | NO    |     | NULL              |                |
+| Column Name            | Data Type          | Constraints                      | Description                               |
+|------------------------|--------------------|----------------------------------|-------------------------------------------|
+| Product_id             | int                | NOT NULL, AUTO_INCREMENT, PRIMARY KEY | Unique identifier for each product.       |
+| Product_name           | varchar(50)        | NOT NULL, UNIQUE                | Name of the product.                      |
+| Product_description    | varchar(100)       | NOT NULL                         | Description of the product.              |
+| Product_registerd_date | datetime           | NOT NULL                         | Date and time when the product was registered. |
+| image_url              | varchar(45)        | NOT NULL                         | URL of the product's image.               |
+| event_id               | int                | NOT NULL                         | Identifier of the event associated with the product. |
+
+
+
+
+## request
+### Table: requests
+###  ** request MODULE**
+- Productrequest Model
+- Productrequest Validator
+- Productrequest Dao
+- Productrequest ServiceLayer
+- Productrequest Test cases
+- 
+
+ ###  ** Product MODULE FEATURES**
+-Add Productrequest
+-Read all Productrequest
+
+
+| Column Name            | Data Type          | Constraints                      | Description                      |
+|------------------------|--------------------|----------------------------------|----------------------------------|
+| request_id             | int                | NOT NULL, AUTO_INCREMENT, PRIMARY KEY | Unique identifier for each request. |
+| event_name             | varchar(50)        | NOT NULL                         | Name of the event associated with the request. |
+| product_name           | varchar(100)       | NOT NULL                         | Name of the product associated with the request. |
+| request_registerd_date | datetime           | NOT NULL                         | Date and time when the request was registered. |
+| contact_number         | bigint(45)         | NOT NULL, UNIQUE                | Contact number associated with the request. |
+| is_active              | BOOLEAN            | NOT NULL, default true          | Indicates whether the request is active or not. |
+
+
+
