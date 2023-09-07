@@ -74,9 +74,9 @@
 - Productrequest Test cases
 - 
 
- ###  ** Product MODULE FEATURES**
--Add Productrequest
--Read all Productrequest
+ ###  ** request MODULE FEATURES**
+- Add Productrequest
+- Read all Productrequest
 
 
 | Column Name            | Data Type          | Constraints                      | Description                      |
