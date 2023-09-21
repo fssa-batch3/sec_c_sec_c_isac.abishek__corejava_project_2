@@ -15,10 +15,10 @@ public class ProductRequest {
 	private String productName;
 	private LocalDate requestDate;
 	private Date requestDateSQL; // This appears to be a SQL-specific date representation.
-	private long mobileno;
+	private String mobileno;
 	private String isActive;
 	public ProductRequest( String eventName, String productName, 
-			 long mobileno) {
+			 String mobileno) {
 		this.eventName = eventName;
 		this.productName = productName;
 		setRequestDate();
@@ -26,7 +26,7 @@ public class ProductRequest {
 	}
 	
 	public ProductRequest(int requestId, String eventName, String productName, LocalDate requestDate,
-			 long mobileno, String isActive) {
+			 String mobileno, String isActive) {
 		super();
 		this.requestId = requestId;
 		this.eventName = eventName;
@@ -74,10 +74,10 @@ public class ProductRequest {
 	public void setRequestDate(Date requestDateSQL) {
 		this.requestDateSQL = requestDateSQL;
 	}
-	public long getMobileno() {
+	public String getMobileno() {
 		return mobileno;
 	}
-	public void setMobileno(long mobileno) {
+	public void setMobileno(String mobileno) {
 		this.mobileno = mobileno;
 	}
 	

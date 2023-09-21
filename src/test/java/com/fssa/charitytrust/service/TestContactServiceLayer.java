@@ -10,6 +10,7 @@ import com.fssa.charitytrust.connection.ConnectionException;
 import com.fssa.charitytrust.dao.ProductRequestDao;
 import com.fssa.charitytrust.exceptions.DaoException;
 import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
+import com.fssa.charitytrust.exceptions.ServiceException;
 import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
 import com.fssa.charitytrust.model.ProductRequest;
 import com.fssa.charitytrust.validator.ProductRequestValidator;
@@ -17,8 +18,8 @@ import com.fssa.charitytrust.validator.ProductRequestValidator;
  class TestContactServiceLayer {
           public ProductRequest getProductRequest() {
         	  String num="9751328806";
-        			  long con=Long.parseLong(num);
-        	  return new  ProductRequest("JPR","Crutches",con);
+        			
+        	  return new  ProductRequest("JPR","Crutches",num);
           }
           public ProductRequestService createTestRequestLayer() {
         	  ProductRequestValidator validator = new ProductRequestValidator();
@@ -26,41 +27,37 @@ import com.fssa.charitytrust.validator.ProductRequestValidator;
               return new ProductRequestService(validator, dao);
           }
           @Test
-          void testAddRequest() throws ValidatorInitializationException, SQLException, DaoException,
-                  IllegalArgumentException, ConnectionException {
+          void testAddRequest() throws  ServiceException {
         	  ProductRequest request = getProductRequest();
         	  ProductRequestService ProductRequestService = createTestRequestLayer();
               Assertions.assertTrue(ProductRequestService.addproductRequest(request));
           }
           @Test
-          void testAddNullRequest() throws DaoException, IllegalArgumentException, ValidatorInitializationException,
-                  SQLException, ConnectionException {
+          void testAddNullRequest() throws  ServiceException {
         	  ProductRequest productRequest = null;
         	  ProductRequestService requestServiceLayer = createTestRequestLayer();
               try {
             	  requestServiceLayer.addproductRequest(productRequest);
-              } catch (DaoException e) {
+              } catch (ServiceException e) {
                   Assertions.assertEquals(DaoExceptionErrors.INVALID_INPUT, e.getMessage());
               }
           }
           @Test
 
-      	void testServiceAddInvalidrequest() throws ValidatorInitializationException, SQLException, DaoException, ConnectionException
-      			 {
-        	  ProductRequest productRequest = new ProductRequest("12345", "Magnifier",9751329805l);
+      	void testServiceAddInvalidrequest() throws ServiceException    	 {
+        	  ProductRequest productRequest = new ProductRequest("12345", "Magnifier","9751329805");
         	  ProductRequestService requestServiceLayer = createTestRequestLayer();
 
       		Assertions.assertFalse(requestServiceLayer.addproductRequest(productRequest));
 
       	}
           @Test
-          void testUpdateRequest() throws IllegalArgumentException, ValidatorInitializationException, SQLException,
-                  DaoException, ConnectionException {
+          void testUpdateRequest() throws ServiceException {
              
-        	  ProductRequest productRequest = new ProductRequest("chepaks", "Magnifier",9751329805l);
+        	  ProductRequest productRequest = new ProductRequest("chepaks", "Magnifier","9751329805");
         	  ProductRequestService productServiceLayer = createTestRequestLayer();
         	  productServiceLayer.addproductRequest(productRequest);
-              Assertions.assertTrue(productServiceLayer.updateProductRequest(9751329805l,"Accepted"));
+              Assertions.assertTrue(productServiceLayer.updateProductRequest("9751329805","Accepted"));
           }
 
   }

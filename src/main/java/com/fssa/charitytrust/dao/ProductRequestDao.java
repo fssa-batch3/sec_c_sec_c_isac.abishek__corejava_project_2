@@ -35,7 +35,7 @@ public class ProductRequestDao {
 				pst.setString(1, productRequest.getEventName());
 
 				pst.setString(2, productRequest.getProductName());
-				pst.setLong(3, productRequest.getMobileno());
+				pst.setString(3, productRequest.getMobileno());
 				pst.setDate(4, java.sql.Date.valueOf(productRequest.getRequestDate()));
 
 				int rs = pst.executeUpdate(); // executing the query and it returns the number of rows affected
@@ -48,7 +48,7 @@ public class ProductRequestDao {
 		return true;
 	}
 
-	public static List<ProductRequest> findRequestByConatactNo(long conatactNo) throws SQLException, ConnectionException {
+	public static List<ProductRequest> findRequestByConatactNo(String conatactNo) throws SQLException, ConnectionException {
 		List<ProductRequest> arr = new ArrayList<>();
 		final String query = "SELECT event_name,product_name,request_registerd_date,contact_number,is_active FROM requests WHERE contact_number=?";
 		// query for finding an event by name in the table
@@ -56,7 +56,7 @@ public class ProductRequestDao {
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
 
 			try (PreparedStatement pst = con.prepareStatement(query)) { // prepare statement for query update
-				pst.setLong(1, conatactNo); // setting the values in the question mark
+				pst.setString(1, conatactNo); // setting the values in the question mark
              
 				try (ResultSet rs = pst.executeQuery()) { // executing the query
 
@@ -65,7 +65,7 @@ public class ProductRequestDao {
 
 						result.setEventName(rs.getString("event_name"));
 						result.setProductName(rs.getString("product_name"));
-						result.setMobileno(rs.getLong("contact_number"));
+						result.setMobileno(rs.getString("contact_number"));
 						result.setActive(rs.getString("is_active"));
 						result.setRequestDate(rs.getDate("request_registerd_date"));
 						arr.add(result);
@@ -78,7 +78,7 @@ public class ProductRequestDao {
 
 	}
 
-	public static int getId(long contactNo) throws SQLException, ConnectionException {
+	public static int getId(String contactNo) throws SQLException, ConnectionException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 			final String query = "SELECT request_id FROM requests WHERE contact_number='" + contactNo + "'";
@@ -97,14 +97,14 @@ public class ProductRequestDao {
 		}
 	}
 
-	public boolean updateRequest(long contact, String active) throws SQLException, ConnectionException {
+	public boolean updateRequest(String contact, String active) throws SQLException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 
 			final String query = "UPDATE requests SET is_active = ? WHERE contact_number = ?";
 			// query for updating the value in the table
 			try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
 				preparedStatement.setString(1, active);
-				preparedStatement.setLong(2, contact);
+				preparedStatement.setString(2, contact);
 				// Execute the update
 				int rowsAffected = preparedStatement.executeUpdate();
 				return rowsAffected > 0;
@@ -127,7 +127,7 @@ public class ProductRequestDao {
 						result.setRequestId(rs.getInt("request_id"));
 						result.setEventName(rs.getString("event_name"));
 						result.setProductName(rs.getString("product_name"));
-						result.setMobileno(rs.getLong("contact_number"));
+						result.setMobileno(rs.getString("contact_number"));
 						result.setRequestDate(rs.getDate("request_registerd_date"));
 						result.setActive(rs.getString("is_active"));
 						resultlist.add(result); // objects are pushed

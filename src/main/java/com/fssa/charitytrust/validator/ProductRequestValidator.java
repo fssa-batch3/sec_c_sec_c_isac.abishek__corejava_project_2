@@ -32,8 +32,9 @@ public class ProductRequestValidator {
 			
 			
 			return true;
-		} catch (Exception e) {
-			return false;
+		} catch (ValidatorInitializationException e) {
+			throw new ValidatorInitializationException(e.getMessage());
+			
 		}
 	}
 	/**
@@ -90,22 +91,23 @@ public class ProductRequestValidator {
 	 * Validates the contact number to ensure it follows a specific pattern for
 	 * Indian phone numbers.
 	 *
-	 * @param contactNo The contact number to be validated.
+	 * @param contact The contact number to be validated.
 	 * @return true if the contact number is valid, false otherwise.
 	 * @throws ValidatorInitializationException if the contact number is null or
 	 *                                          does not meet the required format.
 	 */
-	public boolean validateContactNo(long contactNo) throws ValidatorInitializationException {
+	public static boolean validateContactNo(String contact) throws ValidatorInitializationException {
 		
 		String regex = "^(\\+91|91)?[6789]\\d{9}$";
 		Pattern pattern = Pattern.compile(regex);
-		String contactNos=Long.toString(contactNo);
-		Matcher matcher = pattern.matcher(contactNos);
+		
+		Matcher matcher = pattern.matcher(contact);
 		boolean isMatch = matcher.matches();
 		if (isMatch) {
-			
+			System.out.println("happen");
 			return true;
 		} else {
+			System.out.println("happen4");
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_CONTACT_NUMBER);
 		}
 	}
@@ -124,5 +126,8 @@ public class ProductRequestValidator {
 		} else {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_BOOLEAN);
 		}
+	}
+	public static void main(String[] args) throws ValidatorInitializationException {
+		validateContactNo("0000000000");
 	}
 }

@@ -9,6 +9,7 @@ import com.fssa.charitytrust.connection.ConnectionException;
 import com.fssa.charitytrust.dao.ProductDao;
 import com.fssa.charitytrust.exceptions.DaoException;
 import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
+import com.fssa.charitytrust.exceptions.ServiceException;
 import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
 import com.fssa.charitytrust.model.Product;
 import com.fssa.charitytrust.validator.ProductValidator;
@@ -45,14 +46,20 @@ public class ProductServiceLayer {
 	 * @throws ConnectionException 
 	 */
 	public boolean addProduct(Product product)
-			throws  SQLException,  ValidatorInitializationException, ConnectionException, DaoException {
+			throws ServiceException {
 
 	
-		if (ProductValidator.validate(product)) {
-			return ProductDao.addProduct(product);
-		} else {
-			return false;
+		try {
+			if (ProductValidator.validate(product)) {
+				return ProductDao.addProduct(product);
+			} else {
+				return false;
+			}
+		} catch (ValidatorInitializationException | SQLException | DaoException | ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return false;
 	}
 
 	/**
@@ -70,16 +77,22 @@ public class ProductServiceLayer {
 	 * @throws ConnectionException 
 	 */
 	public boolean updateProduct(Product product)
-			throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException, ConnectionException {
+			throws ServiceException {
 
 		if (product == null) {
-			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  ServiceException(DaoExceptionErrors.INVALID_INPUT);
 		}
-		if (ProductValidator.validate(product)) {
-			return ProductDao.update(product);
-		} else {
-			return false;
+		try {
+			if (ProductValidator.validate(product)) {
+				return ProductDao.update(product);
+			} else {
+				return false;
+			}
+		} catch (ValidatorInitializationException | SQLException | ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return false;
 	}
 
 	/**
@@ -96,8 +109,14 @@ public class ProductServiceLayer {
 	 *                                          access layer.
 	 * @throws ConnectionException 
 	 */
-	public List<Product> readProduct() throws IllegalArgumentException, SQLException, DaoException, ConnectionException {
-		return ProductDao.readFullProductList();
+	public List<Product> readProduct() throws ServiceException {
+		try {
+			return ProductDao.readFullProductList();
+		} catch (SQLException | ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -114,15 +133,21 @@ public class ProductServiceLayer {
 	 * @throws com.fssa.charitytrust.exceptions.DaoException
 	 * @throws ConnectionException 
 	 */
-	public boolean deleteProduct(String name,int eventId) throws SQLException, DaoException, ValidatorInitializationException, ConnectionException {
+	public boolean deleteProduct(String name,int eventId) throws ServiceException {
 		if (name == null) {
-			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  ServiceException(DaoExceptionErrors.INVALID_INPUT);
 		}
-		if (ProductValidator.validateProductName(name)) {
-			return ProductDao.deleteProduct(name,eventId);
-		} else {
-			return false;
+		try {
+			if (ProductValidator.validateProductName(name)) {
+				return ProductDao.deleteProduct(name,eventId);
+			} else {
+				return false;
+			}
+		} catch (ValidatorInitializationException | SQLException | DaoException | ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return false;
 	}
 
 	/**
@@ -138,30 +163,48 @@ public class ProductServiceLayer {
 	 * @throws ValidatorInitializationException if there is an issue with
 	 *                                          initializing the validator.
 	 */
-	public Product findByNameProduct(String name) throws SQLException, DaoException, ValidatorInitializationException, ConnectionException {
+	public Product findByNameProduct(String name) throws ServiceException {
 		if (name == null) {
-			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  ServiceException(DaoExceptionErrors.INVALID_INPUT);
 		}
-		if (ProductValidator.validateProductName(name)) {
-			return ProductDao.findProductByName(name);
-		} else {
-			return null;
+		try {
+			if (ProductValidator.validateProductName(name)) {
+				return ProductDao.findProductByName(name);
+			} else {
+				return null;
+			}
+		} catch (ValidatorInitializationException | SQLException | ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
 
-	public boolean readProductByEvent() throws IllegalArgumentException, SQLException,  ConnectionException {
+	public boolean readProductByEvent() throws ServiceException {
  
-		return ProductDao.viewProductByEvents();
+		try {
+			return ProductDao.viewProductByEvents();
+		} catch (SQLException | ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public List<ArrayList<String>> readProductBySpecificEvent(int eventId)
-			throws IllegalArgumentException, SQLException, ValidatorInitializationException,  ConnectionException {
+			throws ServiceException {
 
-		if (ProductValidator.validateEventId(eventId)) {
-			return ProductDao.viewProductBySpecificEvents(eventId);
-		} else {
-			return Collections.emptyList();
+		try {
+			if (ProductValidator.validateEventId(eventId)) {
+				return ProductDao.viewProductBySpecificEvents(eventId);
+			} else {
+				return Collections.emptyList();
+			}
+		} catch (ValidatorInitializationException | SQLException | ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 
 	}
 }

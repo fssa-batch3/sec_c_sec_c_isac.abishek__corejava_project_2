@@ -18,12 +18,19 @@ public class UserValidator {
 		}
 
 		validateName(user.getUsername());
+		System.out.println("1");
 		validateEmail(user.getEmail());
+		System.out.println("1");
 		validateUserRole(user.getRole());
+		System.out.println("1");
 		validatePassword(user.getPassword());
+		System.out.println("1");
 		validateContactNo(user.getContactNumber());
+		System.out.println("1");
 		validateAddhaarNo(user.getAadhaarNumber());
+		System.out.println("1");
 		validateLocation(user.getAddress());
+		System.out.println("1");
 		
 
 		return true;

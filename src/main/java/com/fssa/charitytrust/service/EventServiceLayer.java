@@ -7,6 +7,7 @@ import com.fssa.charitytrust.connection.ConnectionException;
 import com.fssa.charitytrust.dao.EventDao;
 import com.fssa.charitytrust.exceptions.DaoException;
 import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
+import com.fssa.charitytrust.exceptions.ServiceException;
 import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
 import com.fssa.charitytrust.model.Event;
 import com.fssa.charitytrust.validator.EventValidator;
@@ -55,17 +56,23 @@ public class EventServiceLayer {
 	 * @throws ConnectionException 
 	 */
 	public boolean addEvent(Event event)
-			throws  ValidatorInitializationException, SQLException, DaoException, ConnectionException {
+			throws  ServiceException {
 
 		if (event == null) {
-			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  ServiceException(DaoExceptionErrors.INVALID_INPUT);
 		}
-		if (EventValidator.validate(event)) {
+		try {
+			if (EventValidator.validate(event)) {
 
-			return EventDao.addEvent(event);
-		} else {
-			return false;
+				return EventDao.addEvent(event);
+			} else {
+				return false;
+			}
+		} catch (ValidatorInitializationException | SQLException | DaoException | ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return false;
 	}
 
 	/**
@@ -83,16 +90,22 @@ public class EventServiceLayer {
 	 * @throws ConnectionException 
 	 */
 	public boolean updateEvent(Event event)
-			throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException, ConnectionException {
+			throws ServiceException {
 		
 		if (event == null) {
-			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  ServiceException(DaoExceptionErrors.INVALID_INPUT);
 		}
-		if (EventValidator.validate(event)) {
-			return EventDao.update(event);
-		} else {
-			return false;
+		try {
+			if (EventValidator.validate(event)) {
+				return EventDao.update(event);
+			} else {
+				return false;
+			}
+		} catch (ValidatorInitializationException | SQLException | ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return false;
 	}
 
 	/**
@@ -110,8 +123,14 @@ public class EventServiceLayer {
 	 * @throws ConnectionException 
 	 */
 	public List<Event> readEvents()
-			throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException, ConnectionException {
-		return EventDao.readFullEventList();
+			throws ServiceException {
+		try {
+			return EventDao.readFullEventList();
+		} catch (SQLException | ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -127,15 +146,21 @@ public class EventServiceLayer {
 	 *                                          initializing the validator.
 	 * @throws ConnectionException 
 	 */
-	public boolean deleteEvent(String name) throws SQLException, DaoException, ValidatorInitializationException, ConnectionException {
+	public boolean deleteEvent(String name) throws ServiceException {
 		if (name == null) {
-			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  ServiceException(DaoExceptionErrors.INVALID_INPUT);
 		}
-		if (EventValidator.validateEventName(name)) {
-			return EventDao.deleteEvent(name);
-		} else {
-			return false;
+		try {
+			if (EventValidator.validateEventName(name)) {
+				return EventDao.deleteEvent(name);
+			} else {
+				return false;
+			}
+		} catch (ValidatorInitializationException | SQLException | DaoException | ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return false;
 	}
 
 	/**
@@ -151,20 +176,32 @@ public class EventServiceLayer {
 	 *                                          initializing the validator.
 	 * @throws ConnectionException 
 	 */
-	public Event findEventByName(String name) throws SQLException, DaoException, ValidatorInitializationException, ConnectionException {
+	public Event findEventByName(String name) throws ServiceException {
 		if (name == null) {
-			throw new  DaoException(DaoExceptionErrors.INVALID_INPUT);
+			throw new  ServiceException(DaoExceptionErrors.INVALID_INPUT);
 		}
-		if (EventValidator.validateEventName(name)) {
-			return EventDao.findEventByName(name);
-		} else {
-			return null;
+		try {
+			if (EventValidator.validateEventName(name)) {
+				return EventDao.findEventByName(name);
+			} else {
+				return null;
+			}
+		} catch (ValidatorInitializationException | SQLException | ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
 
-	public List<Event> viewEvent() throws IllegalArgumentException, SQLException,  ConnectionException {
+	public List<Event> viewEvent() throws ServiceException {
 
-		return EventDao.viewEvents();
+		try {
+			return EventDao.viewEvents();
+		} catch (SQLException | ConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

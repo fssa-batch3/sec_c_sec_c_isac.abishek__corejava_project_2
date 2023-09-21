@@ -3,7 +3,7 @@
 
 
 git status
-git add srcen
+git add .
 git commit -m "commit"
 git pull origin main
 git push origin main

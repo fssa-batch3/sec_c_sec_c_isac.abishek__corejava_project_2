@@ -10,6 +10,7 @@ import com.fssa.charitytrust.connection.ConnectionException;
 import com.fssa.charitytrust.dao.EventDao;
 import com.fssa.charitytrust.exceptions.DaoException;
 import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
+import com.fssa.charitytrust.exceptions.ServiceException;
 import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
 import com.fssa.charitytrust.logger.Logger;
 import com.fssa.charitytrust.model.Event;
@@ -56,8 +57,7 @@ class TestEventServiceLayer {
      * @throws ConnectionException If there's an issue with the database connection.
      */
     @Test
-    void testAddEvent() throws ValidatorInitializationException, SQLException, DaoException,
-            IllegalArgumentException, ConnectionException {
+    void testAddEvent() throws  ServiceException, ValidatorInitializationException, SQLException, DaoException, ConnectionException{
         Event event1 = createTestEvent();
         EventServiceLayer eventServiceLayer = createTestEventLayer();
         Assertions.assertTrue(eventServiceLayer.addEvent(event1));
@@ -73,13 +73,12 @@ class TestEventServiceLayer {
      * @throws ConnectionException If there's an issue with the database connection.
      */
     @Test
-    void testAddNullEvent() throws DaoException, IllegalArgumentException, ValidatorInitializationException,
-            SQLException, ConnectionException {
+    void testAddNullEvent() throws ServiceException {
         Event event1 = null;
         EventServiceLayer eventServiceLayer = createTestEventLayer();
         try {
             eventServiceLayer.addEvent(event1);
-        } catch (DaoException e) {
+        } catch (ServiceException e) {
             Assertions.assertEquals(DaoExceptionErrors.INVALID_INPUT, e.getMessage());
         }
     }
@@ -94,8 +93,7 @@ class TestEventServiceLayer {
      * @throws ConnectionException If there's an issue with the database connection.
      */
     @Test
-    void testAddInvalidEvent() throws ValidatorInitializationException, DaoException, SQLException,
-            IllegalArgumentException, ConnectionException {
+    void testAddInvalidEvent() throws ServiceException {
         LocalDate input = LocalDate.of(2023, 10, 10);
         Event event1 = new Event(
             "12345",
@@ -120,8 +118,7 @@ class TestEventServiceLayer {
      * @throws ConnectionException If there's an issue with the database connection.
      */
     @Test
-    void testUpdateEvent() throws IllegalArgumentException, ValidatorInitializationException, SQLException,
-            DaoException, ConnectionException {
+    void testUpdateEvent() throws ServiceException {
         LocalDate input = LocalDate.of(2023, 10, 10);
         Event eventNew = new Event(
             "IslandGround",
@@ -156,13 +153,12 @@ class TestEventServiceLayer {
      * @throws ConnectionException If there's an issue with the database connection.
      */
     @Test
-    void testUpdateNullEvent() throws IllegalArgumentException, ValidatorInitializationException, SQLException,
-            DaoException, ConnectionException {
+    void testUpdateNullEvent() throws ServiceException {
         Event event1 = null;
         EventServiceLayer eventServiceLayer = createTestEventLayer();
         try {
             eventServiceLayer.updateEvent(event1);
-        } catch (DaoException e) {
+        } catch (ServiceException e) {
             Assertions.assertEquals(DaoExceptionErrors.INVALID_INPUT, e.getMessage());
         }
     }
@@ -177,8 +173,7 @@ class TestEventServiceLayer {
      * @throws ConnectionException If there's an issue with the database connection.
      */
     @Test
-    void testUpdateInvalidEvent() throws IllegalArgumentException, ValidatorInitializationException, SQLException,
-            DaoException, ConnectionException {
+    void testUpdateInvalidEvent() throws ServiceException {
         LocalDate input = LocalDate.of(2023, 10, 10);
         Event event1 = new Event(
             "12345",
@@ -204,8 +199,7 @@ class TestEventServiceLayer {
      * @throws ConnectionException If there's an issue with the database connection.
      */
     @Test
-    void testReadEvents() throws DaoException, SQLException, IllegalArgumentException, ValidatorInitializationException,
-            ConnectionException {
+    void testReadEvents() throws ServiceException {
         LocalDate input = LocalDate.of(2023, 10, 10);
         Event event1 = new Event(
             "Pachayppas",
@@ -231,8 +225,7 @@ class TestEventServiceLayer {
      * @throws ConnectionException If there's an issue with the database connection.
      */
     @Test
-    void testViewEvents() throws IllegalArgumentException, ValidatorInitializationException, SQLException,
-            DaoException, ConnectionException {
+    void testViewEvents() throws ServiceException {
         EventServiceLayer eventServiceLayer = createTestEventLayer();
         Assertions.assertNotNull(eventServiceLayer.viewEvent());
         Logger.info(eventServiceLayer.viewEvent());
@@ -247,7 +240,7 @@ class TestEventServiceLayer {
      * @throws ConnectionException If there's an issue with the database connection.
      */
     @Test
-    void testDeleteEvent() throws SQLException, DaoException, ValidatorInitializationException, ConnectionException {
+    void testDeleteEvent() throws ServiceException {
     	 LocalDate input = LocalDate.of(2023, 10, 10);
          Event event1 = new Event(
              "BalajiiEvent",
@@ -272,11 +265,11 @@ class TestEventServiceLayer {
      * @throws ConnectionException If there's an issue with the database connection.
      */
     @Test
-    void testDeleteNullEvent() throws SQLException, DaoException, ValidatorInitializationException, ConnectionException {
+    void testDeleteNullEvent() throws ServiceException {
         EventServiceLayer eventServiceLayer = createTestEventLayer();
         try {
             eventServiceLayer.deleteEvent(null);
-        } catch (DaoException e) {
+        } catch (ServiceException e) {
             Assertions.assertEquals(DaoExceptionErrors.INVALID_INPUT, e.getMessage());
         }
     }
@@ -290,11 +283,11 @@ class TestEventServiceLayer {
      * @throws ConnectionException If there's an issue with the database connection.
      */
     @Test
-    void testDeleteInvalidEvent() throws SQLException, DaoException, ValidatorInitializationException, ConnectionException {
+    void testDeleteInvalidEvent() throws ServiceException {
         EventServiceLayer eventServiceLayer = createTestEventLayer();
         try {
             eventServiceLayer.deleteEvent("InvalidName");
-        } catch (DaoException e) {
+        } catch (ServiceException e) {
             Assertions.assertEquals(DaoExceptionErrors.ROW_AFFECTED, e.getMessage());
         }
     }
@@ -309,8 +302,7 @@ class TestEventServiceLayer {
      * @throws ConnectionException If there's an issue with the database connection.
      */
     @Test
-    void testFindByName() throws SQLException, DaoException, ValidatorInitializationException,
-            IllegalArgumentException, ConnectionException {
+    void testFindByName() throws ServiceException {
         LocalDate input = LocalDate.of(2023, 10, 10);
         Event event1 = new Event(
             "Chepak",
@@ -337,13 +329,12 @@ class TestEventServiceLayer {
      * @throws ConnectionException If there's an issue with the database connection.
      */
     @Test
-    void testFindByNameNull() throws IllegalArgumentException, ValidatorInitializationException, SQLException,
-            DaoException, ConnectionException {
+    void testFindByNameNull() throws ServiceException {
         String eventName = null;
         EventServiceLayer eventServiceLayer = createTestEventLayer();
         try {
             eventServiceLayer.findEventByName(eventName);
-        } catch (DaoException e) {
+        } catch (ServiceException e) {
             Assertions.assertEquals(DaoExceptionErrors.INVALID_INPUT, e.getMessage());
         }
     }

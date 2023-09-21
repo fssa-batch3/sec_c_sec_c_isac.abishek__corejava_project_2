@@ -282,12 +282,7 @@ public class UserDAO {
 				ResultSet rs = pst.executeQuery();
 
 				if (rs.next()) {
-					int result = rs.getInt("is_Active");
-					if (result == 0) {
-						return false;
-					} else {
-						return true;
-					}
+					return true;
 
 				}
 
