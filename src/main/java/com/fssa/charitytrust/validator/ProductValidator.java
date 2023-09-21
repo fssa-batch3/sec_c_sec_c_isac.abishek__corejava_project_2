@@ -8,7 +8,7 @@ import org.apache.commons.validator.routines.UrlValidator;
 
 import com.fssa.charitytrust.exceptions.ProductValidateErrors;
 import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
-import com.fssa.charitytrust.exceptions.ValidatorIntializationException;
+import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
 import com.fssa.charitytrust.model.Product;
 
 public class ProductValidator {
@@ -28,9 +28,9 @@ public class ProductValidator {
 	 *                                          initializing the validator or other
 	 *                                          validation errors occur.
 	 */
-	public static boolean validate(Product product) throws ValidatorIntializationException {
+	public static boolean validate(Product product) throws ValidatorInitializationException {
 		if (product == null) {
-			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCT_NULL);
+			throw new ValidatorInitializationException(ProductValidateErrors.INVALID_PRODUCT_NULL);
 		}
 		try {
 			validateProductName(product.getProductName());
@@ -52,9 +52,9 @@ public class ProductValidator {
 	 * @throws ValidatorInitializationException if the Product name is null or does
 	 *                                          not meet the required format.
 	 */
-	public static boolean validateProductName(String productName) throws ValidatorIntializationException {
+	public static boolean validateProductName(String productName) throws ValidatorInitializationException {
 		if (productName == null) {
-			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCT_NULL);
+			throw new ValidatorInitializationException(ProductValidateErrors.INVALID_PRODUCT_NULL);
 		}
 		String regex = "[a-zA-Z ]+";
 		Pattern pattern = Pattern.compile(regex);
@@ -63,7 +63,7 @@ public class ProductValidator {
 		if (isMatch) {
 			return true;
 		} else {
-			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCT_NAME);
+			throw new ValidatorInitializationException(ProductValidateErrors.INVALID_PRODUCT_NAME);
 		}
 	}
 
@@ -76,9 +76,9 @@ public class ProductValidator {
 	 * @throws ValidatorInitializationException if the ProductDescription is null or
 	 *                                          does not meet the required format.
 	 */
-	public static boolean validateDescription(String productDescription) throws ValidatorIntializationException {
+	public static boolean validateDescription(String productDescription) throws ValidatorInitializationException {
 		if (productDescription == null) {
-			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCTDESCRIPTION_NULL);
+			throw new ValidatorInitializationException(ProductValidateErrors.INVALID_PRODUCTDESCRIPTION_NULL);
 		}
 		String regex = "^[a-zA-Z0-9\\s\\-\\.\\,#/]+$";
 		Pattern pattern = Pattern.compile(regex);
@@ -87,7 +87,7 @@ public class ProductValidator {
 		if (isMatch) {
 			return true;
 		} else {
-			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCTDESCRIPTION);
+			throw new ValidatorInitializationException(ProductValidateErrors.INVALID_PRODUCTDESCRIPTION);
 		}
 	}
 
@@ -99,9 +99,9 @@ public class ProductValidator {
 	 * @throws ValidatorInitializationException if the URL is null or does not meet
 	 *                                          the required format.
 	 */
-	public static boolean validateURL(String url) throws ValidatorIntializationException,MalformedURLException {
+	public static boolean validateURL(String url) throws ValidatorInitializationException,MalformedURLException {
 		if (url == null || url.trim().isEmpty()) {
-			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_URL_NULL);
+			throw new ValidatorInitializationException(ProductValidateErrors.INVALID_URL_NULL);
 		}
 	    UrlValidator validator = new UrlValidator();
 	   boolean isMatch=validator.isValid(url);
@@ -113,9 +113,9 @@ public class ProductValidator {
 	}
 
 
-	public static boolean validateEventId(int eventId) throws ValidatorIntializationException {
+	public static boolean validateEventId(int eventId) throws ValidatorInitializationException {
 		if (eventId <= 0) {
-			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_EVENT_ID);
+			throw new ValidatorInitializationException(ProductValidateErrors.INVALID_EVENT_ID);
 		} else {
 			return true;
 		}

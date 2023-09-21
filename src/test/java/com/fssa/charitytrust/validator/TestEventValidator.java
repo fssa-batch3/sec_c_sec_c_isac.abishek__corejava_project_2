@@ -236,7 +236,7 @@ class TestEventValidator {
 	@Test
 	void testInvalidAbout() {
 		try {
-			EventValidator.validateAboutEvent("123456");
+			EventValidator.validateAboutEvent("%%%%%123456");
 		} catch (ValidatorInitializationException e) {
 			Assertions.assertEquals(EventValidatorErrors.INVALID_ABOUT_EVENT_TYPE, e.getMessage());
 		}

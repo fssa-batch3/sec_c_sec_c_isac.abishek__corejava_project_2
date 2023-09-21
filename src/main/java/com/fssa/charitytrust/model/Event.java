@@ -12,8 +12,8 @@ public class Event {
 	// Member variables representing event properties
 	private int eventId;
 	private String eventName;
-	private String eventLocation;
 	private String organizerName;
+	private String eventLocation;
 	private String contactNumber;
 	private LocalDate eventDate;
 	private Date eventDateSQL; // This appears to be a SQL-specific date representation.

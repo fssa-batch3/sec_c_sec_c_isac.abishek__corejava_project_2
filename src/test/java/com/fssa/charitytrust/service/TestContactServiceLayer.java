@@ -16,7 +16,9 @@ import com.fssa.charitytrust.validator.ProductRequestValidator;
 
  class TestContactServiceLayer {
           public ProductRequest getProductRequest() {
-        	  return new  ProductRequest("IslandGround","MAgnifier",9751328805l);
+        	  String num="9751328806";
+        			  long con=Long.parseLong(num);
+        	  return new  ProductRequest("JPR","Crutches",con);
           }
           public ProductRequestService createTestRequestLayer() {
         	  ProductRequestValidator validator = new ProductRequestValidator();
@@ -58,7 +60,7 @@ import com.fssa.charitytrust.validator.ProductRequestValidator;
         	  ProductRequest productRequest = new ProductRequest("chepaks", "Magnifier",9751329805l);
         	  ProductRequestService productServiceLayer = createTestRequestLayer();
         	  productServiceLayer.addproductRequest(productRequest);
-              Assertions.assertTrue(productServiceLayer.updateProductRequest(9751329805l,true));
+              Assertions.assertTrue(productServiceLayer.updateProductRequest(9751329805l,"Accepted"));
           }
 
   }

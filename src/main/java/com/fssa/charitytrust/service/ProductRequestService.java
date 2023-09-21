@@ -1,5 +1,6 @@
 package com.fssa.charitytrust.service;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fssa.charitytrust.connection.ConnectionException;
@@ -69,7 +70,7 @@ public class ProductRequestService {
 	 *                                          access layer.
 	 * @throws ConnectionException 
 	 */
-	public boolean updateProductRequest(long mobile,boolean active)
+	public boolean updateProductRequest(long mobile,String active)
 			throws IllegalArgumentException, ValidatorInitializationException, SQLException, DaoException, ConnectionException {
 		
 	
@@ -101,8 +102,8 @@ public class ProductRequestService {
 	/**
 	 * Finds an event in the system by its name.
 	 *
-	 * @param name The name of the event to be found.
-	 * @return The Event object if found, null otherwise.
+	 * @param name The name of the request to be found.
+	 * @return The request object if found, null otherwise.
 	 * @throws SQLException                     if there is an issue with the SQL
 	 *                                          database operation.
 	 * @throws DaoException                     if there is an issue with the data
@@ -111,10 +112,12 @@ public class ProductRequestService {
 	 *                                          initializing the validator.
 	 * @throws ConnectionException 
 	 */
-	public ProductRequest findRequestByConatactNo(long contact) throws SQLException, DaoException, ValidatorInitializationException, ConnectionException {
-		
+	public List<ProductRequest> findRequestByConatactNo(long contact) throws SQLException, DaoException, ValidatorInitializationException, ConnectionException {
+		List<ProductRequest> arr  = new ArrayList<>();
 		if (productRequestValidator.validateContactNo(contact)) {
-			return productRequestDao.findRequestByConatactNo(contact);
+			
+			arr =  productRequestDao.findRequestByConatactNo(contact);
+			return arr;
 		} else {
 			return null;
 		}

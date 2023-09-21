@@ -6,12 +6,17 @@ import java.time.LocalDate;
 public class ProductRequest {
 	private int requestId;  
 	
+	@Override
+	public String toString() {
+		return "ProductRequest [eventName=" + eventName + ", productName=" + productName + ", requestDate="
+				+ requestDate + ", requestDateSQL=" + requestDateSQL + ", mobileno=" + mobileno + "]";
+	}
 	private String eventName;
 	private String productName;
 	private LocalDate requestDate;
 	private Date requestDateSQL; // This appears to be a SQL-specific date representation.
 	private long mobileno;
-	private boolean isActive;
+	private String isActive;
 	public ProductRequest( String eventName, String productName, 
 			 long mobileno) {
 		this.eventName = eventName;
@@ -21,7 +26,7 @@ public class ProductRequest {
 	}
 	
 	public ProductRequest(int requestId, String eventName, String productName, LocalDate requestDate,
-			 long mobileno, boolean isActive) {
+			 long mobileno, String isActive) {
 		super();
 		this.requestId = requestId;
 		this.eventName = eventName;
@@ -33,10 +38,10 @@ public class ProductRequest {
 	public ProductRequest() {
 		
 	}
-	public boolean isActive() {
+	public String isActive() {
 		return isActive;
 	}
-	public void setActive(boolean isActive) {
+	public void setActive(String isActive) {
 		this.isActive = isActive;
 	}
 	public int getRequestId() {

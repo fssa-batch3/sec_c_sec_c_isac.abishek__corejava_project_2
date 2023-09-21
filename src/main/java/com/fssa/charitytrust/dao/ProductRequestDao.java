@@ -16,13 +16,12 @@ import com.fssa.charitytrust.model.ProductRequest;
 
 public class ProductRequestDao {
 	public ProductRequestDao() {
-		
-	} 
-	
-	public static ProductRequestDao getrequestDao(){
-		return new ProductRequestDao();
+		// it is used to create product instance
 	}
 
+	public static ProductRequestDao getrequestDao() {
+		return new ProductRequestDao();
+	}
 
 	public boolean addrequest(ProductRequest productRequest) throws SQLException, DaoException, ConnectionException {
 
@@ -34,11 +33,10 @@ public class ProductRequestDao {
 				// setting the values in the question mark
 
 				pst.setString(1, productRequest.getEventName());
-				
+
 				pst.setString(2, productRequest.getProductName());
 				pst.setLong(3, productRequest.getMobileno());
 				pst.setDate(4, java.sql.Date.valueOf(productRequest.getRequestDate()));
-				
 
 				int rs = pst.executeUpdate(); // executing the query and it returns the number of rows affected
 				if (rs == 0) {
@@ -50,34 +48,33 @@ public class ProductRequestDao {
 		return true;
 	}
 
-
-
-	public ProductRequest findRequestByConatactNo(long conatactNo) throws SQLException, ConnectionException {
-		final String query = "SELECT request_id,event_name,product_name,request_registerd_date,contact_number FROM requests WHERE contact_number=?";
+	public static List<ProductRequest> findRequestByConatactNo(long conatactNo) throws SQLException, ConnectionException {
+		List<ProductRequest> arr = new ArrayList<>();
+		final String query = "SELECT event_name,product_name,request_registerd_date,contact_number,is_active FROM requests WHERE contact_number=?";
 		// query for finding an event by name in the table
-		ProductRequest result = new ProductRequest(); // object created
+
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
 
 			try (PreparedStatement pst = con.prepareStatement(query)) { // prepare statement for query update
 				pst.setLong(1, conatactNo); // setting the values in the question mark
-
+             
 				try (ResultSet rs = pst.executeQuery()) { // executing the query
 
-					if (rs.next()) { // Setting all the values to the object
+					while (rs.next()) { // Setting all the values to the object
+						ProductRequest result = new ProductRequest(); // object created 
 
-						
 						result.setEventName(rs.getString("event_name"));
 						result.setProductName(rs.getString("product_name"));
 						result.setMobileno(rs.getLong("contact_number"));
+						result.setActive(rs.getString("is_active"));
 						result.setRequestDate(rs.getDate("request_registerd_date"));
+						arr.add(result);
 					}
-					
-					return result; // returning the result object	// connections are closed
+					return arr; // returning the result object // connections are closed
 				}
 			}
-			
+
 		}
-		
 
 	}
 
@@ -92,8 +89,6 @@ public class ProductRequestDao {
 						id1 = id.getInt("request_id");
 					}
 
-					
-					
 					return id1;
 				}
 			} catch (SQLException ex) {
@@ -102,18 +97,16 @@ public class ProductRequestDao {
 		}
 	}
 
-	public boolean updateRequest(long contact,boolean active) throws SQLException, ConnectionException {
+	public boolean updateRequest(long contact, String active) throws SQLException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) {
 
 			final String query = "UPDATE requests SET is_active = ? WHERE contact_number = ?";
 			// query for updating the value in the table
 			try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-				preparedStatement.setBoolean(1, active);
+				preparedStatement.setString(1, active);
 				preparedStatement.setLong(2, contact);
-				
 				// Execute the update
 				int rowsAffected = preparedStatement.executeUpdate();
-
 				return rowsAffected > 0;
 
 			}
@@ -123,9 +116,9 @@ public class ProductRequestDao {
 	}
 
 	public List<ProductRequest> readFullRequestList() throws SQLException, ConnectionException {
-		
+
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
-			final String query = "SELECT request_id,event_name,product_name,contact_number,request_registerd_date FROM requests";
+			final String query = "SELECT request_id,event_name,product_name,contact_number,request_registerd_date,is_active FROM requests";
 			ArrayList<ProductRequest> resultlist = new ArrayList<>(); // arraylist declared
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 				try (ResultSet rs = pst.executeQuery()) {
@@ -136,6 +129,7 @@ public class ProductRequestDao {
 						result.setProductName(rs.getString("product_name"));
 						result.setMobileno(rs.getLong("contact_number"));
 						result.setRequestDate(rs.getDate("request_registerd_date"));
+						result.setActive(rs.getString("is_active"));
 						resultlist.add(result); // objects are pushed
 					}
 				} // result set is closed
@@ -145,16 +139,13 @@ public class ProductRequestDao {
 		}
 
 	}
-	public List<ProductRequest> viewRequests() throws SQLException,  ConnectionException {
+
+	public List<ProductRequest> viewRequests() throws SQLException, ConnectionException {
 		List<ProductRequest> resultList;
-		ProductRequestDao productRequestDao =new ProductRequestDao();
+		ProductRequestDao productRequestDao = new ProductRequestDao();
 		resultList = productRequestDao.readFullRequestList();
 		Logger.info(resultList);
 		return resultList;
 	}
-	
-	
-	
-	
 
 }

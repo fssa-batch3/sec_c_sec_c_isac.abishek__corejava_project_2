@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import com.fssa.charitytrust.exceptions.EventValidatorErrors;
 import com.fssa.charitytrust.exceptions.ProductValidateErrors;
 import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
-import com.fssa.charitytrust.exceptions.ValidatorIntializationException;
+import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
 import com.fssa.charitytrust.model.ProductRequest;
 
 public class ProductRequestValidator {
@@ -70,9 +70,9 @@ public class ProductRequestValidator {
 	 * @throws ValidatorInitializationException if the Product name is null or does
 	 *                                          not meet the required format.
 	 */
-	public static boolean validateProductName(String productName) throws ValidatorIntializationException {
+	public static boolean validateProductName(String productName) throws ValidatorInitializationException {
 		if (productName == null) {
-			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCT_NULL);
+			throw new ValidatorInitializationException(ProductValidateErrors.INVALID_PRODUCT_NULL);
 		}
 		String regex = "[a-zA-Z ]+";
 		Pattern pattern = Pattern.compile(regex);
@@ -82,7 +82,7 @@ public class ProductRequestValidator {
 			
 			return true;
 		} else {
-			throw new ValidatorIntializationException(ProductValidateErrors.INVALID_PRODUCT_NAME);
+			throw new ValidatorInitializationException(ProductValidateErrors.INVALID_PRODUCT_NAME);
 		}
 	}
 	
@@ -118,9 +118,8 @@ public class ProductRequestValidator {
 	 * @throws ValidatorInitializationException if the boolean is is null or
 	 *                                          does not meet the required format.
 	 */
-	public boolean validateIsActive(boolean isactive) throws ValidatorInitializationException {
-		boolean trueval= true;
-		if (isactive==trueval) {
+	public boolean validateIsActive(String isactive) throws ValidatorInitializationException {
+		if (isactive.equalsIgnoreCase("Accepted")||isactive.equalsIgnoreCase("Pending")||isactive.equalsIgnoreCase("Declined")) {
 			return true;
 		} else {
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_BOOLEAN);
