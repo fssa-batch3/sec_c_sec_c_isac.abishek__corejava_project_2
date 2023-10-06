@@ -39,7 +39,7 @@
 - Product Dao
 - Product ServiceLayer
 - Product Test cases
-- 
+
 
  ###  ** Product MODULE FEATURES**
 -Add Product
@@ -87,6 +87,36 @@
 | request_registerd_date | datetime           | NOT NULL                         | Date and time when the request was registered. |
 | contact_number         | bigint(45)         | NOT NULL, UNIQUE                | Contact number associated with the request. |
 | is_active              | BOOLEAN            | NOT NULL, default true          | Indicates whether the request is active or not. |
+
+
+###  ** USER MODULE**
+- User Model
+- User Validator
+- User Dao
+- User ServiceLayer
+- User Test cases
+
+
+ ###  ** User MODULE FEATURES**
+-Add User
+-Read specific User
+-User Product
+-User Product
+
+
+### Table: User
+
+| Column Name | Data Type          | Constraints                   | Description                          |
+|-------------|--------------------|-------------------------------|--------------------------------------|
+| id          | int                | NOT NULL, AUTO_INCREMENT      | Unique identifier for each user.    |
+| Username    | varchar(50)        | NOT NULL                      | User's username.                     |
+| Address     | varchar(100)       | NOT NULL                      | User's address.                      |
+| Contact     | varchar(45)        | NOT NULL                      | User's contact information.          |
+| Password    | varchar(200)       | NOT NULL                      | User's password (hashed and secured).|
+| Email       | varchar(45)        | NOT NULL, UNIQUE              | User's email address (unique).       |
+| Role        | varchar(45)        | NOT NULL                      | User's role or role identifier.      |
+| is_Active   | boolean            | DEFAULT true                  | Indicates if the user account is active or not (default is active). |
+| accessblity | boolean            | DEFAULT true                  | Indicates user's accessibility (default is accessible). |
 
 
 
