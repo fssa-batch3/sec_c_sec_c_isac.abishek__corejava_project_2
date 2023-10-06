@@ -99,7 +99,6 @@ public class TestHospitalServiceLayer {
 		  
 	   }
 	@Test  
-	@Order(3)
 	public void testReadObject() throws ServiceException {
 		Hospital hospital1=  new Hospital( "balaji maruthuvamanai", "North Street,Taramani", "Naresh", "9751328805",
 				"https://freeimage.host/i/HNRzLYJ.jpg", "NORMALCHECKUP");

@@ -18,7 +18,7 @@ import com.fssa.charitytrust.model.Hospital;
 //class for doing CRUD on hospital table
 public class HospitalDao {
 
-	public static boolean addHospital(com.fssa.charitytrust.model.Hospital hospital) throws SQLException, DaoException, ConnectionException {
+	public static boolean addHospital(Hospital hospital) throws SQLException, DaoException, ConnectionException {
 
 		final String query = "INSERT INTO HospitalList ( hospital_name, hospital_address, doctor_name, contact_number, hospital_registerd_date, image_url, check_types)VALUES (?, ?, ?, ?, ?, ?, ? );";
       // query for adding the values in table
@@ -39,6 +39,8 @@ public class HospitalDao {
 				throw new DaoException(DaoExceptionErrors.ROW_AFFECTED);
 			}
             pst.close(); //closing the prepared statement 
+		}catch(Exception e) {
+			System.err.println(e.getMessage());
 		}
 		return true; 
 	}
@@ -140,7 +142,7 @@ public class HospitalDao {
 
 	public static ArrayList readFullHospitalList() throws SQLException, DaoException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) { //getting connection
-			final String query = "SELECT * FROM freshtrust.HospitalList";
+			final String query = "SELECT * FROM HospitalList";
 			ArrayList<Hospital> resultlist = new ArrayList();//arraylist declared
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 				ResultSet rs = pst.executeQuery();

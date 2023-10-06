@@ -13,12 +13,12 @@ import com.fssa.charitytrust.model.UserRole;
 public class TestUserService {
 	UserService service = new UserService();
 	UserRole role = UserRole.valueOf("VOLUNTEER");
-	User obj = new User(9, "Balaji", "balajii@gmail.com", "Balaji@2002", "palavakam North Street", "9080020730",
+	User obj = new User(9, "Balaji", "balajii@gmail.com", "Balaji@2002", "626109", "9080020730",
 			"787878787124", role);
-
+	
 	@Test
 	void testAddNewUSer() throws ServiceException {
-		User obj = new User(9, "Balaji", "balaji@gmail.com", "Balaji@2002", "palavakam North Street", "9080020730",
+		User obj = new User(9, "Balaji", "balaji@gmail.com", "Balaji@2002", "626109", "9080020730",
 				"787878787124", role);
 		Assertions.assertTrue(service.AddUser(obj));
 	}
@@ -28,13 +28,13 @@ public class TestUserService {
 		try {
 			service.addNewUser(null);
 		} catch (ServiceException e) {
-			Assertions.assertEquals(e.getMessage(), UserServiceErrors.UNABLE_TO_ADD);
+			Assertions.assertEquals(UserValidatorError.INVALID_USER_NULL, e.getMessage());
 		}
 	}
 
 	@Test
 	void testUpdateUSer() throws ServiceException {
-		User obj = new User(9, "Nantha", "balaji@gmail.com", "Balaji@2002", "palavakam North Street", "9080020730",
+		User obj = new User(9, "Nantha", "balaji@gmail.com", "Balaji@2002", "626109", "9080020730",
 				"787878787124", role);
 		Assertions.assertTrue(service.updateUser(obj));
 	}
@@ -50,7 +50,7 @@ public class TestUserService {
 
 	@Test
 	void testDeleteUSer() throws ServiceException {
-		User obj = new User(9, "Nantha", "balaji@gmail.com", "Balaji@2002", "palavakam North Street", "9080020730",
+		User obj = new User(9, "Nantha", "balaji@gmail.com", "Balaji@2002", "626109", "9080020730",
 				"787878787124", role);
 		Assertions.assertTrue(service.deleteUser(obj));
 	}
@@ -84,7 +84,7 @@ public class TestUserService {
 		try {
 			service.AddUser(obj);
 		} catch (ServiceException e) {
-			Assertions.assertEquals(e.getMessage(), "Email Already Exist");
+			Assertions.assertEquals("Email Already Exist", e.getMessage());
 		}
 	}
 
@@ -99,7 +99,7 @@ public class TestUserService {
 		try {
 			service.checkMailAvailable("Invalid");
 		} catch (ServiceException e) {
-			Assertions.assertEquals(e.getMessage(), UserValidatorError.INVALID_USEREMAIL_PATTERN);
+			Assertions.assertEquals(UserValidatorError.INVALID_USEREMAIL_PATTERN, e.getMessage());
 		}
 	}
 
@@ -114,7 +114,7 @@ public class TestUserService {
 		try {
 			service.checkMailAndPassword("Invalid", "Invalid");
 		} catch (ServiceException e) {
-			Assertions.assertEquals(e.getMessage(), UserValidatorError.INVALID_USEREMAIL_PATTERN);
+			Assertions.assertEquals(UserValidatorError.INVALID_USEREMAIL_PATTERN, e.getMessage());
 		}
 	}
 

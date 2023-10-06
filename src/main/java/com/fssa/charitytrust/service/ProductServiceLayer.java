@@ -57,9 +57,8 @@ public class ProductServiceLayer {
 			}
 		} catch (ValidatorInitializationException | SQLException | DaoException | ConnectionException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
 		}
-		return false;
 	}
 
 	/**
@@ -145,9 +144,8 @@ public class ProductServiceLayer {
 			}
 		} catch (ValidatorInitializationException | SQLException | DaoException | ConnectionException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
 		}
-		return false;
 	}
 
 	/**
@@ -202,9 +200,9 @@ public class ProductServiceLayer {
 			}
 		} catch (ValidatorInitializationException | SQLException | ConnectionException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
 		}
-		return null;
+		
 
 	}
 }

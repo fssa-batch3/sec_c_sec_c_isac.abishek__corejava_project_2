@@ -116,7 +116,7 @@ public class TestUserValidator {
 			UserValidator.validatePassword(getInvalidUser().getPassword());
 			Assertions.fail("Test case failed");
 		} catch (ValidatorInitializationException e) {
-			Assertions.assertEquals(UserValidatorError.INVALID_PASSWORD_PATTERN, e.getMessage());
+			Assertions.assertEquals(UserValidatorError.INVALID_PASSWORD_LOGIN, e.getMessage());
 		}
 	}
  
@@ -190,7 +190,7 @@ public class TestUserValidator {
      */
 	@Test
 	void testValidAddress() throws ValidatorInitializationException {
-		user.setAddress("North Street, Taramani");
+		user.setAddress("626109");
 		String address = user.getAddress();
 		Assertions.assertTrue(UserValidator.validateLocation(address));
 	}

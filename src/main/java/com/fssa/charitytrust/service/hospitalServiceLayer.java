@@ -105,7 +105,8 @@ public class hospitalServiceLayer {
 			return HospitalDao.readFullHospitalList();
 		} catch (SQLException | DaoException | ConnectionException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println(e.getMessage());
+			
 		}
 		return null;
     }
@@ -130,17 +131,14 @@ public class hospitalServiceLayer {
 			    try {
 					return HospitalDao.deleteHospital(name);
 				} catch (SQLException | DaoException | ConnectionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					throw new ServiceException(e.getMessage());
 				}
 			} else {
 			    return false;
 			}
 		} catch (ValidatorInitializationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
 		}
-		return false;
     }
 
     /**
@@ -165,10 +163,8 @@ public class hospitalServiceLayer {
 			    return null;
 			}
 		} catch (ValidatorInitializationException | SQLException | DaoException | ConnectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
 		}
-		return null; 
     }
 
    

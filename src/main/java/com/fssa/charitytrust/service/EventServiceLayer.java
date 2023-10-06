@@ -157,10 +157,8 @@ public class EventServiceLayer {
 				return false;
 			}
 		} catch (ValidatorInitializationException | SQLException | DaoException | ConnectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
 		}
-		return false;
 	}
 
 	/**

@@ -244,7 +244,7 @@ public class UserDAO {
 
 	public static boolean makeActiveAccessblity(String email,boolean val) throws ConnectionException, DaoException {
 		try (Connection con = ConnectionUtil.getConnection()) {
-			String query = "Update users set Accessblity = ? where email = ?";
+			String query = "Update users set accessblity = ? where email = ?";
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 			
 				

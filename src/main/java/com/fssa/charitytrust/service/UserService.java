@@ -21,8 +21,9 @@ public class UserService {
 
  
 			try {
+				if(UserValidator.validate(user))
 				UserDAO.addUser(user);
-			} catch (DaoException | ConnectionException e) {
+			} catch (DaoException | ConnectionException | ValidatorInitializationException e) {
 				throw new ServiceException(e.getMessage());
 			}
  

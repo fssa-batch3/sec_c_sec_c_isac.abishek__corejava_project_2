@@ -202,7 +202,7 @@ class TestProductServiceLayer {
 			ProductServiceLayer1.deleteProduct(null,0);
 		} catch (ServiceException e) {
 			Assertions.assertEquals(DaoExceptionErrors.INVALID_INPUT, e.getMessage());
-		}
+		} 
 
 	}
 	 /**
