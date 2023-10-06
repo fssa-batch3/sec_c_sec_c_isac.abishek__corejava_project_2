@@ -27,12 +27,14 @@ public class ConnectionUtil {
 //		userName = System.getenv("DATABASE_USERNAME");
 //		passWord = System.getenv("DATABASE_PASSWORD");
 
-		url = "jdbc:mysql://localhost:3306/charitytrust";
-		userName = "root";
-		passWord = "123456";
+//		url =System.getenv("LOCAL_URL");
+//		userName = System.getenv("LOCAL_USERNAME");
+//		passWord = System.getenv("LOCAL_PASSWORD");
 		
 		
-		
+		url="jdbc:mysql://localhost:3306/charitytrust";
+		userName="root";
+		passWord="123456";
 		
 
 		try {

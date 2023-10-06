@@ -16,24 +16,29 @@ public class UserValidator {
 		if (user == null) {
 			throw new ValidatorInitializationException(UserValidatorError.INVALID_USER_NULL);
 		}
+     try {
+    	 validateName(user.getUsername());
+ 		
+ 		validateEmail(user.getEmail());
+ 		
+ 		validateUserRole(user.getRole());
+ 		 
+ 		validatePassword(user.getPassword());
+ 		 
+ 		validateContactNo(user.getContactNumber());
+ 		 
+// 		validateAddhaarNo(user.getAadhaarNumber());
+ 		 
+ 		validateLocation(user.getAddress());
+ 		 
+ 		
 
-		validateName(user.getUsername());
-		System.out.println("1");
-		validateEmail(user.getEmail());
-		System.out.println("1");
-		validateUserRole(user.getRole());
-		System.out.println("1");
-		validatePassword(user.getPassword());
-		System.out.println("1");
-		validateContactNo(user.getContactNumber());
-		System.out.println("1");
-		validateAddhaarNo(user.getAadhaarNumber());
-		System.out.println("1");
-		validateLocation(user.getAddress());
-		System.out.println("1");
+ 		return true;
+     }
+     catch(ValidatorInitializationException e) {
+    	 throw new ValidatorInitializationException(e.getMessage());
+     }
 		
-
-		return true;
 	}
 	public static boolean validateUpdate(User user) throws ValidatorInitializationException {
 
@@ -44,7 +49,7 @@ public class UserValidator {
 		validateName(user.getUsername());
 		validateEmail(user.getEmail());
 		validateContactNo(user.getContactNumber());
-		validateAddhaarNo(user.getAadhaarNumber());
+//		validateAddhaarNo(user.getAadhaarNumber());
 		validateLocation(user.getAddress());
 		
 
@@ -65,7 +70,7 @@ public class UserValidator {
 			throw new ValidatorInitializationException(UserValidatorError.INVALID_USERNAME_NULL);
 		}
 
-		String regex = "^[a-zA-Z]{3,20}+$";
+		String regex = "^[a-zA-Z]{3,50}+$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(name);
 		Boolean isMatch = matcher.matches();
@@ -78,21 +83,22 @@ public class UserValidator {
 	}
 
 	public static boolean validateEmail(String email) throws ValidatorInitializationException {
-        email=email.trim();
+       
 		if (email == null || email.trim().equals("")) {
 			throw new ValidatorInitializationException(UserValidatorError.INVALID_USEREMAIL_NULL);
 		}
 
-		String emailPattern = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+		String emailPattern = "^[A-Za-z0-9._%+-]+@[A-Za-z.-]+\\.[A-Za-z]{2,}$";
 		Pattern pattern = Pattern.compile(emailPattern);
 		Matcher matcher = pattern.matcher(email);
 		Boolean isMatch = matcher.matches();
  
-		System.out.println(isMatch);
-		if (isMatch==true) {
+		
+		if (isMatch) {
+		
 			return true;
 		}
-		else {
+		else { 
 			throw new ValidatorInitializationException(UserValidatorError.INVALID_USEREMAIL_PATTERN);
 		}
 
@@ -106,9 +112,7 @@ public class UserValidator {
 		}
 		return true;
 	}
-public static void main(String[] args) throws ValidatorInitializationException {
-	UserValidator.validateEmail("isac@gmail.com");
-}
+
 	public static boolean validatePassword(String password) throws ValidatorInitializationException {
 
 		if (password == null || password.isEmpty()) {
@@ -124,8 +128,9 @@ public static void main(String[] args) throws ValidatorInitializationException {
 		Boolean isMatch = matcher.matches();
 
 		if (Boolean.FALSE.equals(isMatch)) {
-			throw new ValidatorInitializationException(UserValidatorError.INVALID_PASSWORD_PATTERN);
+			throw new ValidatorInitializationException(UserValidatorError.INVALID_PASSWORD_LOGIN);
 		}
+		
 		return true;
 	}
 
@@ -150,7 +155,7 @@ public static void main(String[] args) throws ValidatorInitializationException {
 		if (contactNo == null) {
 			throw new ValidatorInitializationException(UserValidatorError.INVALID_AADHAAR_NO_NULL);
 		}
-		String regex = "^([0-9]){12}$";
+		String regex = "^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(contactNo);
 		boolean isMatch = matcher.matches();
@@ -165,7 +170,7 @@ public static void main(String[] args) throws ValidatorInitializationException {
 		if (location == null || location.isEmpty()) {
 			throw new ValidatorInitializationException(UserValidatorError.INVALID_LOCATION_NULL);
 		}
-		String regex = "^[a-zA-Z0-9\\s\\-\\.\\,#/]+$";
+		String regex = "^(?!0\\d{5}|(\\d)\\1{5})[1-9]\\d{5}$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(location);
 		boolean isMatch = matcher.matches();

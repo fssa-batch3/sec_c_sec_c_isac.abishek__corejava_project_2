@@ -23,11 +23,10 @@ public class UserService {
 			try {
 				UserDAO.addUser(user);
 			} catch (DaoException | ConnectionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new ServiceException(e.getMessage());
 			}
  
-	
+	 
 		return true;
 	}
  
@@ -41,7 +40,7 @@ public class UserService {
 			}
 		} catch (ValidatorInitializationException | DaoException | ConnectionException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
 		}
 		return true;
 	}
@@ -55,8 +54,7 @@ public class UserService {
  
 			}
 		} catch (ValidatorInitializationException | DaoException | ConnectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
 		}
 		return true;
 	}
@@ -70,8 +68,7 @@ public class UserService {
 				
 			}
 		} catch (ValidatorInitializationException | DaoException | ConnectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
 		}
 	   return null;
 	}
@@ -80,11 +77,11 @@ public class UserService {
 			if(UserValidator.validate(user)) {
 			if (UserValidator.validateEmail(user.getEmail())) {
  
-			boolean res=UserDAO.checkMailAvailable(user.getEmail());
+			boolean res=UserDAO.checkMailAvailable(user.getEmail().trim().toLowerCase());
 				if(res==true) {
 					boolean checkActive=UserDAO.checkIsActive(user.getEmail());
 				   if(checkActive==true) {
-					   return false; // already exists
+					   throw new ServiceException("Email Already Exist"); // already exists
 				   }
 				   else {
 					   UserDAO.makeIsActive(user.getEmail());
@@ -99,8 +96,9 @@ public class UserService {
 			}
 			 }
 		} catch (ValidatorInitializationException | ConnectionException | DaoException | ServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
+	
 		}
 		return true;
 	}
@@ -114,8 +112,20 @@ public class UserService {
 				
 			}
 		} catch (ValidatorInitializationException | ConnectionException | DaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
+		}
+		return true;
+	}
+public static boolean checkMobileAvailable(String mobile) throws ServiceException {
+		
+		try {
+			if(UserValidator.validateContactNo(mobile)) {
+				
+				return UserDAO.CheckMobileExists(mobile);
+				
+			}
+		} catch (ValidatorInitializationException | ConnectionException | DaoException e) {
+			throw new ServiceException(e.getMessage());
 		}
 		return true;
 	}
@@ -123,35 +133,36 @@ public class UserService {
 		
 		try {
 			if(UserValidator.validateEmail(email) && UserValidator.validatePassword(password)) {
-				
+				try {
+					password = UserDAO.hashPassword(password);
+				} catch (DaoException e) {
+					e.printStackTrace();
+				}
 				return UserDAO.checkMailAndPassword(email,password);
 				
 			}
 		} catch (ValidatorInitializationException | ConnectionException | DaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+		
+			throw new ServiceException(e.getMessage());
 		}
 		return true;
 	}
-	public static boolean setAccessblity(String email,boolean val) throws ServiceException {
+	public static boolean setAccessblity(String email,boolean val) throws ServiceException, ValidatorInitializationException {
 		
 		try {
-			return UserDAO.makeActiveAccessblity(email,val);
+			if(UserValidator.validateEmail(email)) {
+				return UserDAO.makeActiveAccessblity(email,val);
+			}
+			
 		} catch (ConnectionException | DaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
 		}
 		return false;
+		
 	}
 	
-	public static void printUser(User user) {
-		
-		Logger.info("UserName :" + user.getUsername());
-		Logger.info("Id :" + user.getId());
-		Logger.info("Email :"+user.getEmail());
-		Logger.info("Password :"+user.getPassword());		
-		
-	}
+
  
 	
 }

@@ -12,17 +12,17 @@ import com.fssa.charitytrust.model.User;
 import com.fssa.charitytrust.model.UserRole;
 
 public class TestUserValidator {
-	User user = new User("Isac", "Isac@gmail.com", "Isac@123","Noerth Chennai,royapuram","7305836758","1234 5678 9012", UserRole.ADMIN, LocalDate.of(2005, 04, 06));
+	User user = new User("Isac", "Isac@gmail.com", "Isac@123","Noerth Chennai,royapuram","7305836758","1234 5678 9012", UserRole.ADMIN);
 	public static User getValidUser() {
  
-		User user = new User("Isac", "Isac@gmail.com", "Isac@123","Noerth Chennai,royapuram","7305836758","1234 5678 9012", UserRole.ADMIN, LocalDate.of(2005, 04, 06));
+		User user = new User("Isac", "Isac@gmail.com", "Isac@123","Noerth Chennai,royapuram","7305836758","1234 5678 9012", UserRole.ADMIN);
  
 		return user;
 	}
  
 	public static User getInvalidUser() {
  
-		User user = new User("Go*#&*aj", "gokulgmail", "dfuffy123","Noerth Chennai,royapuram","0000836758","000000006758", null, LocalDate.of(2025, 04, 06));
+		User user = new User("Go*#&*aj", "gokulgmail", "dfuffy123","Noerth Chennai,royapuram","0000836758","000000006758", null);
  
 		return user;
 	}

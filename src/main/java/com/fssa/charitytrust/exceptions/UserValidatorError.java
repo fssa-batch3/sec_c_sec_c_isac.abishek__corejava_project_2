@@ -8,31 +8,29 @@ public interface UserValidatorError {
  
 	public static final String INVALID_USERNAME_NULL = "UserName can't be null";
  
-	public static final String INVALID_USERNAME_PATTERN = "UserName should not contain Special Character";
+	public static final String INVALID_USERNAME_PATTERN = "UserName should be mimium 3 maximum 50 should not contain specail charcters and numbers";
  
 	public static final String INVALID_USEREMAIL_NULL = "UserEmail can't be null";
  
-	public static final String INVALID_USEREMAIL_PATTERN = "UserEmail should contain Special Character";
+	public static final String INVALID_USEREMAIL_PATTERN = "Invalid email please enter a valid email email should only contain alphabets,numbers,@,. with maximum length 45  ";
  
 	public static final String INVALID_USERROLE_NULL = "UserRole can't be null";
  
-	public static final String INVALID_DATE_NULL = "Date of Birth can't be null";
- 
-	public static final String INVALID_DATE_FORMAT = "Date of Birth can't be in the future";
-	
+
+	public static final String INVALID_PASSWORD_LOGIN = "PassWord Invalid in Login";
 	public static final String INVALID_PASSWORD_NULL = "Password can't be null";
 
-	public static final String INVALID_PASSWORD_PATTERN = "PassWord should not contain Special Character";
+	public static final String INVALID_PASSWORD_PATTERN = "PassWord should  contain Special Character";
  
-	public static final String  INVALID_CONTACT_NUMBER = "invalid contact number";
+	public static final String  INVALID_CONTACT_NUMBER = "contact number should only contain number with length 10 only starts with 6,7,8,9 ";
    
-	public static final String  INVALID_CONTACT_NO_NULL = "invalid contact number";
+	public static final String  INVALID_CONTACT_NO_NULL = "invalid contact number null";
 	
 	public static final String  INVALID_AADHAAR_NUMBER = "invalid AADHAAR number";
 	   
 	public static final String  INVALID_AADHAAR_NO_NULL = "aadhaar can't be null";
 
-	public static final String INVALID_LOCATION_NULL = "location can't be null";
+	public static final String INVALID_LOCATION_NULL = "pincode can't be null";
 
-	public static final String INVALID_LOCATION = "invalid location";
+	public static final String INVALID_LOCATION = "Invalid pincode,pincode only contain 6 digit number";
 }

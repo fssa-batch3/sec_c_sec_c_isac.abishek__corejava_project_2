@@ -1,5 +1,8 @@
 package com.fssa.charitytrust.dao;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,33 +13,62 @@ import java.util.List;
 import com.fssa.charitytrust.connection.ConnectionException;
 import com.fssa.charitytrust.connection.ConnectionUtil;
 import com.fssa.charitytrust.exceptions.DaoException;
+import com.fssa.charitytrust.exceptions.UserServiceErrors;
 import com.fssa.charitytrust.model.User;
 import com.fssa.charitytrust.model.UserRole;
 
 public class UserDAO {
+	/**
+	 * This method hashes a password using the SHA-256 hashing algorithm.
+	 *
+	 * @param password The password to be hashed.
+	 * @return The SHA-256 hash of the password as a hexadecimal string.
+	 * @throws DaoException If there is an issue with the hashing algorithm.
+	 */
+	public static String hashPassword(String password) throws DaoException {
+		try {
+			// Create a MessageDigest instance for SHA-256 hashing
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			// Calculate the hash of the password by encoding it as bytes and digesting it using UTF-8 method
+			byte[] hashedBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
+
+			// Convert the byte array to a hexadecimal string
+			StringBuilder sb = new StringBuilder();
+			for (byte b : hashedBytes) {
+				 // Format each byte as a two-character hexadecimal string and append to StringBuilder
+				sb.append(String.format("%02x", b));
+			}
+			// Return the SHA-256 hash of the password as a hexadecimal string
+			return sb.toString();
+		} catch (NoSuchAlgorithmException e) {
+			throw new DaoException(e.getMessage());
+		}
+	}
+	/*
+	 * 
+	 */
 
 	public static boolean addUser(User user) throws DaoException, ConnectionException {
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
-			String query = "insert into users(username,address,contact,password,email,aadhaar,role) values (?,?,?,?,?,?,?)";
+			String query = "insert into users(username,address,contact,password,email,role) values (?,?,?,?,?,?)";
 
 			try (PreparedStatement pst = connection.prepareStatement(query)) {
 
 				pst.setString(1, user.getUsername());
 				pst.setString(2, user.getAddress());
 				pst.setString(3, user.getContactNumber());
-				pst.setString(4, user.getPassword());
+				pst.setString(4, hashPassword(user.getPassword()));
 				pst.setString(5, user.getEmail());
-				pst.setString(6, user.getAadhaarNumber());
-				pst.setString(7, user.getRole().toString());
+				pst.setString(6, user.getRole().toString());
 
 				int rows = pst.executeUpdate();
 
 				return rows > 0;
 			}
-		} catch (SQLException e) {
-
-			throw new DaoException(e.getMessage());
+		} catch (Exception e) {
+                e.printStackTrace();;
+			throw new DaoException(UserServiceErrors.UNABLE_TO_ADD);
 		}
 	}
 
@@ -46,15 +78,15 @@ public class UserDAO {
 
 			int id = getIdByEmail(user.getEmail().trim());
 
-			String query = "update users SET username = ?,address = ?,contact = ? ,aadhaar=? where id = ?";
+			String query = "update users SET username = ?,address = ?,contact = ?  where id = ?";
 
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 
 				pst.setString(1, user.getUsername());
 				pst.setString(2, user.getAddress());
 				pst.setString(3, user.getContactNumber());
-				pst.setString(4, user.getAadhaarNumber());
-				pst.setInt(5, id);
+//				pst.setString(5, user.getAadhaarNumber());
+				pst.setInt(4, id);
 
 				int rowsAffected = pst.executeUpdate();
 
@@ -62,7 +94,7 @@ public class UserDAO {
 			}
 		} catch (SQLException e) {
 
-			throw new DaoException(e.getMessage());
+			throw new DaoException(UserServiceErrors.UNABLE_TO_UPDATE_USER);
 
 		}
 
@@ -87,7 +119,7 @@ public class UserDAO {
 			}
 		} catch (SQLException e) {
 
-			throw new DaoException(e.getMessage());
+			throw new DaoException(UserServiceErrors.UNABLE_TO_ISACTIVE_USER);
 
 		}
 
@@ -108,7 +140,7 @@ public class UserDAO {
 				}
 			}
 		} catch (SQLException e) {
-			throw new DaoException(e.getMessage());
+			throw new DaoException(UserServiceErrors.UNABLE_TO_GET_USER);
 		}
 
 		return userId;
@@ -120,7 +152,7 @@ public class UserDAO {
 		User user = null;
 
 		try (Connection con = ConnectionUtil.getConnection()) {
-			String query = "SELECT id,username,address,contact,password,email,aadhaar,role FROM users where email = ?";
+			String query = "SELECT id,username,address,contact,password,email,role FROM users where email = ?";
 
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 				pst.setString(1, email);
@@ -130,7 +162,7 @@ public class UserDAO {
 					user = new User();
 					user.setId(rs.getInt("id"));
 					user.setContactNumber(rs.getString("Contact"));
-					user.setAadhaarNumber(rs.getNString("aadhaar"));
+//					user.setAadhaarNumber(rs.getNString("aadhaar"));
 					user.setUsername(rs.getString("username"));
 					user.setAddress(rs.getString("Address"));
 					user.setEmail(rs.getString("email"));
@@ -139,7 +171,7 @@ public class UserDAO {
 				}
 			}
 		} catch (SQLException e) {
-			throw new DaoException(e.getMessage());
+			throw new DaoException(UserServiceErrors.UNABLE_TO_GET_USER);
 		}
 
 		return userArray;
@@ -161,7 +193,7 @@ public class UserDAO {
 				}
 			}
 		} catch (SQLException e) {
-			throw new DaoException(e.getMessage());
+			throw new DaoException(UserServiceErrors.CONTACT_NOT_AVAILABLE);
 		}
 
 		return false;
@@ -179,7 +211,7 @@ public class UserDAO {
 
 			}
 		} catch (SQLException e) {
-			throw new DaoException(e.getMessage());
+			throw new DaoException(UserServiceErrors.UNABLE_TO_ISACTIVE_USER);
 		}
 		return true;
 	}
@@ -205,7 +237,7 @@ public class UserDAO {
 
 			}
 		} catch (SQLException e) {
-			throw new DaoException(e.getMessage());
+			throw new DaoException(UserServiceErrors.UNABLE_TO_UPDATE_ACCEBLITY);
 		}
 		return false;
 	}
@@ -224,7 +256,7 @@ public class UserDAO {
 			}
 
 		} catch (SQLException e) {
-			throw new DaoException(e.getMessage());
+			throw new DaoException(UserServiceErrors.UNABLE_TO_UPDATE_ACCEBLITY);
 		}
 		return false;
 	}
@@ -242,10 +274,10 @@ public class UserDAO {
 
 					return true;
 				}
-
+ 
 			}
 		} catch (SQLException e) {
-			throw new DaoException(e.getMessage());
+			throw new DaoException(UserServiceErrors.MAIL_NOT_AVAILABLE);
 		}
 		return false;
 	}
@@ -267,7 +299,7 @@ public class UserDAO {
 
 			}
 		} catch (SQLException e) {
-			throw new DaoException(e.getMessage());
+			throw new DaoException(UserServiceErrors.MAIL_AND_PASSWORD_NOT_AVAILABLE);
 		}
 		return false;
 	}
@@ -288,7 +320,7 @@ public class UserDAO {
 
 			}
 		} catch (SQLException e) {
-			throw new DaoException(e.getMessage());
+			throw new DaoException(UserServiceErrors.UNABLE_TO_ISACTIVE_USER);
 		}
 		return false;
 	}

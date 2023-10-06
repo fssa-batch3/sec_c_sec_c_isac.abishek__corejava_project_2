@@ -64,8 +64,9 @@ public class User {
 		this.role = role;
 	}
 	public User( String username, String email, String password, String address, String contactNumber,
-			String aadhaarNumber, UserRole role, LocalDate dateOfBirth) {
+			String aadhaarNumber,UserRole role) {
 		super();
+		
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -74,6 +75,7 @@ public class User {
 		this.aadhaarNumber = aadhaarNumber;
 		this.role = role;
 	}
+	
 	public User() {
 	}
  

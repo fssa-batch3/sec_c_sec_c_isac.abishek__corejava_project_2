@@ -104,10 +104,10 @@ public class ProductRequestValidator {
 		Matcher matcher = pattern.matcher(contact);
 		boolean isMatch = matcher.matches();
 		if (isMatch) {
-			System.out.println("happen");
+			
 			return true;
 		} else {
-			System.out.println("happen4");
+			
 			throw new ValidatorInitializationException(EventValidatorErrors.INVALID_CONTACT_NUMBER);
 		}
 	}

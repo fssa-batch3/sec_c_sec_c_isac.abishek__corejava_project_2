@@ -29,7 +29,7 @@ public class TestProductRequestServiceLayer {
 	}
 	@Test
 	void TestContactInvalid() {
-		Assertions.assertThrows(ValidatorInitializationException.class,()-> productRequestValidator.validateContactNo(123456789l));
+		Assertions.assertThrows(ValidatorInitializationException.class,()-> productRequestValidator.validateContactNo("1234567899"));
 	}
 	@Test
 	void TestBooleanIsActive() {

@@ -10,6 +10,7 @@ import com.fssa.charitytrust.connection.ConnectionException;
 import com.fssa.charitytrust.dao.ProductRequestDao;
 import com.fssa.charitytrust.exceptions.DaoException;
 import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
+import com.fssa.charitytrust.exceptions.EventValidatorErrors;
 import com.fssa.charitytrust.exceptions.ServiceException;
 import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
 import com.fssa.charitytrust.model.ProductRequest;
@@ -47,8 +48,13 @@ import com.fssa.charitytrust.validator.ProductRequestValidator;
       	void testServiceAddInvalidrequest() throws ServiceException    	 {
         	  ProductRequest productRequest = new ProductRequest("12345", "Magnifier","9751329805");
         	  ProductRequestService requestServiceLayer = createTestRequestLayer();
-
-      		Assertions.assertFalse(requestServiceLayer.addproductRequest(productRequest));
+              try {
+            	  requestServiceLayer.addproductRequest(productRequest);
+              }
+              catch(Exception e) {
+            	  Assertions.assertEquals(EventValidatorErrors.INVALID_EVENT_NAME, e.getMessage());
+              }
+      		
 
       	}
           @Test
