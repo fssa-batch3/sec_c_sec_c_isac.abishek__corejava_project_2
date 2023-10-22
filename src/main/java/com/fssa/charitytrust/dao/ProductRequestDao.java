@@ -77,6 +77,30 @@ public class ProductRequestDao {
 		}
 
 	}
+	public boolean checkConatactNoExists(String conatactNo) throws SQLException, ConnectionException {
+		
+		final String query = "SELECT contact_number FROM requests WHERE contact_number=?";
+		// query for finding an event by name in the table
+
+		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
+
+			try (PreparedStatement pst = con.prepareStatement(query)) { // prepare statement for query update
+				pst.setString(1, conatactNo); // setting the values in the question mark
+             
+				try (ResultSet rs = pst.executeQuery()) { // executing the query
+
+					if (rs.next()) {
+
+						return true;
+					}
+					 // returning the result object // connections are closed
+				}
+			}
+
+		}
+		return false;
+
+	}
 
 	public static int getId(String contactNo) throws SQLException, ConnectionException {
 

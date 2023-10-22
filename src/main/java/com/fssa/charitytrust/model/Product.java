@@ -23,20 +23,20 @@ public class Product {
 
 	// hashCode() and equals() methods to support comparison based on productName
 	// property
-	@Override
-	public int hashCode() {
-		return Objects.hash(productName);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null || getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		return Objects.equals(productName, other.productName);
-	}
+//	@Override
+//	public int hashCode() {
+//		return Objects.hash(productName);
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null || getClass() != obj.getClass())
+//			return false;
+//		Product other = (Product) obj;
+//		return Objects.equals(productName, other.productName);
+//	}
 
 	/**
 	 * Parameterized constructor to initialize Product object with provided values.

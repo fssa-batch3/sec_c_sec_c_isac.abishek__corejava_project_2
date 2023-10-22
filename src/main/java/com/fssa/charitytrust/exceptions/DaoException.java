@@ -9,7 +9,12 @@ public class DaoException extends Exception {
 	/**
 	 * A unique identifier for the serialized version of this class.
 	 */
-	private static final long serialVersionUID = 3785994329939220887L;
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Constructs a new DaoException with the specified error message.

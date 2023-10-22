@@ -35,6 +35,8 @@ public class UserServiceErrors {
 	
 	public static final String MAIL_AND_PASSWORD_NOT_AVAILABLE = "MAIL_AND_PASSWORD_NOT_AVAILABLE";
 	
+	public static final String CONTACT_EXISTS = "One Request For One Mobile Number";
+	
 	private UserServiceErrors() {
 		
 	}

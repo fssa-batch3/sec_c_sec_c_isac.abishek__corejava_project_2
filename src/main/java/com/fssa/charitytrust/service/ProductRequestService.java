@@ -9,6 +9,7 @@ import com.fssa.charitytrust.dao.ProductRequestDao;
 import com.fssa.charitytrust.exceptions.DaoException;
 import com.fssa.charitytrust.exceptions.DaoExceptionErrors;
 import com.fssa.charitytrust.exceptions.ServiceException;
+import com.fssa.charitytrust.exceptions.UserServiceErrors;
 import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
 import com.fssa.charitytrust.model.ProductRequest;
 import com.fssa.charitytrust.validator.ProductRequestValidator;
@@ -56,8 +57,12 @@ public class ProductRequestService {
 		
 			try {
 				if (productRequestValidator.validate(productRequest)) {
-
-					return productRequestDao.addrequest(productRequest);
+					if(productRequestDao.checkConatactNoExists(productRequest.getMobileno())) {
+						throw new ServiceException(UserServiceErrors.CONTACT_EXISTS);
+					}
+					else {
+						return productRequestDao.addrequest(productRequest);
+					}
 				}
 				else {
 					return false;
@@ -95,10 +100,8 @@ public class ProductRequestService {
 				return false;
 			}
 		} catch (ValidatorInitializationException | SQLException | ConnectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
 		}
-		return false;
 	}
 
 	/**
@@ -148,8 +151,7 @@ public class ProductRequestService {
 				return arr;
 			}
 		} catch (ValidatorInitializationException | SQLException | ConnectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
 		}
 		return arr;
 	}

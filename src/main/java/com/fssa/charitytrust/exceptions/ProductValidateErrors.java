@@ -1,5 +1,6 @@
 package com.fssa.charitytrust.exceptions;
 
+
 /**
  * An interface containing constant error messages for Product data validation.
  * These error messages can be used to identify specific issues when validating
@@ -49,4 +50,5 @@ public final class ProductValidateErrors {
 	private ProductValidateErrors() {
 		
 	}
+	
 }
