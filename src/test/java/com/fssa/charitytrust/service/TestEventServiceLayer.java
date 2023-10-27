@@ -41,10 +41,10 @@ class TestEventServiceLayer {
      *
      * @return An instance of EventServiceLayer.
      */
-    public EventServiceLayer createTestEventLayer() {
+    public EventService createTestEventLayer() {
         EventValidator eventValidator = new EventValidator();
         EventDao eventDao = EventDao.getEventDao();
-        return new EventServiceLayer(eventValidator, eventDao);
+        return new EventService(eventValidator, eventDao);
     }
 
     /**
@@ -59,7 +59,7 @@ class TestEventServiceLayer {
     @Test
     void testAddEvent() throws  ServiceException, ValidatorInitializationException, SQLException, DaoException, ConnectionException{
         Event event1 = createTestEvent();
-        EventServiceLayer eventServiceLayer = createTestEventLayer();
+        EventService eventServiceLayer = createTestEventLayer();
         Assertions.assertTrue(eventServiceLayer.addEvent(event1));
     }
 
@@ -75,7 +75,7 @@ class TestEventServiceLayer {
     @Test
     void testAddNullEvent() throws ServiceException {
         Event event1 = null;
-        EventServiceLayer eventServiceLayer = createTestEventLayer();
+        EventService eventServiceLayer = createTestEventLayer();
         try {
             eventServiceLayer.addEvent(event1);
         } catch (ServiceException e) {
@@ -104,7 +104,7 @@ class TestEventServiceLayer {
             input,
             "Concert"
         );
-        EventServiceLayer eventServiceLayer = createTestEventLayer();
+        EventService eventServiceLayer = createTestEventLayer();
         Assertions.assertFalse(eventServiceLayer.addEvent(event1));
     }
 
@@ -138,7 +138,7 @@ class TestEventServiceLayer {
             input,
             "Product Donating And Distributions"
         );
-        EventServiceLayer eventServiceLayer = createTestEventLayer();
+        EventService eventServiceLayer = createTestEventLayer();
         eventServiceLayer.addEvent(eventNew);
         Assertions.assertTrue(eventServiceLayer.updateEvent(updateEvent));
     }
@@ -155,7 +155,7 @@ class TestEventServiceLayer {
     @Test
     void testUpdateNullEvent() throws ServiceException {
         Event event1 = null;
-        EventServiceLayer eventServiceLayer = createTestEventLayer();
+        EventService eventServiceLayer = createTestEventLayer();
         try {
             eventServiceLayer.updateEvent(event1);
         } catch (ServiceException e) {
@@ -184,7 +184,7 @@ class TestEventServiceLayer {
             input,
             "Concert"
         );
-        EventServiceLayer eventServiceLayer = createTestEventLayer();
+        EventService eventServiceLayer = createTestEventLayer();
         Assertions.assertFalse(eventServiceLayer.updateEvent(event1));
     }
 
@@ -210,7 +210,7 @@ class TestEventServiceLayer {
             input,
             "Product Donation"
         );
-        EventServiceLayer eventServiceLayer = createTestEventLayer();
+        EventService eventServiceLayer = createTestEventLayer();
         eventServiceLayer.addEvent(event1);
         Assertions.assertNotEquals(0, eventServiceLayer.readEvents().size());
     }
@@ -226,7 +226,7 @@ class TestEventServiceLayer {
      */
     @Test
     void testViewEvents() throws ServiceException {
-        EventServiceLayer eventServiceLayer = createTestEventLayer();
+        EventService eventServiceLayer = createTestEventLayer();
         Assertions.assertNotNull(eventServiceLayer.viewEvent());
         Logger.info(eventServiceLayer.viewEvent());
     }
@@ -251,7 +251,7 @@ class TestEventServiceLayer {
              input,
              "Concert"
          );
-         EventServiceLayer eventServiceLayer = createTestEventLayer();
+         EventService eventServiceLayer = createTestEventLayer();
          eventServiceLayer.addEvent(event1);
         Assertions.assertTrue(eventServiceLayer.deleteEvent("BalajiiEvent"));
     }
@@ -266,7 +266,7 @@ class TestEventServiceLayer {
      */
     @Test
     void testDeleteNullEvent() throws ServiceException {
-        EventServiceLayer eventServiceLayer = createTestEventLayer();
+        EventService eventServiceLayer = createTestEventLayer();
         try {
             eventServiceLayer.deleteEvent(null);
         } catch (ServiceException e) {
@@ -284,7 +284,7 @@ class TestEventServiceLayer {
      */
     @Test
     void testDeleteInvalidEvent() throws ServiceException {
-        EventServiceLayer eventServiceLayer = createTestEventLayer();
+        EventService eventServiceLayer = createTestEventLayer();
         try {
             eventServiceLayer.deleteEvent("InvalidName");
         } catch (ServiceException e) {
@@ -314,7 +314,7 @@ class TestEventServiceLayer {
             "Product distribution in Chepak stadium"
         );
 
-        EventServiceLayer eventServiceLayer = createTestEventLayer();
+        EventService eventServiceLayer = createTestEventLayer();
         eventServiceLayer.addEvent(event1);
         Assertions.assertEquals(eventServiceLayer.findEventByName(event1.getEventName()), event1);
     }
@@ -331,7 +331,7 @@ class TestEventServiceLayer {
     @Test
     void testFindByNameNull() throws ServiceException {
         String eventName = null;
-        EventServiceLayer eventServiceLayer = createTestEventLayer();
+        EventService eventServiceLayer = createTestEventLayer();
         try {
             eventServiceLayer.findEventByName(eventName);
         } catch (ServiceException e) {

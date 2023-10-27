@@ -14,12 +14,12 @@ public class TestUserService {
 	UserService service = new UserService();
 	UserRole role = UserRole.valueOf("VOLUNTEER");
 	User obj = new User(9, "Balaji", "balajii@gmail.com", "Balaji@2002", "626109", "9080020730",
-			"787878787124", role);
+			 role);
 	
 	@Test
 	void testAddNewUSer() throws ServiceException {
 		User obj = new User(9, "Balaji", "balaji@gmail.com", "Balaji@2002", "626109", "9080020730",
-				"787878787124", role);
+				 role);
 		Assertions.assertTrue(service.AddUser(obj));
 	}
 
@@ -35,7 +35,7 @@ public class TestUserService {
 	@Test
 	void testUpdateUSer() throws ServiceException {
 		User obj = new User(9, "Nantha", "balaji@gmail.com", "Balaji@2002", "626109", "9080020730",
-				"787878787124", role);
+				 role);
 		Assertions.assertTrue(service.updateUser(obj));
 	}
 
@@ -51,7 +51,7 @@ public class TestUserService {
 	@Test
 	void testDeleteUSer() throws ServiceException {
 		User obj = new User(9, "Nantha", "balaji@gmail.com", "Balaji@2002", "626109", "9080020730",
-				"787878787124", role);
+				 role);
 		Assertions.assertTrue(service.deleteUser(obj));
 	}
 

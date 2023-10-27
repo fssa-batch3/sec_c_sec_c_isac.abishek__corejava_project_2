@@ -93,7 +93,7 @@ public class EventDao {
 						result.setContactNumber(rs.getString("contact_number"));
 						result.setImageUrl(rs.getString("image_url"));
 						result.setAboutEvent(rs.getString("about_event"));
-						result.setEventDate(rs.getDate("event_date"));
+						result.setEventDate(rs.getDate("event_date").toLocalDate());
 					}
 					return result; // returning the result object	// connections are closed
 				}
@@ -178,7 +178,7 @@ public class EventDao {
 						result.setContactNumber(rs.getString("contact_number"));
 						result.setImageUrl(rs.getString("image_url"));
 						result.setAboutEvent(rs.getString("about_event"));
-						result.setEventDate(rs.getDate("event_date"));
+						result.setEventDate(rs.getDate("event_date").toLocalDate());
 						resultlist.add(result); // objects are pushed
 					}
 				} // result set is closed

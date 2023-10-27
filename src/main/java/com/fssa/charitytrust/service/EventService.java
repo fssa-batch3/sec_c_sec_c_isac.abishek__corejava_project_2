@@ -16,7 +16,7 @@ import com.fssa.charitytrust.validator.EventValidator;
  * The service layer class that acts as an intermediary between the
  * application's business logic and data access layer.
  */
-public class EventServiceLayer {
+public class EventService {
 
 
 	private  EventValidator eventValidator;
@@ -34,7 +34,7 @@ public class EventServiceLayer {
 
 	// Constructor to initialize the service layer with EventValidator and EventDao
 	// instances.
-	public EventServiceLayer(EventValidator eventValidator, EventDao eventDao) {
+	public EventService(EventValidator eventValidator, EventDao eventDao) {
 		this.eventValidator = eventValidator;
 		this.eventDao = eventDao;
 	}
@@ -69,10 +69,10 @@ public class EventServiceLayer {
 				return false;
 			}
 		} catch (ValidatorInitializationException | SQLException | DaoException | ConnectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
+			
 		}
-		return false;
+		
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class EventServiceLayer {
 				return false;
 			}
 		} catch (ValidatorInitializationException | SQLException | ConnectionException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return false;
@@ -127,7 +127,6 @@ public class EventServiceLayer {
 		try {
 			return EventDao.readFullEventList();
 		} catch (SQLException | ConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

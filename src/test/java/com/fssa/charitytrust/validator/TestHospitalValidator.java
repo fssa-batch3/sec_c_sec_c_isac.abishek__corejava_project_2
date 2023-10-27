@@ -11,7 +11,7 @@ import com.fssa.charitytrust.model.Hospital;
 
 
 public class TestHospitalValidator {
-	Hospital hospital=new Hospital("Gem Hospital","North Street,Taramani","Naresh","9751328805","https://freeimage.host/i/HNRzLYJ.jpg","NORMALCHECKUP");
+	Hospital hospital=new Hospital("Gem Hospital","North Street,Taramani","Naresh","9751328805","https://iili.io/JKGWdkG.jpg","NORMALCHECKUP");
 	Hospital testobj= new Hospital();
 	
 	

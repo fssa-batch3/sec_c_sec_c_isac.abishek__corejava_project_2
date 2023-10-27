@@ -85,7 +85,6 @@ public class UserDAO {
 				pst.setString(1, user.getUsername());
 				pst.setString(2, user.getAddress());
 				pst.setString(3, user.getContactNumber());
-//				pst.setString(5, user.getAadhaarNumber());
 				pst.setInt(4, id);
 
 				int rowsAffected = pst.executeUpdate();
@@ -152,7 +151,7 @@ public class UserDAO {
 		User user = null;
 
 		try (Connection con = ConnectionUtil.getConnection()) {
-			String query = "SELECT id,username,address,contact,password,email,role FROM users where email = ?";
+			String query = "SELECT id,username,address,contact,password,email,role,accessblity FROM users where email = ?";
 
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 				pst.setString(1, email);
@@ -162,11 +161,11 @@ public class UserDAO {
 					user = new User();
 					user.setId(rs.getInt("id"));
 					user.setContactNumber(rs.getString("Contact"));
-//					user.setAadhaarNumber(rs.getNString("aadhaar"));
 					user.setUsername(rs.getString("username"));
 					user.setAddress(rs.getString("Address"));
 					user.setEmail(rs.getString("email"));
 					user.setRole(UserRole.valueOf(rs.getString("role")));
+					user.setAccessblity(rs.getBoolean("accessblity"));
 					userArray.add(user);
 				}
 			}

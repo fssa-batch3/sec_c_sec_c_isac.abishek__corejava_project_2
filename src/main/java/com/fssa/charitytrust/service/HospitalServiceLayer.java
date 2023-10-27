@@ -17,14 +17,14 @@ import com.fssa.charitytrust.validator.HospitalValidator;
 /**
  * The service layer class that acts as an intermediary between the application's business logic and data access layer.
  */
-public class hospitalServiceLayer {
+public class HospitalServiceLayer {
 
     // Instance variables for HospitalValidator and HospitalDao
     public HospitalValidator hospitalValidator;
     public HospitalDao hospitalDao;
 
     // Constructor to initialize the service layer with HospitalValidator and HospitalDao instances.
-    public hospitalServiceLayer(HospitalValidator hospitalValidator, HospitalDao hospitalDao) {
+    public HospitalServiceLayer(HospitalValidator hospitalValidator, HospitalDao hospitalDao) {
         this.hospitalValidator = hospitalValidator;
         this.hospitalDao = hospitalDao;
     }

@@ -10,7 +10,6 @@ public class User {
 	private String password;
 	private String Address;
 	private String contactNumber;
-	private String aadhaarNumber;
 	private UserRole role;
 	private boolean accessblity;
 
@@ -41,30 +40,23 @@ public class User {
 		this.contactNumber = contactNumber;
 	}
 
-	public String getAadhaarNumber() {
-		return aadhaarNumber;
-	}
 
-	public void setAadhaarNumber(String aadhaarNumber) {
-		this.aadhaarNumber = aadhaarNumber;
-	}
 
 
  
 	public User(int id, String username, String email, String password, String address, String contactNumber,
-			String aadhaarNumber, UserRole role) {
+			 UserRole role) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		Address = address;
+		this.Address = address;
 		this.contactNumber = contactNumber;
-		this.aadhaarNumber = aadhaarNumber;
 		this.role = role;
 	}
 	public User( String username, String email, String password, String address, String contactNumber,
-			String aadhaarNumber,UserRole role) {
+			UserRole role) {
 		super();
 		
 		this.username = username;
@@ -72,7 +64,6 @@ public class User {
 		this.password = password;
 		Address = address;
 		this.contactNumber = contactNumber;
-		this.aadhaarNumber = aadhaarNumber;
 		this.role = role;
 	}
 	

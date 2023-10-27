@@ -1,6 +1,6 @@
 package com.fssa.charitytrust.model;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -16,7 +16,6 @@ public class Event {
 	private String eventLocation;
 	private String contactNumber;
 	private LocalDate eventDate;
-	private Date eventDateSQL; // This appears to be a SQL-specific date representation.
 	private String imageUrl;
 	private String aboutEvent;
 
@@ -24,7 +23,7 @@ public class Event {
 	public String toString() {
 		return "Event [eventId=" + eventId + ", eventName=" + eventName + ", eventLocation=" + eventLocation
 				+ ", organizerName=" + organizerName + ", contactNumber=" + contactNumber 
-				+ ", eventDateSQL=" + eventDateSQL + ", imageUrl=" + imageUrl + ", aboutEvent=" + aboutEvent + "]";
+				+  ", imageUrl=" + imageUrl + ", aboutEvent=" + aboutEvent + "]";
 	}
 
 	public Event() {
@@ -147,15 +146,5 @@ public class Event {
 		this.eventDate = date;
 	}
 
-	/**
-	 * Sets the event date based on a given SQL Date representation.
-	 *
-	 * @param date The SQL Date representing the event date.
-	 */
-	public void setEventDate(Date date) {
-		this.eventDateSQL = date;
-	}
-	public Date getEventDateSql() {
-		return eventDateSQL ;
-	}
+	
 }

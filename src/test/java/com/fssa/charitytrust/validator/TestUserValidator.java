@@ -12,17 +12,17 @@ import com.fssa.charitytrust.model.User;
 import com.fssa.charitytrust.model.UserRole;
 
 public class TestUserValidator {
-	User user = new User("Isac", "Isac@gmail.com", "Isac@123","Noerth Chennai,royapuram","7305836758","1234 5678 9012", UserRole.ADMIN);
+	User user = new User("Isac", "Isac@gmail.com", "Isac@123","Noerth Chennai,royapuram","7305836758", UserRole.ADMIN);
 	public static User getValidUser() {
  
-		User user = new User("Isac", "Isac@gmail.com", "Isac@123","Noerth Chennai,royapuram","7305836758","1234 5678 9012", UserRole.ADMIN);
+		User user = new User("Isac", "Isac@gmail.com", "Isac@123","Noerth Chennai,royapuram","7305836758", UserRole.ADMIN);
  
 		return user;
 	}
  
 	public static User getInvalidUser() {
  
-		User user = new User("Go*#&*aj", "gokulgmail", "dfuffy123","Noerth Chennai,royapuram","0000836758","000000006758", null);
+		User user = new User("Go*#&*aj", "gokulgmail", "dfuffy123","Noerth Chennai,royapuram","0000836758", null);
  
 		return user;
 	}
@@ -228,47 +228,7 @@ public class TestUserValidator {
 		}
 	}
 	
-	/**
-     * Tests validation of a contact no.
-     */
-	@Test
-	void testValidAadhaarNo() throws ValidatorInitializationException {
-		user.setAadhaarNumber("234567890123");
-		String aadhaarNumber = user.getAadhaarNumber();
-		Assertions.assertTrue(UserValidator.validateAddhaarNo(aadhaarNumber));
-	}
-	/**
-     * Tests validation of a invalid contact no.
-     */
-	@Test
-	void testInvalidAadhaarNo() {
-		try {
-			UserValidator.validateAddhaarNo("8123456789012");
-		} catch (ValidatorInitializationException e) {
-			Assertions.assertEquals(UserValidatorError.INVALID_AADHAAR_NUMBER, e.getMessage());
-		}
-	}
-	/**
-     * Tests validation of a contact null.
-     */
-	@Test
-	void testInvalidAadhaarNoNull() {
-		try {
-			UserValidator.validateAddhaarNo(null);
-		} catch (ValidatorInitializationException e) {
-			Assertions.assertEquals(UserValidatorError.INVALID_AADHAAR_NO_NULL, e.getMessage());
-		}
-	}
-	/**
-     * Tests validation of a contact no empty.
-     */
-	@Test
-	void testInvalidAadhaarEmpty() {
-		try {
-			UserValidator.validateAddhaarNo(" ");
-		} catch (ValidatorInitializationException e) {
-			Assertions.assertEquals(UserValidatorError.INVALID_AADHAAR_NUMBER, e.getMessage());
-		}
-	}
+	
+
  
 }

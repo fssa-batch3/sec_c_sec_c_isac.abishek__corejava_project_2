@@ -20,7 +20,7 @@ public class HospitalDao {
 
 	public static boolean addHospital(Hospital hospital) throws SQLException, DaoException, ConnectionException {
 
-		final String query = "INSERT INTO HospitalList ( hospital_name, hospital_address, doctor_name, contact_number, hospital_registerd_date, image_url, check_types)VALUES (?, ?, ?, ?, ?, ?, ? );";
+		final String query = "INSERT INTO hospitallist ( hospital_name, hospital_address, doctor_name, contact_number, hospital_registerd_date, image_url, check_types)VALUES (?, ?, ?, ?, ?, ?, ? );";
       // query for adding the values in table
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
 			PreparedStatement pst = con.prepareStatement(query); //prepare statement for query update
@@ -47,7 +47,7 @@ public class HospitalDao {
 
 	public static boolean deleteHospital(String name) throws SQLException, DaoException, ConnectionException {
 
-		final String query = "DELETE FROM HospitalList WHERE hospital_name = ?";
+		final String query = "DELETE FROM hospitallist WHERE hospital_name = ?";
 		//query for deleting the value in the table
 
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
@@ -66,7 +66,7 @@ public class HospitalDao {
 	}
 
 	public static Hospital findHospitalByName(String name) throws SQLException, DaoException, ConnectionException {
-		final String query = "select * from HospitalList where hospital_name=?";
+		final String query = "select * from hospitallist where hospital_name=?";
 		//query for find hospital by name the value in the table
 		Hospital result = new Hospital(); //object created
 		try (Connection con = ConnectionUtil.getConnection()) { // getting connection
@@ -99,7 +99,7 @@ public class HospitalDao {
 	public static int getId(String name) throws SQLException, ConnectionException {
 	    
    	 try (Connection con = ConnectionUtil.getConnection()) {
-   			final String query = "SELECT hospital_id FROM HospitalList WHERE hospital_name='" + name + "'";
+   			final String query = "SELECT hospital_id FROM hospitallist WHERE hospital_name='" + name + "'";
    			try (Statement preparedStatement = con.createStatement()) {
    				ResultSet id = preparedStatement.executeQuery(query);
    				int id1=0;
@@ -118,7 +118,7 @@ public class HospitalDao {
 
 	public static boolean update(Hospital hospital) throws SQLException, DaoException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) {
-			final String query = "UPDATE HospitalList SET  hospital_name = ?, doctor_name = ?, hospital_address = ?, contact_number = ?,image_url = ?,check_types = ? WHERE hospital_id = ?;";
+			final String query = "UPDATE hospitallist SET  hospital_name = ?, doctor_name = ?, hospital_address = ?, contact_number = ?,image_url = ?,check_types = ? WHERE hospital_id = ?;";
 			//query for update the value in the table
 			try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
 				preparedStatement.setString(1, hospital.getHospitalName());
@@ -142,7 +142,7 @@ public class HospitalDao {
 
 	public static ArrayList readFullHospitalList() throws SQLException, DaoException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) { //getting connection
-			final String query = "SELECT * FROM HospitalList";
+			final String query = "SELECT * FROM hospitallist";
 			ArrayList<Hospital> resultlist = new ArrayList();//arraylist declared
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 				ResultSet rs = pst.executeQuery();

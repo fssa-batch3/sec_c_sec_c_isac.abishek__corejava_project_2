@@ -26,11 +26,10 @@ public interface UserValidatorError {
    
 	public static final String  INVALID_CONTACT_NO_NULL = "invalid contact number null";
 	
-	public static final String  INVALID_AADHAAR_NUMBER = "invalid AADHAAR number";
-	   
-	public static final String  INVALID_AADHAAR_NO_NULL = "aadhaar can't be null";
 
 	public static final String INVALID_LOCATION_NULL = "pincode can't be null";
 
 	public static final String INVALID_LOCATION = "Invalid pincode,pincode only contain 6 digit number";
+	
+	public static final String UNABLE_TO_LOGIN="Login Email or Password is wrong"; 
 }
