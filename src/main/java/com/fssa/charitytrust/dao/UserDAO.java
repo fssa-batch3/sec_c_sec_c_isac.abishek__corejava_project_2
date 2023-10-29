@@ -298,7 +298,7 @@ public class UserDAO {
 
 			}
 		} catch (SQLException e) {
-			throw new DaoException(UserServiceErrors.MAIL_AND_PASSWORD_NOT_AVAILABLE);
+			throw new DaoException(UserServiceErrors.CONNECTION_ERROR);
 		}
 		return false;
 	}

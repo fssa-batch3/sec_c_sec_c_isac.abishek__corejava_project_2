@@ -46,7 +46,7 @@ public class ConnectionUtil {
 			throw new ConnectionException(ConectionError.CONNECTION_ERROR);
 		}
 		catch (Exception e) {
-			throw new RuntimeException("unable to get connection");
+			throw new ConnectionException(ConectionError.CONNECTION_ERROR);
 		}
 		return con;
 

@@ -31,5 +31,5 @@ public interface UserValidatorError {
 
 	public static final String INVALID_LOCATION = "Invalid pincode,pincode only contain 6 digit number";
 	
-	public static final String UNABLE_TO_LOGIN="Login Email or Password is wrong"; 
+	public static final String UNABLE_TO_LOGIN="Internal server error"; 
 }

@@ -19,7 +19,7 @@ public class UserServiceErrors {
 	 * database connection. This could happen when the application fails to
 	 * establish a connection with the database.
 	 */
-	public static final String CONNECTION_ERROR = "Connection Error";
+	public static final String CONNECTION_ERROR = "Internal Server Connection Error";
 	
 	public static final String UNABLE_TO_ISACTIVE_USER = "UNABLE_TO_DELETE";
 	
@@ -33,9 +33,10 @@ public class UserServiceErrors {
 	
 	public static final String MAIL_NOT_AVAILABLE = "MAIL_NOT_AVAILABLE";
 	
-	public static final String MAIL_AND_PASSWORD_NOT_AVAILABLE = "MAIL_AND_PASSWORD_NOT_AVAILABLE";
+	public static final String MAIL_AND_PASSWORD_NOT_AVAILABLE = "Mail or password is wrong";
 	
 	public static final String CONTACT_EXISTS = "One Request For One Mobile Number";
+	public static final String SUCCESSFULLY_LOGGEDIN   ="Successfully LoggedIn";
 	
 	private UserServiceErrors() {
 		
