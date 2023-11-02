@@ -1,6 +1,6 @@
 package com.fssa.charitytrust.service;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 import com.fssa.charitytrust.connection.ConnectionException;
@@ -8,9 +8,9 @@ import com.fssa.charitytrust.dao.UserDAO;
 import com.fssa.charitytrust.exceptions.DaoException;
 import com.fssa.charitytrust.exceptions.ServiceException;
 import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
-import com.fssa.charitytrust.logger.Logger;
+
 import com.fssa.charitytrust.model.User;
-import com.fssa.charitytrust.model.UserRole;
+
 import com.fssa.charitytrust.validator.UserValidator;
 
 

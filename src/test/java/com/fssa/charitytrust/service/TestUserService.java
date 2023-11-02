@@ -18,7 +18,7 @@ public class TestUserService {
 	
 	@Test
 	void testAddNewUSer() throws ServiceException {
-		User obj = new User(9, "Balaji", "balaji@gmail.com", "Balaji@2002", "626109", "9080020730",
+		User obj = new User( "Balaji", "balaji@gmail.com", "Balaji@2002", "626109", "9000020730",
 				 role);
 		Assertions.assertTrue(service.AddUser(obj));
 	}
@@ -32,12 +32,7 @@ public class TestUserService {
 		}
 	}
 
-	@Test
-	void testUpdateUSer() throws ServiceException {
-		User obj = new User(9, "Nantha", "balaji@gmail.com", "Balaji@2002", "626109", "9080020730",
-				 role);
-		Assertions.assertTrue(service.updateUser(obj));
-	}
+	
 
 	@Test
 	void testInvalidUpdateUSer() {

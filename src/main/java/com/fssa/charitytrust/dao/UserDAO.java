@@ -86,12 +86,14 @@ public class UserDAO {
 				pst.setString(2, user.getAddress());
 				pst.setString(3, user.getContactNumber());
 				pst.setInt(4, id);
+				System.out.println(pst);
 
 				int rowsAffected = pst.executeUpdate();
 
 				return rowsAffected > 0;
 			}
 		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 
 			throw new DaoException(UserServiceErrors.UNABLE_TO_UPDATE_USER);
 

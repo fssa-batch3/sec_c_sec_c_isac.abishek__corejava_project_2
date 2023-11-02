@@ -140,10 +140,10 @@ public class HospitalDao {
 
 	}
 
-	public static ArrayList readFullHospitalList() throws SQLException, DaoException, ConnectionException {
+	public static ArrayList<Hospital> readFullHospitalList() throws SQLException, DaoException, ConnectionException {
 		try (Connection con = ConnectionUtil.getConnection()) { //getting connection
 			final String query = "SELECT * FROM hospitallist";
-			ArrayList<Hospital> resultlist = new ArrayList();//arraylist declared
+			ArrayList<Hospital> resultlist = new ArrayList<Hospital>();//arraylist declared
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 				ResultSet rs = pst.executeQuery();
 				while (rs.next()) {

@@ -17,8 +17,7 @@ import com.fssa.charitytrust.model.Product;
 // Class for doing CRUD on the Product table
 public class ProductDao {
 	public ProductDao() {
-		 
-	}
+ }
 	public static  ProductDao getProductDao() {
 		return new ProductDao();
 	}

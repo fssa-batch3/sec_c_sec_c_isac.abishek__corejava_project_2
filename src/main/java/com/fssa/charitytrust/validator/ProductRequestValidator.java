@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 import com.fssa.charitytrust.exceptions.EventValidatorErrors;
 import com.fssa.charitytrust.exceptions.ProductValidateErrors;
 import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
-import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
 import com.fssa.charitytrust.model.ProductRequest;
 
 public class ProductRequestValidator {

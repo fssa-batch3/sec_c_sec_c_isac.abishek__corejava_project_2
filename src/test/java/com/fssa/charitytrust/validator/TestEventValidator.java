@@ -12,7 +12,7 @@ import com.fssa.charitytrust.model.Event;
 import com.fssa.charitytrust.validator.EventValidator;
 
 class TestEventValidator {
-	 LocalDate input = LocalDate.of(2023, 10, 10);
+	 LocalDate input = LocalDate.of(2023, 12, 12);
 	    Event event = new Event("Gem Event", "North Street, Taramani", "Organizer", "9751328805",
 	            "https://freeimage.host/i/HNRzLYJ.jpg", input, "Concert");
 	    Event testObj = new Event();
@@ -310,7 +310,7 @@ class TestEventValidator {
      */
 	@Test
 	void validDate() throws ValidatorInitializationException {
-		LocalDate input1 = LocalDate.of(2023, 10, 10);
+		LocalDate input1 = LocalDate.of(2023, 12, 12);
 		testObj.setEventDate(input1);
 		LocalDate input = testObj.getEventDate();
 		Assertions.assertTrue(EventValidator.isValidEventDate(input));

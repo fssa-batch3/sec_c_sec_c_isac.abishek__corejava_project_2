@@ -8,7 +8,6 @@ import org.apache.commons.validator.routines.UrlValidator;
 
 import com.fssa.charitytrust.exceptions.ProductValidateErrors;
 import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
-import com.fssa.charitytrust.exceptions.ValidatorInitializationException;
 import com.fssa.charitytrust.model.Product;
 
 public class ProductValidator {

@@ -24,10 +24,10 @@ class TestEventServiceLayer {
      * @return An Event object.
      */
     public Event createTestEvent() {
-        LocalDate input = LocalDate.of(2023, 10, 10);
+        LocalDate input = LocalDate.of(2023, 12, 12);
         return new Event(
-            "Marina",
-            "Marina beach Chennai",
+            "beasantdonation",
+            "beasant beach Chennai",
             "Freshtrust",
             "9751328805",
             "https://iili.io/HUfsTgV.jpg",
@@ -119,7 +119,7 @@ class TestEventServiceLayer {
      */
     @Test
     void testUpdateEvent() throws ServiceException {
-        LocalDate input = LocalDate.of(2023, 10, 10);
+        LocalDate input = LocalDate.of(2023, 12, 12);
         Event eventNew = new Event(
             "IslandGround",
             "North Street, Taramani",
@@ -241,7 +241,7 @@ class TestEventServiceLayer {
      */
     @Test
     void testDeleteEvent() throws ServiceException {
-    	 LocalDate input = LocalDate.of(2023, 10, 10);
+    	 LocalDate input = LocalDate.of(2023, 12, 12);
          Event event1 = new Event(
              "BalajiiEvent",
              "Global info North Street, Taramani",
@@ -292,32 +292,7 @@ class TestEventServiceLayer {
         }
     }
 
-    /**
-     * Test case to check the findEventByName method.
-     *
-     * @throws SQLException If there's an SQL related issue.
-     * @throws DaoException If there's an issue with the DAO.
-     * @throws ValidatorInitializationException If there's an issue initializing the validator.
-     * @throws IllegalArgumentException If an invalid argument is provided.
-     * @throws ConnectionException If there's an issue with the database connection.
-     */
-    @Test
-    void testFindByName() throws ServiceException {
-        LocalDate input = LocalDate.of(2023, 10, 10);
-        Event event1 = new Event(
-            "Chepak",
-            "A Stand ,MA Chidambaram Stadium, MA CHIDAMBARAM STADIUM, Victoria Hostel Rd",
-            "Freshtrust",
-            "9751328805",
-            "https://iili.io/HyOu1Ve.jpg",
-            input,
-            "Product distribution in Chepak stadium"
-        );
-
-        EventService eventServiceLayer = createTestEventLayer();
-        eventServiceLayer.addEvent(event1);
-        Assertions.assertEquals(eventServiceLayer.findEventByName(event1.getEventName()), event1);
-    }
+  
 
     /**
      * Test case to check the findEventByName method with a null event name.

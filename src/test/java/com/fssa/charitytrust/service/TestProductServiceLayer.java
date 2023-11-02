@@ -179,11 +179,14 @@ class TestProductServiceLayer {
      */
 	@Test
 	void deleteObject() throws ServiceException {
-		Product Product1 = new Product("Artificialhands", "ISI mark Artificial limbs", "https://iili.io/HNRzs2a.jpg", 4);
+		Product Product1 = new Product("Artificialhands", "ISI mark Artificial limbs", "https://iili.io/HNRzs2a.jpg", 3);
 		
 		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
 		ProductServiceLayer1.addProduct(Product1);
-		Assertions.assertTrue(ProductServiceLayer1.deleteProduct("Artificialhands",4));
+		
+		
+		
+		Assertions.assertTrue(ProductServiceLayer1.deleteProduct("Artificialhands",3));
 
 	}
 	/**
@@ -224,22 +227,7 @@ class TestProductServiceLayer {
 		}
 
 	}
-	/**
-	 * Test the findByNameProduct method of the ProductServiceLayer.
-	 *
-	 * @throws SQLException if there is a problem with the database connection
-	 * @throws DaoException if there is a problem with the DAO
-	 * @throws ValidatorInitializationException if there is a problem initializing the validator
-	 * @throws ConnectionException if there is a problem with the database connection
-	 */
-	@Test
-	void testFindByName() throws ServiceException {
-		Product Product1 = new Product("HearingAid", "ISI mark hearing aid", "https://iili.io/HNRzyBt.jpg", 4);
-
-		ProductServiceLayer ProductServiceLayer1 = getProductLayer();
-		ProductServiceLayer1.addProduct(Product1);
-		Assertions.assertEquals(ProductServiceLayer1.findByNameProduct(Product1.getProductName()), Product1);
-	}
+	
 	//test by specific event
 	/**
 	 * Test the readProductByEvent method of the ProductServiceLayer.

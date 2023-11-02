@@ -81,7 +81,7 @@ public class EventDao {
 
 			try (PreparedStatement pst = con.prepareStatement(query)) { // prepare statement for query update
 				pst.setString(1, name); // setting the values in the question mark
-
+              System.out.println(pst);
 				try (ResultSet rs = pst.executeQuery()) { // executing the query
 
 					if (rs.next()) { // Setting all the values to the object

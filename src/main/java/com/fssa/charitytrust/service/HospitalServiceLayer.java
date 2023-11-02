@@ -104,7 +104,7 @@ public class HospitalServiceLayer {
         try {
 			return HospitalDao.readFullHospitalList();
 		} catch (SQLException | DaoException | ConnectionException e) {
-			// TODO Auto-generated catch block
+	
 			System.err.println(e.getMessage());
 			
 		}

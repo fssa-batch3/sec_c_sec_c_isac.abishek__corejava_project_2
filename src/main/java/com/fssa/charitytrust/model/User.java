@@ -1,6 +1,6 @@
 package com.fssa.charitytrust.model;
 
-import java.time.LocalDate;
+
  
 public class User {
  

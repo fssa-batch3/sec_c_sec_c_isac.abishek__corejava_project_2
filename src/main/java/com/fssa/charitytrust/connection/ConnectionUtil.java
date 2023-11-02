@@ -21,7 +21,7 @@ public class ConnectionUtil {
 
 		String url;
 		String userName;
-		String passWord;
+		String code;
 		
 //		url = System.getenv("DATABASE_HOST");
 //		userName = System.getenv("DATABASE_USERNAME");
@@ -34,13 +34,13 @@ public class ConnectionUtil {
 		
 		url="jdbc:mysql://localhost:3306/charitytrust";
 		userName="root";
-		passWord="123456";
+		code="123456";
 		
 
 		try {
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection(url, userName, passWord);
+			con = DriverManager.getConnection(url, userName, code);
 			Logger.info("Connection success");
 		} catch (SQLException e) {
 			throw new ConnectionException(ConectionError.CONNECTION_ERROR);
@@ -48,7 +48,9 @@ public class ConnectionUtil {
 		catch (Exception e) {
 			throw new ConnectionException(ConectionError.CONNECTION_ERROR);
 		}
+		
 		return con;
+	
 
 	}
 

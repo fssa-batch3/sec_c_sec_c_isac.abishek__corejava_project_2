@@ -11,10 +11,8 @@ import com.fssa.charitytrust.connection.ConnectionException;
 import com.fssa.charitytrust.connection.ConnectionUtil;
 import com.fssa.charitytrust.exceptions.BookingErrors;
 import com.fssa.charitytrust.exceptions.DaoException;
-import com.fssa.charitytrust.exceptions.UserServiceErrors;
 import com.fssa.charitytrust.model.BookHospital;
-import com.fssa.charitytrust.model.User;
-import com.fssa.charitytrust.model.UserRole;
+
 
 public class BookHospitalDao {
 	public static boolean addBooking(BookHospital bookhospital) throws DaoException, ConnectionException {
